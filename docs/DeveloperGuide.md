@@ -155,6 +155,48 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Group feature
+
+#### Implementation
+
+The group feature is a modification of the original "tag" feature, where each person can have multiple tags with various sorts of information.
+We have adapted the tags for the express purpose of putting students into groups.
+
+The command, like all others, implements `execute`. In this case, all valid students will be put into the specified group.
+A valid student needs to have a `studentId` which fulfils various criteria as specified in the `StudentId` class.
+A valid student should also be in the list of current students. 
+Students who are not in the list of existing students are mentioned in an error message. 
+
+Internally, the command makes use of the pre-existing `EditCommand#execute(StudentId, editPersonDescriptor)` method.
+It calls this method for all applicable students in a loop. 
+The loop identifies the `studentIds` of invalid students when `EditCommand` throws a `CommandException`.
+The collected `studentIds` are given in the exception message of `GroupCommand` itself.
+
+Here is an example usage scenario: 
+
+Step 1. The user enters command `group gp/3 id/A0123456X id/A0000000H` where
+`id/A0123456X` is in the list of existing students, but `id/A0000000H` is not.
+
+![GroupState1](images/GroupState1.png)
+
+Step 2. The `group` command calls `EditCommand#execute(StudentId, editPersonDescriptor)` for the first student. 
+This student has a `studentId` of `A0123456X`, which is valid. Hence, the student 
+is added to group 3. 
+
+![GroupState2](images/GroupState2.png)
+
+Step 3. The `group` command calls `EditCommand#execute(StudentId, editPersonDescriptor)` for the first student.
+This student has a `studentId` of `A0000000H`, which is not in the list of existing students.
+
+![GroupState3](images/GroupState3.png)
+
+As seen above, such a student does not exist. 
+Hence, when `EditCommand#execute(StudentId, editPersonDescriptor)` is called, it throws a `CommandException`. 
+This exception is caught in the loop, which indicates to `GroupCommand` that the `studentId` could not be added.
+
+Hence, the end result is that only the student with `studentId` of `A0000000H` is added to group 3.
+The other student not in the list is not added to group 3, and is mentioned in a `CommandException` thrown by `GroupCommand`. 
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
