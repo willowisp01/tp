@@ -20,24 +20,28 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final ArchivedBook archivedBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> filteredArchivedPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyArchivedBook archivedBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.archivedBook = new ArchivedBook(archivedBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredArchivedPersons = new FilteredList<>(this.archivedBook.getArchivedList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new ArchivedBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -75,6 +79,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getArchivedBookFilePath() {
+        return userPrefs.getArchivedBookFilePath();
+    }
+
+    @Override
+    public void setArchivedBookFilePath(Path archivedBookFilePath) {
+        requireNonNull(archivedBookFilePath);
+        userPrefs.setArchivedBookFilePath(archivedBookFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -85,6 +100,16 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public void setArchivedBook(ReadOnlyArchivedBook archivedBook) {
+        this.archivedBook.resetData(archivedBook);
+    }
+
+    @Override
+    public ReadOnlyArchivedBook getArchivedBook() {
+        return archivedBook;
     }
 
     @Override
@@ -107,8 +132,13 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void archivePerson(Person person) {
+        addressBook.archivePerson(person);
+        archivedBook.addPerson(person);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -129,6 +159,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getFilteredArchiveList() {
+        return filteredArchivedPersons;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -141,8 +176,10 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
+                && archivedBook.equals(otherModelManager.archivedBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredArchivedPersons.equals(otherModelManager.filteredArchivedPersons);
     }
 
 }

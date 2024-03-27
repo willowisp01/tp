@@ -10,12 +10,10 @@ import seedu.teachstack.model.person.Person;
 import seedu.teachstack.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the archived-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
-
-    private final UniquePersonList persons;
+public class ArchivedBook implements ReadOnlyArchivedBook {
     private final UniquePersonList archivedPersons;
 
     /*
@@ -26,16 +24,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
         archivedPersons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    public ArchivedBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an ArchivedBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public ArchivedBook(ReadOnlyArchivedBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -43,81 +40,71 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
+     * Replaces the contents of the archived list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
     public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+        this.archivedPersons.setPersons(persons);
     }
 
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code ArchivedBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyArchivedBook newData) {
         requireNonNull(newData);
-
-        setPersons(newData.getPersonList());
+        setPersons(newData.getArchivedList());
     }
 
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the archived book.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return persons.contains(person);
+        return archivedPersons.contains(person);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a person to the archived book.
+     * The person must not already exist in the archived book.
      */
     public void addPerson(Person p) {
-        persons.add(p);
+        archivedPersons.add(p);
     }
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the archived book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the archived book.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
-        persons.setPerson(target, editedPerson);
+        archivedPersons.setPerson(target, editedPerson);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code ArchivedBook}.
+     * {@code key} must exist in the archived book.
      */
     public void removePerson(Person key) {
-        persons.remove(key);
+        archivedPersons.remove(key);
     }
 
-    /**
-     * Archives a person to the archive list and remove the person in the address book.
-     * The person must already exist in the address book.
-     */
-    public void archivePerson(Person p) {
-        archivedPersons.add(p);
-        persons.remove(p);
-    }
 
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("persons", archivedPersons)
                 .toString();
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Person> getArchivedList() {
+        return archivedPersons.asUnmodifiableObservableList();
     }
 
     @Override
@@ -127,16 +114,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof ArchivedBook)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        ArchivedBook otherArchivedBook = (ArchivedBook) other;
+        return archivedPersons.equals(otherArchivedBook.archivedPersons);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return archivedPersons.hashCode();
     }
 }

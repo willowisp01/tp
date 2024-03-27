@@ -65,21 +65,6 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
@@ -149,6 +134,5 @@ public class ParserUtil {
         }
         return studentIdSet;
     }
-
 
 }

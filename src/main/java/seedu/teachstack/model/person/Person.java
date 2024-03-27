@@ -25,6 +25,9 @@ public class Person {
     private final Set<Group> groups = new HashSet<>();
     private final Grade grade;
 
+    // Boolean field to check if the person is archived.
+    private boolean isArchived;
+
     /**
      * Every field must be present and not null.
      */
@@ -37,6 +40,7 @@ public class Person {
         this.email = email;
         this.groups.addAll(groups);
         this.grade = grade;
+        isArchived = false;
     }
 
     public Name getName() {
@@ -130,5 +134,11 @@ public class Person {
         return this.getEmail().equals(otherPerson.getEmail());
     }
 
+    public void setArchivedPerson() {
+        isArchived = true;
+    }
 
+    public boolean isArchivedPerson() {
+        return isArchived;
+    }
 }

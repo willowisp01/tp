@@ -8,6 +8,7 @@ import seedu.teachstack.logic.commands.CommandResult;
 import seedu.teachstack.logic.commands.exceptions.CommandException;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
 import seedu.teachstack.model.ReadOnlyAddressBook;
+import seedu.teachstack.model.ReadOnlyArchivedBook;
 import seedu.teachstack.model.person.Person;
 
 /**
@@ -30,13 +31,29 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+    /**
+     * Returns the ArchivedBook.
+     *
+     * @see seedu.teachstack.model.Model#getArchivedBook()
+     */
+    ReadOnlyArchivedBook getArchivedBook();
+
+
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered list of archived persons */
+    ObservableList<Person> getFilteredArchiveList();
 
     /**
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
+
+    /**
+     * Returns the user prefs' archived book file path.
+     */
+    Path getArchivedBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

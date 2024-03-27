@@ -15,6 +15,7 @@ import seedu.teachstack.logic.parser.AddressBookParser;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
 import seedu.teachstack.model.Model;
 import seedu.teachstack.model.ReadOnlyAddressBook;
+import seedu.teachstack.model.ReadOnlyArchivedBook;
 import seedu.teachstack.model.person.Person;
 import seedu.teachstack.storage.Storage;
 
@@ -52,6 +53,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveArchivedBook(model.getArchivedBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -72,8 +74,23 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ReadOnlyArchivedBook getArchivedBook() {
+        return model.getArchivedBook();
+    }
+
+    @Override
+    public ObservableList<Person> getFilteredArchiveList() {
+        return model.getFilteredArchiveList();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
+    }
+
+    @Override
+    public Path getArchivedBookFilePath() {
+        return model.getArchivedBookFilePath();
     }
 
     @Override
