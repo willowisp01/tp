@@ -162,40 +162,51 @@ This section describes some noteworthy details on how certain features are imple
 The group feature is a modification of the original "tag" feature, where each person can have multiple tags with various sorts of information.
 We have adapted the tags for the express purpose of putting students into groups.
 
-The command, like all others, implements `execute`. In this case, all valid students will be put into the specified group.
+The command, like all others, implements `execute`. If possible, all students will be put into the specified group.
 A valid student needs to have a `studentId` which fulfils various criteria as specified in the `StudentId` class.
-A valid student should also be in the list of current students. 
-Students who are not in the list of existing students are mentioned in an error message. 
+A valid student should also be in the list of current students. **If any students are invalid, the whole command fails.**
+Students who are not in the list of existing students are given in the exception message of `GroupCommand` itself.
 
 Internally, the command makes use of the pre-existing `EditCommand#execute(StudentId, editPersonDescriptor)` method.
-It calls this method for all applicable students in a loop. 
-The loop identifies the `studentIds` of invalid students when `EditCommand` throws a `CommandException`.
-The collected `studentIds` are given in the exception message of `GroupCommand` itself.
+It calls this method for all given students in a loop.
 
-Here is an example usage scenario: 
+It is also possible to give no argument for `groups`. 
+In which case, the students given will have their groups set to none (i.e., removed).
+
+**Here is an example usage scenario:** 
 
 Step 1. The user enters command `group gp/3 id/A0123456X id/A0000000H` where
 `id/A0123456X` is in the list of existing students, but `id/A0000000H` is not.
 
 ![GroupState1](images/GroupState1.png)
 
-Step 2. The `group` command calls `EditCommand#execute(StudentId, editPersonDescriptor)` for the first student. 
-This student has a `studentId` of `A0123456X`, which is valid. Hence, the student 
-is added to group 3. 
+In this case, `id/A0123456X` is not in the list of existing students, so the whole command fails.
+
+Step 2. The user then enters command `group gp/3 id/A0123456X`.
+The `group` command calls `EditCommand#execute(StudentId, editPersonDescriptor)` for `id/A0123456X`. 
+Hence, the student is added to group 3. 
 
 ![GroupState2](images/GroupState2.png)
 
-Step 3. The `group` command calls `EditCommand#execute(StudentId, editPersonDescriptor)` for the first student.
-This student has a `studentId` of `A0000000H`, which is not in the list of existing students.
+Step 3. The user then enters command `group gp/7 id/A0123456X id/A1234567H`.
+Since both students are in the list, they are both added to group 7. 
+Note that `p0` still retains the original group, group 3.
 
 ![GroupState3](images/GroupState3.png)
 
-As seen above, such a student does not exist. 
-Hence, when `EditCommand#execute(StudentId, editPersonDescriptor)` is called, it throws a `CommandException`. 
-This exception is caught in the loop, which indicates to `GroupCommand` that the `studentId` could not be added.
+#### Design considerations:
 
-Hence, the end result is that only the student with `studentId` of `A0000000H` is added to group 3.
-The other student not in the list is not added to group 3, and is mentioned in a `CommandException` thrown by `GroupCommand`. 
+**Aspect: To allow partial success of command or not? 
+(i.e. successfully add some students even if only some provided IDs are valid)**
+
+* **Alternative 1 (current choice):** Disallow partial success.
+    * Pros: Leads to less confusion regarding whether students are successfully added to a group or not (either they all are, or they all aren't.)
+    * Is the standard expectation of a CLI command. 
+    * Cons: Will have to retype command if it fails.
+  
+
+* **Alternative 2:** Allow partial success.
+    * Pros and cons are the opposite of those of alternative 1.
 
 ### \[Proposed\] Undo/redo feature
 

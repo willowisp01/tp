@@ -4,11 +4,11 @@ skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
 
-title After command "group gp/3 id/A0123456X id/A0000000H"
+title After command "group gp/3 id/A0123456X id/A1234567H"
 
-package States <<rectangle>> {
-    class State1 as "<u>p0:Person</u>\nstudentId:A0123456X\ngroup:3"
-    class State2 as "<u>p1:Person</u>\nstudentId:A1234567H"
+package addressBook <<rectangle>> {
+    class State1 as "<u>p0:Person</u>\nstudentId:A0123456X\ngroup:3,7"
+    class State2 as "<u>p1:Person</u>\nstudentId:A1234567H\ngroup:7"
 }
 
 State1 -[hidden]right-> State2
