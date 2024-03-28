@@ -27,6 +27,12 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_withPreamble_throwsParseException() {
+        assertParseFailure(parser, "should not be here" + GROUP_DESC_1,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
