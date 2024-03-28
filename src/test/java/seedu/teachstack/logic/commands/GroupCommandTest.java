@@ -40,7 +40,8 @@ public class GroupCommandTest {
         // Should clear all groups
         String expectedMessage = String.format(GroupCommand.MESSAGE_CLEAR_SUCCESS, Messages.format(alice));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new ArchivedBook(model.getArchivedBook()), new UserPrefs());
         expectedModel.setPerson(model.getPerson(alice.getStudentId()), alice);
 
         assertCommandSuccess(groupCommand, model, expectedMessage, expectedModel);
@@ -104,7 +105,8 @@ public class GroupCommandTest {
 
         String expectedMessage = String.format(GroupCommand.MESSAGE_GROUP_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new ArchivedBook(model.getArchivedBook()), new UserPrefs());
         expectedModel.setPerson(model.getPerson(editedPerson.getStudentId()), editedPerson); // Alice in group 99, 100
 
         addToGroup99.execute(model);
