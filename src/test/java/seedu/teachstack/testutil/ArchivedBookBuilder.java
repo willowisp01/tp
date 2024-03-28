@@ -1,6 +1,5 @@
 package seedu.teachstack.testutil;
 
-import javafx.scene.shape.Arc;
 import seedu.teachstack.model.ArchivedBook;
 import seedu.teachstack.model.person.Person;
 
