@@ -4,12 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.teachstack.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.teachstack.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.teachstack.logic.commands.CommandTestUtil.GROUP_DESC_1;
+import static seedu.teachstack.logic.commands.CommandTestUtil.GROUP_DESC_2B;
+import static seedu.teachstack.model.util.SampleDataUtil.getGroupSet;
 import static seedu.teachstack.testutil.Assert.assertThrows;
 import static seedu.teachstack.testutil.TypicalStudentIds.ID_FIRST_PERSON;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +23,8 @@ import seedu.teachstack.logic.commands.HelpCommand;
 import seedu.teachstack.logic.commands.ListCommand;
 import seedu.teachstack.logic.commands.ViewCommand;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
-import seedu.teachstack.model.person.NameContainsKeywordsPredicate;
 import seedu.teachstack.model.person.Person;
+import seedu.teachstack.model.person.PersonInGroupPredicate;
 import seedu.teachstack.testutil.EditPersonDescriptorBuilder;
 import seedu.teachstack.testutil.PersonBuilder;
 import seedu.teachstack.testutil.PersonUtil;
@@ -71,10 +70,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + GROUP_DESC_1 + GROUP_DESC_2B);
+        assertEquals(new FindCommand(new PersonInGroupPredicate(getGroupSet("Group 2B", "Group 1"))), command);
     }
 
     @Test
