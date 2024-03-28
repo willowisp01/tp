@@ -3,10 +3,10 @@ package seedu.teachstack.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.teachstack.testutil.Assert.assertThrows;
+import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
 import static seedu.teachstack.testutil.TypicalPersons.ALICE;
 import static seedu.teachstack.testutil.TypicalPersons.HOON;
 import static seedu.teachstack.testutil.TypicalPersons.IDA;
-import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
 
 import java.io.IOException;
 import java.nio.file.Path;

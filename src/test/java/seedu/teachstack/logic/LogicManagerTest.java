@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.teachstack.logic.commands.AddCommand;
-import seedu.teachstack.logic.commands.ArchiveCommand;
 import seedu.teachstack.logic.commands.CommandResult;
 import seedu.teachstack.logic.commands.ListCommand;
 import seedu.teachstack.logic.commands.exceptions.CommandException;
