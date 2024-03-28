@@ -19,6 +19,7 @@ import seedu.teachstack.logic.commands.FindCommand;
 import seedu.teachstack.logic.commands.GroupCommand;
 import seedu.teachstack.logic.commands.HelpCommand;
 import seedu.teachstack.logic.commands.ListCommand;
+import seedu.teachstack.logic.commands.SetWeakThresholdCommand;
 import seedu.teachstack.logic.commands.ViewCommand;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
 
@@ -88,6 +89,9 @@ public class AddressBookParser {
 
         case ArchiveCommand.COMMAND_WORD:
             return new ArchiveCommandParser().parse(arguments);
+
+        case SetWeakThresholdCommand.COMMAND_WORD:
+            return new SetWeakThresholdCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
