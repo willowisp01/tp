@@ -14,46 +14,46 @@ class student1 as "<u>student1:Person</u>" {}
 class student2 as "<u>student2:Person</u>" {}
 class student3 as "<u>student3:Person</u>" {}
 class studentName1 as "<u>studentName1:Name</u>" {
-    name = Alice
+    name = "Alice"
 }
 class studentName2 as "<u>studentName1:Name</u>" {
-    name = Bob
+    name = "Bob"
 }
 class studentName3 as "<u>studentName3:Name</u>" {
-    name = John
+    name = "John"
 }
 class studentId1 as "<u>studentId1:StudentId</u>" {
-    studentId = A0234567X
+    studentId = "A0234567X"
 }
 class studentId2 as "<u>studentId2:StudentId</u>" {
-    studentId = A0345678X
+    studentId = "A0345678X"
 }
 class studentId3 as "<u>studentId3:StudentId</u>" {
-    studentId = A0123456X
+    studentId = "A0123456X"
 }
 class studentEmail1 as "<u>studentEmail1:Email</u>" {
-    email = e0234567@u.nus.edu
+    email = "e0234567@u.nus.edu"
 }
 class studentEmail2 as "<u>studentEmail2:Email</u>" {
-    email = e0345678@u.nus.edu
+    email = "e0345678@u.nus.edu"
 }
 class studentEmail3 as "<u>studentEmail3:Email</u>" {
-    email = e0123456@u.nus.edu
+    email = "e0123456@u.nus.edu"
 }
 class studentGrade1 as "<u>studentGrade1:Grade</u>" {
-    grade = A
+    grade = "A"
 }
 class studentGrade2 as "<u>studentGrade2:Grade</u>" {
-    grade = B
+    grade = "B"
 }
 class studentGrade3 as "<u>studentGrade3:Grade</u>" {
-    grade = A
+    grade = "A"
 }
 class studentGroup1 as "<u>studentGroup1:Group</u>" {
-    group = Group 1
+    group = "Group 1"
 }
 class studentGroup2 as "<u>studentGroup2:Group</u>" {
-    group = Group 2
+    group = "Group 2"
 }
 student1 -[hidden]right-> student2
 student2 -[hidden]right-> student3
