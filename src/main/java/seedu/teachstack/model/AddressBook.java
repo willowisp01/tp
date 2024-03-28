@@ -134,4 +134,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void sort() {
         persons.sort();
     }
+
+    public ObservableList<Person> getStudents() {
+        return persons.getStudents();
+    }
 }

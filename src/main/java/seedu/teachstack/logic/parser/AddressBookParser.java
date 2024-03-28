@@ -8,17 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.teachstack.commons.core.LogsCenter;
-import seedu.teachstack.logic.commands.AddCommand;
-import seedu.teachstack.logic.commands.ClearCommand;
-import seedu.teachstack.logic.commands.Command;
-import seedu.teachstack.logic.commands.DeleteCommand;
-import seedu.teachstack.logic.commands.EditCommand;
-import seedu.teachstack.logic.commands.ExitCommand;
-import seedu.teachstack.logic.commands.FindCommand;
-import seedu.teachstack.logic.commands.GroupCommand;
-import seedu.teachstack.logic.commands.HelpCommand;
-import seedu.teachstack.logic.commands.ListCommand;
-import seedu.teachstack.logic.commands.ViewCommand;
+import seedu.teachstack.logic.commands.*;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
 
 /**
@@ -84,6 +74,9 @@ public class AddressBookParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
+
+        case SummaryCommand.COMMAND_WORD:
+            return new SummaryCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
