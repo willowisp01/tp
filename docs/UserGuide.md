@@ -3,14 +3,45 @@ layout: page
 title: User Guide
 ---
 
-TeachStack is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TeachStack can get your contact management tasks done faster than traditional GUI apps.
-
-## Table of Contents
+## Table of contents
   {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## 1. Welcome!
+
+Thank you for choosing to use TeachStack! Our product aims to help you allocate resources to keep track of weaker students,
+and is optimized to be used with the Command Line Interface (CLI).
+This is achieved through the use of focus groups, which identifies students in need and monitors their performance.
+So, are you ready to help students in need?
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 2. Target user/audience
+
+The growing population of computer science students worldwide presents a novel set of problems administratively for computer science instructors which TeachStack aims to address. Therefore, TeachStack is tailored for computer science instructors, not limited to those within NUS.
+
+## 2.1 Assumptions
+1. We assume that users are passionate educators who wish to see their students succeed. This is important as TeachStack mainly allows instructors to track the performance of weaker students, so the application can only demonstrate its full potential in the hands of instructors who care.
+2. We also assume that users are somewhat familiar with computers and have used computer applications in the past, which will help them follow this guide and use TeachStack effectively. Since most instructors will have used similar applications (e.g. Canvas), this is a reasonable assumption to make.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 3. Purpose of User Guide (UG)
+
+The purpose of the User Guide (UG) for TeachStack is to provide users
+with a comprehensive understanding of the application's features and
+functionalities. Structured to facilitate ease of use and enhance productivity,
+the guide offers clear instructions, detailed explanations, and reference
+materials such as command summaries and a glossary. By empowering users
+with the knowledge to efficiently navigate TeachStack's Command Line Interface (CLI)
+and Graphical User Interface (GUI), the UG aims to streamline student management tasks
+and ensure optimal utilization of the application's capabilities.
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+## 5. Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -26,36 +57,33 @@ TeachStack is a **desktop app for managing contacts, optimized for use via a Com
    Some example commands you can try:
 
     * `list` : Lists all contacts.
-
-
-* `add id/A01234567H n/John Doe e/e0123456@u.nus.edu` : Adds a student named `John Doe` to the list.
-
-* `delete A0123456X` : Deletes the student with student id A0123456X from the list.
-
-* `clear` : Deletes all students.
-
-* `exit` : Exits the app.
+    * `add id/A01234567H n/John Doe e/e0123456@u.nus.edu` : Adds a student named `John Doe` to the list.
+    * `delete A0123456X` : Deletes the student with student id A0123456X from the list.
+    * `clear` : Deletes all students.
+    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
-## Understanding Our GUI
+
+## Understanding our GUI
 
 --------------------------------------------------------------------------------------------------------------------
-## How to Use the User Guide
+## 6. How to use the user guide
 
 This guide explains how you can use TeachStack to manage weaker students. It will walk you through each feature and functionality of the app, ensuring you're equipped to make the most of Teachstack's capabilities.
 
-* To get started with TeachStack. [Quick Start](#Quick-Start)
-* To understand the GUI. [Understanding Our GUI](Understanding-Our-GUI)
-* To see details of the commands and features. [Features](#Features)
-* To quickly navigate to a specific section. [Table of Contents](#Table-of-Content)
-* If you encounter any technical term, please refer to the glossary. [Glossary] (#Glossary)
-* If you encounter any problem, you may find your answer in the FAQ. [FAQ](#FAQ)
+* To get started with TeachStack. [Quick start](#quick-start)
+* To understand the GUI. [Understanding our GUI](#understanding-our-gui)
+* To see details of the commands and features. [Features](#features)
+* To quickly navigate to a specific section. [Table of contents](#table-of-contents)
+* To see an overview of all commands. [Command summary](#command-summary)
+* If you encounter any technical term, please refer to the glossary. [Glossary](#glossary)
+* If you encounter any problem, you may find your answer in the FAQ. [FAQ](#faq)
 
 ## Terminologies / Symbols
 
 Extra information are given in boxes:
 * <div markdown="block" class="alert alert-info">:information_source: denotes additional information</div>
-* <div markdown="block" class="alert alert-info">:exclamation: denotes warning that can cause error</div>
+* <div markdown="block" class="alert alert-warning">:exclamation: denotes warning that can cause error</div>
 
 The explanation of each command will be formatted in the following convention
 1. What the command does
