@@ -71,7 +71,7 @@ public class ArchivedBook implements ReadOnlyArchivedBook {
      * The person must not already exist in the archived book.
      */
     public void addPerson(Person p) {
-        archivedPersons.add(p);
+        archivedPersons.addToArchive(p);
     }
 
     /**

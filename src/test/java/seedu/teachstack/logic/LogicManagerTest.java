@@ -26,9 +26,11 @@ import seedu.teachstack.logic.parser.exceptions.ParseException;
 import seedu.teachstack.model.Model;
 import seedu.teachstack.model.ModelManager;
 import seedu.teachstack.model.ReadOnlyAddressBook;
+import seedu.teachstack.model.ReadOnlyArchivedBook;
 import seedu.teachstack.model.UserPrefs;
 import seedu.teachstack.model.person.Person;
 import seedu.teachstack.storage.JsonAddressBookStorage;
+import seedu.teachstack.storage.JsonArchivedBookStorage;
 import seedu.teachstack.storage.JsonUserPrefsStorage;
 import seedu.teachstack.storage.StorageManager;
 import seedu.teachstack.testutil.PersonBuilder;
@@ -47,8 +49,10 @@ public class LogicManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonArchivedBookStorage archivedBookStorage =
+                new JsonArchivedBookStorage(temporaryFolder.resolve("archivedBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, archivedBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -123,7 +127,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getArchivedBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -158,9 +162,17 @@ public class LogicManagerTest {
             }
         };
 
+        JsonArchivedBookStorage archivedBookStorage = new JsonArchivedBookStorage(prefPath) {
+            @Override
+            public void saveArchivedBook(ReadOnlyArchivedBook archivedBook, Path filePath)
+                    throws IOException {
+                throw e;
+            }
+        };
+
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, archivedBookStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 

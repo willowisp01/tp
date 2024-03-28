@@ -47,7 +47,6 @@ public class ArchiveCommand extends Command {
         }
 
         Person personToArchive = personOptional.get();
-        personToArchive.setArchivedPerson();
         model.archivePerson(personToArchive);
         return new CommandResult(String.format(MESSAGE_ARCHIVE_PERSON_SUCCESS, Messages.format(personToArchive)));
     }

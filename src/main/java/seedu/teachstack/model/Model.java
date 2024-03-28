@@ -110,6 +110,6 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /** Method to get filtered list for archived persons. */
-   ObservableList<Person> getFilteredArchiveList();
+    ObservableList<Person> getFilteredArchivedList();
 
 }

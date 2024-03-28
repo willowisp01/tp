@@ -137,8 +137,8 @@ public class ModelManager implements Model {
 
     @Override
     public void archivePerson(Person person) {
-        addressBook.archivePerson(person);
         archivedBook.addPerson(person);
+        deletePerson(person);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -159,7 +159,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Person> getFilteredArchiveList() {
+    public ObservableList<Person> getFilteredArchivedList() {
         return filteredArchivedPersons;
     }
 

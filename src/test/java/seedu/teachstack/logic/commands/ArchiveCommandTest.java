@@ -22,107 +22,103 @@ import seedu.teachstack.model.UserPrefs;
 import seedu.teachstack.model.person.Person;
 import seedu.teachstack.model.person.StudentId;
 
-/**
- * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
- */
-public class DeleteCommandTest {
+public class ArchiveCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalArchivedBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        StudentId id = personToDelete.getStudentId();
-        DeleteCommand deleteCommand = new DeleteCommand(id);
+        Person personToArchive = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        StudentId id = personToArchive.getStudentId();
+        ArchiveCommand archiveCommand = new ArchiveCommand(id);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+        String expectedMessage = String.format(ArchiveCommand.MESSAGE_ARCHIVE_PERSON_SUCCESS,
+                Messages.format(personToArchive));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getArchivedBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.archivePerson(personToArchive);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(archiveCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         StudentId outOfBoundId = new StudentId("A9999999Z");
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundId);
+        ArchiveCommand archiveCommand = new ArchiveCommand(outOfBoundId);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_DISPLAYED_STUDENT_ID);
+        assertCommandFailure(archiveCommand, model, Messages.MESSAGE_INVALID_DISPLAYED_STUDENT_ID);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        StudentId id = personToDelete.getStudentId();
+        Person personToArchive = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        StudentId id = personToArchive.getStudentId();
 
-        DeleteCommand deleteCommand = new DeleteCommand(id);
+        ArchiveCommand archiveCommand = new ArchiveCommand(id);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+        String expectedMessage = String.format(ArchiveCommand.MESSAGE_ARCHIVE_PERSON_SUCCESS,
+                Messages.format(personToArchive));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getArchivedBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.archivePerson(personToArchive);
         showNoPerson(expectedModel);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(archiveCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToDelete = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        StudentId outOfBoundId = personToDelete.getStudentId();
+        Person personToArchive = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        StudentId outOfBoundId = personToArchive.getStudentId();
 
         // ensures that outOfBoundId is still in bounds of address book list
         assertTrue(model.getAddressBook().getPersonList().stream()
                 .filter(person -> person.getStudentId().equals(outOfBoundId)).toArray().length == 1);
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundId);
+        ArchiveCommand archiveCommand = new ArchiveCommand(outOfBoundId);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+        String expectedMessage = String.format(ArchiveCommand.MESSAGE_ARCHIVE_PERSON_SUCCESS,
+                Messages.format(personToArchive));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getArchivedBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.archivePerson(personToArchive);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(archiveCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(ID_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(ID_SECOND_PERSON);
+        ArchiveCommand archiveFirstCommand = new ArchiveCommand(ID_FIRST_PERSON);
+        ArchiveCommand archiveSecondCommand = new ArchiveCommand(ID_SECOND_PERSON);
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(archiveFirstCommand.equals(archiveFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(ID_FIRST_PERSON);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        ArchiveCommand archiveFirstCommandCopy = new ArchiveCommand(ID_FIRST_PERSON);
+        assertTrue(archiveFirstCommand.equals(archiveFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(archiveFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(archiveFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertFalse(archiveFirstCommand.equals(archiveSecondCommand));
     }
 
     @Test
     public void toStringMethod() {
         StudentId targetId = new StudentId("A0123456A");
-        DeleteCommand deleteCommand = new DeleteCommand(targetId);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetId=" + targetId + "}";
-        assertEquals(expected, deleteCommand.toString());
+        ArchiveCommand archiveCommand = new ArchiveCommand(targetId);
+        String expected = ArchiveCommand.class.getCanonicalName() + "{targetId=" + targetId + "}";
+        assertEquals(expected, archiveCommand.toString());
     }
 
     /**

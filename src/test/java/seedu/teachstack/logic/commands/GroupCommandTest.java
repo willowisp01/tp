@@ -2,6 +2,7 @@ package seedu.teachstack.logic.commands;
 
 import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
 import static seedu.teachstack.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.teachstack.logic.Messages;
 import seedu.teachstack.model.AddressBook;
+import seedu.teachstack.model.ArchivedBook;
 import seedu.teachstack.model.Model;
 import seedu.teachstack.model.ModelManager;
 import seedu.teachstack.model.UserPrefs;
@@ -19,7 +21,7 @@ import seedu.teachstack.testutil.PersonBuilder;
 import seedu.teachstack.testutil.TypicalPersons;
 
 public class GroupCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalArchivedBook(), new UserPrefs());
 
     /**
      * Checks that Alice's group is correctly changed to group 99.
@@ -35,7 +37,8 @@ public class GroupCommandTest {
 
         String expectedMessage = String.format(GroupCommand.MESSAGE_GROUP_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new ArchivedBook(model.getArchivedBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(groupCommand, model, expectedMessage, expectedModel);
