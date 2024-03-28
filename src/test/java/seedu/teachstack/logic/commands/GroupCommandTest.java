@@ -39,7 +39,7 @@ public class GroupCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new ArchivedBook(model.getArchivedBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getPerson(editedPerson.getStudentId()), editedPerson);
 
         assertCommandSuccess(groupCommand, model, expectedMessage, expectedModel);
     }

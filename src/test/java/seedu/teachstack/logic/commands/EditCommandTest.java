@@ -15,7 +15,6 @@ import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandSucce
 import static seedu.teachstack.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
 import static seedu.teachstack.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.teachstack.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.teachstack.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.teachstack.testutil.TypicalStudentIds.ID_FIRST_PERSON;
 import static seedu.teachstack.testutil.TypicalStudentIds.ID_SECOND_PERSON;
@@ -45,7 +44,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().withStudentId("A0223456X").build();
+        Person editedPerson = new PersonBuilder().withStudentId("A0128956X").build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(ID_FIRST_PERSON, descriptor);
 
@@ -53,7 +52,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new ArchivedBook(model.getArchivedBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getPerson(ID_FIRST_PERSON), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -87,7 +86,7 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(ID_FIRST_PERSON, new EditPersonDescriptor());
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = model.getPerson(ID_FIRST_PERSON);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
@@ -101,7 +100,7 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personInFilteredList = model.getPerson(ID_FIRST_PERSON);
         Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(ID_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -110,7 +109,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new ArchivedBook(model.getArchivedBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getPerson(ID_FIRST_PERSON), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -129,7 +128,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in address book
-        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person personInList = model.getPerson(ID_SECOND_PERSON);
         EditCommand editCommand = new EditCommand(ID_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(personInList).build());
 
@@ -153,7 +152,7 @@ public class EditCommandTest {
     public void execute_invalidPersonIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         StudentId outOfBoundId = ID_SECOND_PERSON;
-        Person personNotInFilteredList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person personNotInFilteredList = model.getPerson(ID_SECOND_PERSON);
         Person editedPerson = new PersonBuilder(personNotInFilteredList).withName(VALID_NAME_BOB).build();
 
         // ensures that outOfBoundIndex is still in bounds of address book list

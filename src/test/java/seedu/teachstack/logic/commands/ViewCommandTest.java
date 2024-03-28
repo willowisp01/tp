@@ -8,7 +8,6 @@ import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandSucce
 import static seedu.teachstack.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
 import static seedu.teachstack.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.teachstack.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.teachstack.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.teachstack.testutil.TypicalStudentIds.ID_FIRST_PERSON;
 import static seedu.teachstack.testutil.TypicalStudentIds.ID_SECOND_PERSON;
@@ -28,9 +27,8 @@ class ViewCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToView = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        StudentId id = personToView.getStudentId();
-        ViewCommand viewCommand = new ViewCommand(id);
+        Person personToView = model.getPerson(ID_FIRST_PERSON);
+        ViewCommand viewCommand = new ViewCommand(ID_FIRST_PERSON);
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_SUCCESS,
                 Messages.format(personToView));
@@ -52,7 +50,7 @@ class ViewCommandTest {
     public void execute_invalidIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToView = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person personToView = model.getPerson(ID_SECOND_PERSON);
         StudentId outOfBoundId = personToView.getStudentId();
 
         // ensures that outOfBoundId is still in bounds of address book list

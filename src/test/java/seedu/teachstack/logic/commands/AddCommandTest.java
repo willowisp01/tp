@@ -24,6 +24,7 @@ import seedu.teachstack.model.ReadOnlyAddressBook;
 import seedu.teachstack.model.ReadOnlyArchivedBook;
 import seedu.teachstack.model.ReadOnlyUserPrefs;
 import seedu.teachstack.model.person.Person;
+import seedu.teachstack.model.person.StudentId;
 import seedu.teachstack.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -186,6 +187,8 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Person> getFilteredArchivedList() {
+
+        public Person getPerson(StudentId id) {
             throw new AssertionError("This method should not be called.");
         }
     }
