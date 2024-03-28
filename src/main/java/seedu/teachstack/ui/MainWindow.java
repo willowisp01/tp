@@ -128,7 +128,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        archivedPersonListPanel = new ArchivedPersonListPanel(logic.getFilteredArchiveList());
+        archivedPersonListPanel = new ArchivedPersonListPanel(logic.getFilteredArchivedList());
         archivedListPanelPlaceholder.getChildren().add(archivedPersonListPanel.getRoot());
     }
 

@@ -28,6 +28,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new ArchivedBook(), new ArchivedBook(modelManager.getArchivedBook()));
     }
 
     @Test
@@ -92,6 +93,23 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void setArchivedBookFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setArchivedBookFilePath(null));
+    }
+
+    @Test
+    public void setArchivedBookFilePath_validPath_setsArchivedBookFilePath() {
+        Path path = Paths.get("archived/book/file/path");
+        modelManager.setArchivedBookFilePath(path);
+        assertEquals(path, modelManager.getArchivedBookFilePath());
+    }
+
+    @Test
+    public void getFilteredArchivedList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredArchivedList().remove(0));
     }
 
     @Test

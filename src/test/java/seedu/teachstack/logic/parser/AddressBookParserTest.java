@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.teachstack.logic.commands.AddCommand;
+import seedu.teachstack.logic.commands.ArchiveCommand;
 import seedu.teachstack.logic.commands.ClearCommand;
 import seedu.teachstack.logic.commands.DeleteCommand;
 import seedu.teachstack.logic.commands.EditCommand;
@@ -94,6 +95,13 @@ public class AddressBookParserTest {
         ViewCommand command = (ViewCommand) parser.parseCommand(
                 ViewCommand.COMMAND_WORD + " " + ID_FIRST_PERSON);
         assertEquals(new ViewCommand(ID_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_archive() throws Exception {
+        ArchiveCommand command = (ArchiveCommand) parser.parseCommand(
+                ArchiveCommand.COMMAND_WORD + " " + ID_FIRST_PERSON);
+        assertEquals(new ArchiveCommand(ID_FIRST_PERSON), command);
     }
 
     @Test
