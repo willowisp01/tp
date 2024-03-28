@@ -8,14 +8,5 @@
     }
   },
   "addressBookFilePath" : "addressbook.json",
-
-  "guiSettings" : {
-    "windowWidth" : 1000.0,
-    "windowHeight" : 500.0,
-    "windowCoordinates" : {
-      "x" : 300,
-      "y" : 100
-    }
-  },
   "archivedBookFilePath" : "archivedbook.json"
 }
