@@ -12,6 +12,7 @@ import seedu.teachstack.logic.commands.Command;
 import seedu.teachstack.logic.commands.CommandResult;
 import seedu.teachstack.logic.commands.exceptions.CommandException;
 import seedu.teachstack.logic.parser.AddressBookParser;
+import seedu.teachstack.logic.parser.ArchivedBookParser;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
 import seedu.teachstack.model.Model;
 import seedu.teachstack.model.ReadOnlyAddressBook;
@@ -33,6 +34,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private final ArchivedBookParser archivedBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -41,14 +43,24 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+        archivedBookParser = new ArchivedBookParser();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
+        String[] words = commandText.trim().split("\\s+");
+        boolean isArchivedBookCommand = words.length >= 2 && words[1].equalsIgnoreCase("archive");
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command;
+
+        if (isArchivedBookCommand) {
+            command = archivedBookParser.parseCommand(commandText);
+        } else {
+            command = addressBookParser.parseCommand(commandText);
+        }
+
         commandResult = command.execute(model);
 
         try {
