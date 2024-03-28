@@ -126,4 +126,11 @@ public class ArchivedBook implements ReadOnlyArchivedBook {
     public int hashCode() {
         return archivedPersons.hashCode();
     }
+
+    /**
+     * Sort the Persons in UniquePersonList.
+     */
+    public void sort() {
+        archivedPersons.sort();
+    }
 }

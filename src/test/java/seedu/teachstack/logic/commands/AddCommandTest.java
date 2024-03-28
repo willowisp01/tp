@@ -187,6 +187,8 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Person> getFilteredArchivedList() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         public Person getPerson(StudentId id) {
             throw new AssertionError("This method should not be called.");
