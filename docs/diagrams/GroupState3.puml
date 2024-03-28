@@ -1,16 +1,26 @@
 @startuml
-!include style.puml
+'https://plantuml.com/class-diagram
+
+hide circle
+hide methods
+
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
 
-title After command "group gp/7 id/A0123456X id/A1234567H"
+title After command "group gp/3 id/A0123456X"
 
 package addressBook <<rectangle>> {
-    class State1 as "<u>p0:Person</u>\nstudentId:A0123456X\ngroup:3,7"
-    class State2 as "<u>p1:Person</u>\nstudentId:A1234567H\ngroup:7"
+    class State1 as "<u>p0:Person</u>" {
+        studentId = A0123456X
+        group = 3, 7
+
+    }
+    class State2 as "<u>p1:Person</u>" {
+        studentId = A1234567H
+        group = 7
+    }
 }
 
 State1 -[hidden]right-> State2
-
-@end
+@enduml

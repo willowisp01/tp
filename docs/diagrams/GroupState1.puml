@@ -1,5 +1,9 @@
 @startuml
-!include style.puml
+'https://plantuml.com/class-diagram
+
+hide circle
+hide methods
+
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
@@ -7,9 +11,13 @@ skinparam ClassBackgroundColor #FFFFAA
 title Current state before modification
 
 package addressBook <<rectangle>> {
-    class State1 as "<u>p0:Person</u>\nstudentId:A0123456X"
-    class State2 as "<u>p1:Person</u>\nstudentId:A1234567H"
+    class State1 as "<u>p0:Person</u>" {
+        studentId = A0123456X
+    }
+    class State2 as "<u>p1:Person</u>" {
+        studentId = A1234567H
+    }
 }
 
 State1 -[hidden]right-> State2
-@end
+@enduml
