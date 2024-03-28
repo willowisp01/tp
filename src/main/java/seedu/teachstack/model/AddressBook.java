@@ -97,15 +97,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-//    /**
-//     * Archives a person to the archive list and remove the person in the address book.
-//     * The person must already exist in the address book.
-//     */
-//    public void archivePerson(Person p) {
-//        archivedPersons.add(p);
-//        persons.remove(p);
-//    }
-
     //// util methods
 
     @Override

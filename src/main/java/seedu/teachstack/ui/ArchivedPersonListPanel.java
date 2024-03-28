@@ -2,7 +2,6 @@ package seedu.teachstack.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -26,6 +25,9 @@ public class ArchivedPersonListPanel extends UiPart<Region> {
     @FXML
     private Label header;
 
+    /**
+     * Creates a {@code ArchivedPersonListPanel} with the given {@code ObservableList}.
+     */
     public ArchivedPersonListPanel(ObservableList<Person> archivedPersonList) {
         super(FXML);
         archivedPersonListView.setItems(archivedPersonList);
