@@ -72,6 +72,7 @@ public class ArchivedBook implements ReadOnlyArchivedBook {
      */
     public void addPerson(Person p) {
         archivedPersons.addToArchive(p);
+        archivedPersons.sort();
     }
 
     /**
