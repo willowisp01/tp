@@ -48,14 +48,4 @@ public class ArchivedPersonListPanel extends UiPart<Region> {
             }
         }
     }
-
-    /**
-     * Initializes the list of archived persons.
-     */
-//    private void initializeList(ObservableList<Person> archivedPersonList) {
-//        personListView.getChildren().clear();
-//        for (Person person : archivedPersonList) {
-//            personListView.getChildren().add(new PersonCard(person).getRoot());
-//        }
-//    }
 }
