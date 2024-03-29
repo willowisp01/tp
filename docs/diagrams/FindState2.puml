@@ -28,6 +28,6 @@ uniquePersonList -down-> student1
 uniquePersonList -down-> student2
 uniquePersonList -down-> student3
 
-model -down-> student1: filter
+model -down-> student1 : filter
 
 @enduml

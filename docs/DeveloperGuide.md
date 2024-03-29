@@ -264,6 +264,20 @@ Step 2. The user executes `find gp/Group 1 gp/ Group 2` to find all students tha
 
 ![FindState2](images/FindState2.png)
 
+Here is the sequence diagram which shows the overall flow:
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+**Aspect: Which model attribute to use for find:**
+
+* **Alternative 1 (current choice):** Filter by `Group`
+    * Pros: `Group` names are easy to remember, especially since they are assigned by the user.
+    * Cons: Some students may not have a `Group` assigned and can only be found by manually looking through all entries in `UniquePersonList`.
+
+* **Alternative 2:** Filter by `StudentId`
+    * Pros: Any student can be found as long as their `StudentId` is known.
+    * Cons: It is not practical for users to remember the `StudentId` of each student.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
