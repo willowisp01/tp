@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.teachstack.logic.commands.EditArchiveCommand;
-import seedu.teachstack.logic.commands.EditArchiveCommand.EditPersonDescriptor;
+import seedu.teachstack.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
 import seedu.teachstack.model.group.Group;
 import seedu.teachstack.model.person.StudentId;

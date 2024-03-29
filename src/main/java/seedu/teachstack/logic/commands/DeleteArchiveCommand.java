@@ -33,13 +33,13 @@ public class DeleteArchiveCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person personToDelete = model.getPerson(targetId);
+        Person personToDelete = model.getArchivedPerson(targetId);
 
         if (personToDelete == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_STUDENT_ID);
         }
 
-        model.deletePerson(personToDelete);
+        model.deleteArchivedPerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_ARCHIVE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

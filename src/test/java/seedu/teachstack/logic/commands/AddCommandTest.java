@@ -190,9 +190,30 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updateFilteredArchivedList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public Person getPerson(StudentId id) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Person getArchivedPerson(StudentId id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setArchivedPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteArchivedPerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

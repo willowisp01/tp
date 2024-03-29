@@ -107,6 +107,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns archived person with the given {@code id}. */
+    Person getArchivedPerson(StudentId id);
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -115,5 +118,24 @@ public interface Model {
 
     /** Method to get filtered list for archived persons. */
     ObservableList<Person> getFilteredArchivedList();
+
+    /**
+     * Deletes the given archived person.
+     * The person must exist in the archived book.
+     */
+    void deleteArchivedPerson(Person target);
+
+    /**
+     * Replaces the given archived person {@code target} with {@code editedPerson}.
+     * {@code target} must exist in the archived book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the archived book.
+     */
+    void setArchivedPerson(Person target, Person editedPerson);
+
+    /**
+     * Updates the filter of the filtered archived list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredArchivedList(Predicate<Person> predicate);
 
 }

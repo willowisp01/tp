@@ -156,9 +156,32 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setArchivedPerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+        archivedBook.setPerson(target, editedPerson);
+        archivedBook.sort();
+    }
+
+    @Override
+    public Person getArchivedPerson(StudentId id) {
+        List<Person> lastShownList = getArchivedBook().getArchivedList();
+
+        Optional<Person> personOptional = lastShownList.stream()
+                .filter(p -> p.getStudentId().equals(id))
+                .findFirst();
+
+        return personOptional.orElse(null);
+    }
+
+    @Override
     public void archivePerson(Person person) {
         archivedBook.addPerson(person);
         deletePerson(person);
+    }
+
+    @Override
+    public void deleteArchivedPerson(Person target) {
+        archivedBook.removePerson(target);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -181,6 +204,12 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredArchivedList() {
         return filteredArchivedPersons;
+    }
+
+    @Override
+    public void updateFilteredArchivedList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        filteredArchivedPersons.setPredicate(predicate);
     }
 
     @Override
