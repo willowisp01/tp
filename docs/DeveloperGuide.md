@@ -255,7 +255,14 @@ The command "set weak [grade]" followed by the grade allows the instructor to se
 new threshold. This command resets students' weak markers immediately. 
 
 
+The following activity diagram: 
+![SetWeakSequenceDiagram](images/SetWeakActivityDiagram.png)
 
+The State prior to set weak command
+![SetWeakStateDisgram](images/SetWeak1.png)
+
+The State after set weak command
+![SetWeakStateDiagram](images/SetWeak2.png)
 --------------------------------------------------------------------------------------------------------------------
 
 
