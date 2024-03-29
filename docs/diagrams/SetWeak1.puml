@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+hide methods
+
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Before set weak Command
+
+package addressBook <<rectangle>> {
+    class State0 as "<U>p0:Person</u>" {
+            studentId = A2345678S
+            grade = A+
+    }
+    class State1 as "<u>p1:Person</u>" {
+        studentId = A0123456X
+        grade = C
+        weak
+    }
+    class State2 as "<u>p2:Person</u>" {
+        studentId = A1234567H
+        grade = B+
+    }
+}
+
+State1 -[hidden]right-> State2
+@enduml
