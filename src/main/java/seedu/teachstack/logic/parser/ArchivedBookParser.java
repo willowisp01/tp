@@ -8,22 +8,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.teachstack.commons.core.LogsCenter;
-import seedu.teachstack.logic.commands.AddCommand;
-import seedu.teachstack.logic.commands.ArchiveCommand;
 import seedu.teachstack.logic.commands.ClearArchiveCommand;
-import seedu.teachstack.logic.commands.ClearCommand;
 import seedu.teachstack.logic.commands.Command;
 import seedu.teachstack.logic.commands.DeleteArchiveCommand;
-import seedu.teachstack.logic.commands.DeleteCommand;
 import seedu.teachstack.logic.commands.EditArchiveCommand;
-import seedu.teachstack.logic.commands.EditCommand;
-import seedu.teachstack.logic.commands.ExitCommand;
-import seedu.teachstack.logic.commands.FindCommand;
-import seedu.teachstack.logic.commands.GroupCommand;
 import seedu.teachstack.logic.commands.HelpCommand;
-import seedu.teachstack.logic.commands.ListCommand;
-import seedu.teachstack.logic.commands.SetWeakThresholdCommand;
-import seedu.teachstack.logic.commands.ViewCommand;
+import seedu.teachstack.logic.commands.UnarchiveCommand;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
 
 /**
@@ -34,7 +24,7 @@ public class ArchivedBookParser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>[^\\s]+\\s+archive)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>[^\\s]+)(\\s+(?<subCommand>archive))?(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(ArchivedBookParser.class);
 
     /**
@@ -59,6 +49,9 @@ public class ArchivedBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
+
+        case UnarchiveCommand.COMMAND_WORD:
+            return new UnarchiveCommandParser().parse(arguments);
 
         case EditArchiveCommand.COMMAND_WORD:
             return new EditArchiveCommandParser().parse(arguments);

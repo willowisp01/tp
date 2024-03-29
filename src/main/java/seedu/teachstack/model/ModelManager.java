@@ -180,6 +180,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void unarchivePerson(Person person) {
+        deleteArchivedPerson(person);
+        addPerson(person);
+    }
+
+    @Override
     public void deleteArchivedPerson(Person target) {
         archivedBook.removePerson(target);
     }

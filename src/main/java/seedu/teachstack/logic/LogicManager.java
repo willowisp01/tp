@@ -51,7 +51,8 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         String[] words = commandText.trim().split("\\s+");
-        boolean isArchivedBookCommand = words.length >= 2 && words[1].equalsIgnoreCase("archive");
+        boolean isArchivedBookCommand = (words.length >= 2 && words[1].equalsIgnoreCase("archive"))
+                || words[0].equalsIgnoreCase("unarchive");
         CommandResult commandResult;
         Command command;
 

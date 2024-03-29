@@ -95,6 +95,12 @@ public interface Model {
     void archivePerson(Person person);
 
     /**
+     * Unarchives the given person.
+     * The person must exist in the archived book.
+     */
+    void unarchivePerson(Person person);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
