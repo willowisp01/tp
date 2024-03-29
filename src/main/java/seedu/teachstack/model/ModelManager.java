@@ -129,6 +129,14 @@ public class ModelManager implements Model {
         return personOptional.orElse(null);
     }
 
+    @Override
+    public List<Person> getWeak() {
+        List<Person> weak = getAddressBook().getPersonList().filtered(person -> {
+            return person.isWeak();
+        });
+        return weak;
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
