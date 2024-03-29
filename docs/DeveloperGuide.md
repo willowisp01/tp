@@ -246,6 +246,37 @@ The following activity diagram summarizes what happens when a user executes a de
     * Pros: Easier to implement command to recover a deleted person in the future.
     * Cons: Stored deleted person may never be used. May have performance issue in terms of memory usage.
 
+### Find feature
+
+#### Implementation
+
+Our find feature is a rework of the one found in AB3, which allowed users to find persons with names containing specified keywords. Since we now have a stronger method of identifying students (their unique student IDs), we decided to update the feature to find and list students by their membership in groups instead.
+
+A `FindCommand` instance has its own `PersonInGroupPredicate`, which contains a `Set<Group>` and is used to test if a `Person` is in the `Group`s in the set. These groups are specified as arguments when entering the find command. It is also important to note that the `Person` must be in all the `Group`s in the set in order to pass the predicate.
+
+When `FindCommand#execute(model)` is called, `ModelManager#updateFilteredPersonList(predicate)` is invoked to update the filter of the currently shown FilteredList` to match the predicate. To illustrate further, here is a step-by-step breakdown of what happens:
+
+Step 1. The user launches the application. The initial list shown is simply the `UniquePersonList`.
+
+![FindState1](images/FindState1.png)
+
+Step 2. The user executes `find gp/Group 1 gp/ Group 2` to find all students that are in both Groups 1 and 2. Only `student1` is in both groups, so after `ModelManager#updateFilteredPersonList(predicate)` is called, only `student1` will be in the `FilteredList`.
+
+![FindState2](images/FindState2.png)
+
+Here is the sequence diagram which shows the overall flow:
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+**Aspect: Which model attribute to use for find:**
+
+* **Alternative 1 (current choice):** Filter by `Group`
+    * Pros: `Group` names are easy to remember, especially since they are assigned by the user.
+    * Cons: Some students may not have a `Group` assigned and can only be found by manually looking through all entries in `UniquePersonList`.
+
+* **Alternative 2:** Filter by `StudentId`
+    * Pros: Any student can be found as long as their `StudentId` is known.
+    * Cons: It is not practical for users to remember the `StudentId` of each student.
 
 ### \[Proposed\] Undo/redo feature
 
