@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+hide methods
+
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Current state before modification
+
+package addressBook <<rectangle>> {
+    class State1 as "<u>p0:Person</u>" {
+
+    }
+    class State2 as "<u>p1:Person</u>" {
+
+    }
+
+    class studentId0  as "<u>studentId0:StudentId</u>" {
+        id = "A0123456X"
+    }
+    class studentId1 as "<u>studentId1:StudentId</u>"{
+        id = "A1234567H"
+    }
+}
+
+State1 -[hidden]right-> State2
+State1 *-down-> studentId0
+State2 *-down-> studentId1
+@enduml

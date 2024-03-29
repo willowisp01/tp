@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+hide methods
+
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title After command "group gp/7 id/A0123456X id/A1234567H"
+
+package addressBook <<rectangle>> {
+
+    class State1 as "<u>p0:Person</u>" {
+
+    }
+
+    class State2 as "<u>p1:Person</u>" {
+
+    }
+
+    class studentId0  as "<u>studentId0:StudentId</u>" {
+        id = "A0123456X"
+    }
+
+    class studentId1 as "<u>studentId1:StudentId</u>"{
+        id = "A1234567H"
+    }
+
+    class studentGroup01  as "<u>studentGroup01:StudentGroup</u>" {
+        group = 3
+    }
+
+    class studentGroup02  as "<u>studentGroup02:StudentGroup</u>" {
+        group = 7
+    }
+
+    class studentGroup1  as "<u>studentGroup1:StudentGroup</u>" {
+        group = 7
+    }
+}
+
+State1 -[hidden]right-> State2
+State1 *-down-> studentId0
+State1 *-down-> studentGroup01
+State1 *-down-> studentGroup02
+State2 *-down-> studentId1
+State2 *-down-> studentGroup1
+@enduml
