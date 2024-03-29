@@ -42,7 +42,7 @@ public class Grade implements Comparable<Grade> {
         return test.matches(VALIDATION_REGEX);
     }
 
-    private int gradeToInt() {
+    public int gradeToInt() {
         switch (value) {
         case ("A+"):
             return 11;

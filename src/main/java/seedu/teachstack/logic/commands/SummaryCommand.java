@@ -17,6 +17,26 @@ public class SummaryCommand extends Command{
     public CommandResult execute(Model model) throws CommandException {
         ObservableList<Person> students = model.getFilteredPersonList();
         int totalStudents = students.size();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, totalStudents));
+
+        DoubleSummaryStatistics stats = students.stream()
+                .mapToDouble(student -> student.getGrade().getNumericValue())
+                .summaryStatistics();
+
+        double meanGrade = stats.getAverage();
+        double standardDeviation = calculateStandardDeviation(students, meanGrade);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, totalStudents, meanGrade, standardDeviation));
+    }
+
+    private double calculateStandardDeviation(ObservableList<Person> students, double meanGrade) {
+        double variance = students.stream()
+                .mapToDouble(student -> {
+                    double diff = student.getGrade().gradeToInt() - meanGrade;
+                    return diff * diff;
+                })
+                .average()
+                .orElse(0);
+
+        return Math.sqrt(variance);
     }
 }
