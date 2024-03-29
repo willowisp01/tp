@@ -11,15 +11,30 @@ skinparam ClassBackgroundColor #FFFFAA
 title After command "group gp/3 id/A0123456X"
 
 package addressBook <<rectangle>> {
+
     class State1 as "<u>p0:Person</u>" {
-        studentId = A0123456X
-        group = 3
 
     }
+
     class State2 as "<u>p1:Person</u>" {
-        studentId = A1234567H
+
+    }
+
+    class studentId0  as "<u>studentId0:StudentId</u>" {
+        id = "A0123456X"
+    }
+
+    class studentId1 as "<u>studentId1:StudentId</u>"{
+        id = "A1234567H"
+    }
+
+    class studentGroup0  as "<u>studentGroup0:StudentGroup</u>" {
+        group = 3
     }
 }
 
 State1 -[hidden]right-> State2
+State1 *-down-> studentId0
+State1 *-down-> studentGroup0
+State2 *-down-> studentId1
 @enduml
