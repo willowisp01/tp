@@ -3,7 +3,7 @@ package seedu.teachstack.logic.parser;
 import static seedu.teachstack.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.teachstack.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.teachstack.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.teachstack.testutil.TypicalStudentIds.ID_FIRST_PERSON;
+import static seedu.teachstack.testutil.TypicalArchivedStudentIds.ID_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class DeleteArchiveCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteArchiveCommand() {
-        assertParseSuccess(parser, "A0128956X", new DeleteArchiveCommand(ID_FIRST_PERSON));
+        assertParseSuccess(parser, "A6789012X", new DeleteArchiveCommand(ID_FIRST_PERSON));
     }
 
     @Test

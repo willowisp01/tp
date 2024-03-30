@@ -7,11 +7,11 @@ import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandFailu
 import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.teachstack.logic.commands.CommandTestUtil.showArchivedPersonAtIndex;
 import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
+import static seedu.teachstack.testutil.TypicalArchivedStudentIds.ID_FIRST_PERSON;
+import static seedu.teachstack.testutil.TypicalArchivedStudentIds.ID_SECOND_PERSON;
 import static seedu.teachstack.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.teachstack.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.teachstack.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.teachstack.testutil.TypicalArchivedStudentIds.ID_FIRST_PERSON;
-import static seedu.teachstack.testutil.TypicalArchivedStudentIds.ID_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 

@@ -25,9 +25,9 @@ import static seedu.teachstack.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.teachstack.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.teachstack.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.teachstack.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.teachstack.testutil.TypicalStudentIds.ID_FIRST_PERSON;
-import static seedu.teachstack.testutil.TypicalStudentIds.ID_SECOND_PERSON;
-import static seedu.teachstack.testutil.TypicalStudentIds.ID_THIRD_PERSON;
+import static seedu.teachstack.testutil.TypicalArchivedStudentIds.ID_FIRST_PERSON;
+import static seedu.teachstack.testutil.TypicalArchivedStudentIds.ID_SECOND_PERSON;
+import static seedu.teachstack.testutil.TypicalArchivedStudentIds.ID_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
