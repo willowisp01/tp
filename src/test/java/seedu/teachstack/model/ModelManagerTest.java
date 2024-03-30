@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.teachstack.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.teachstack.model.util.SampleDataUtil.getGroupSet;
 import static seedu.teachstack.testutil.Assert.assertThrows;
 import static seedu.teachstack.testutil.TypicalPersons.ALICE;
 import static seedu.teachstack.testutil.TypicalPersons.BENSON;
@@ -12,12 +13,11 @@ import static seedu.teachstack.testutil.TypicalPersons.GEORGE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.teachstack.commons.core.GuiSettings;
-import seedu.teachstack.model.person.NameContainsKeywordsPredicate;
+import seedu.teachstack.model.person.PersonInGroupPredicate;
 import seedu.teachstack.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -129,8 +129,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredPersonList(new PersonInGroupPredicate(getGroupSet("nooneingroup")));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

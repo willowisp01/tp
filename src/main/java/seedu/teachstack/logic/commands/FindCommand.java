@@ -1,28 +1,29 @@
 package seedu.teachstack.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.teachstack.logic.parser.CliSyntax.PREFIX_GROUP;
 
 import seedu.teachstack.commons.util.ToStringBuilder;
 import seedu.teachstack.logic.Messages;
 import seedu.teachstack.model.Model;
-import seedu.teachstack.model.person.NameContainsKeywordsPredicate;
+import seedu.teachstack.model.person.PersonInGroupPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all persons in address book who is a member of any of the specified groups.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students who are members of the specified"
+            + "group(s) (case-sensitive) and displays them as a list with index numbers. If multiple groups are"
+            + "specified, only students who are part of all groups will be displayed.\n"
+            + "Parameters: " + PREFIX_GROUP + "GROUP...\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_GROUP + "Group 1 " + PREFIX_GROUP + "Group 2";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final PersonInGroupPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(PersonInGroupPredicate predicate) {
         this.predicate = predicate;
     }
 
