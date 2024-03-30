@@ -1,7 +1,7 @@
 package seedu.teachstack.logic.parser;
 
 import static seedu.teachstack.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.teachstack.logic.parser.CliSyntax.*;
+import static seedu.teachstack.logic.parser.CliSyntax.PREFIX_GRADE;
 
 import seedu.teachstack.logic.commands.SetWeakThresholdCommand;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
