@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.teachstack.testutil.Assert.assertThrows;
 import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
-import static seedu.teachstack.testutil.TypicalPersons.ALICE;
-import static seedu.teachstack.testutil.TypicalPersons.HOON;
-import static seedu.teachstack.testutil.TypicalPersons.IDA;
+import static seedu.teachstack.testutil.TypicalArchivedPersons.JOHN;
+import static seedu.teachstack.testutil.TypicalArchivedPersons.EMMA;
+import static seedu.teachstack.testutil.TypicalArchivedPersons.OLIVER;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -72,14 +72,14 @@ public class JsonArchivedBookStorageTest {
         assertEquals(original, new ArchivedBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addPerson(EMMA);
+        original.removePerson(JOHN);
         jsonArchivedBookStorage.saveArchivedBook(original, filePath);
         readBack = jsonArchivedBookStorage.readArchivedBook(filePath).get();
         assertEquals(original, new ArchivedBook(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addPerson(OLIVER);
         jsonArchivedBookStorage.saveArchivedBook(original); // file path not specified
         readBack = jsonArchivedBookStorage.readArchivedBook().get(); // file path not specified
         assertEquals(original, new ArchivedBook(readBack));
