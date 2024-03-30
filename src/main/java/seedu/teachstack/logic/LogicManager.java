@@ -50,9 +50,8 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
-        String[] words = commandText.trim().split("\\s+");
-        boolean isArchivedBookCommand = (words.length >= 2 && words[1].equalsIgnoreCase("archive"))
-                || words[0].equalsIgnoreCase("unarchive");
+//        String[] words = commandText.trim().split("\\s+");
+        boolean isArchivedBookCommand = commandText.contains("archived");
         CommandResult commandResult;
         Command command;
 
