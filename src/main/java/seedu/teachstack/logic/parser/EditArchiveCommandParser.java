@@ -40,7 +40,8 @@ public class EditArchiveCommandParser implements Parser<EditArchiveCommand> {
         try {
             id = ParserUtil.parseStudentId(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditArchiveCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditArchiveCommand.MESSAGE_USAGE),
+                    pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENTID, PREFIX_EMAIL,
