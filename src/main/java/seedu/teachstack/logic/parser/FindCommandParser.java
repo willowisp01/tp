@@ -1,12 +1,15 @@
 package seedu.teachstack.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.teachstack.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.teachstack.logic.parser.CliSyntax.PREFIX_GROUP;
 
-import java.util.Arrays;
+import java.util.Set;
 
 import seedu.teachstack.logic.commands.FindCommand;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
-import seedu.teachstack.model.person.NameContainsKeywordsPredicate;
+import seedu.teachstack.model.group.Group;
+import seedu.teachstack.model.person.PersonInGroupPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -19,13 +22,13 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        requireNonNull(args);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUP);
+        if (!argMultimap.getValue(PREFIX_GROUP).isPresent() || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        Set<Group> groups = ParserUtil.parseGroups(argMultimap.getAllValues(PREFIX_GROUP));
+        return new FindCommand(new PersonInGroupPredicate(groups));
     }
 }
