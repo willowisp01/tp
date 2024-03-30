@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.teachstack.logic.commands.RandomCommand;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
+import seedu.teachstack.model.group.Group;
 
 
 /**
@@ -38,7 +39,14 @@ public class RandomCommandParser implements Parser<RandomCommand> {
         }
 
         String name = argMultimap.getValue(PREFIX_GROUP).orElse("");
-        return new RandomCommand(name, numOfGroup);
+
+        if (name.equals("") || !name.matches(Group.VALIDATION_REGEX)) {
+            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+        }
+
+        String trimmedName = name.trim();
+
+        return new RandomCommand(trimmedName, numOfGroup);
     }
 
     /**

@@ -2,11 +2,13 @@ package seedu.teachstack.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.teachstack.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.teachstack.testutil.Assert.assertThrows;
 import static seedu.teachstack.testutil.TypicalPersons.ALICE;
 import static seedu.teachstack.testutil.TypicalPersons.BENSON;
+import static seedu.teachstack.testutil.TypicalPersons.GEORGE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -86,6 +88,16 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void getWeak_personBelowThreshold_returnsPersonInList() {
+        modelManager.addPerson(GEORGE);
+        assertEquals(modelManager.getAddressBook().getPersonList(), modelManager.getWeak());
+        modelManager.addPerson(ALICE);
+        assertNotEquals(modelManager.getAddressBook().getPersonList(), modelManager.getWeak());
+        assertNotEquals(modelManager.getAddressBook().getPersonList().size(), modelManager.getWeak().size());
+        assertEquals(modelManager.getAddressBook().getPersonList().get(0), modelManager.getWeak().get(0));
     }
 
     @Test

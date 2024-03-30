@@ -10,6 +10,7 @@ import static seedu.teachstack.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -163,6 +164,12 @@ public class AddCommandTest {
         public Person getPerson(StudentId id) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public List<Person> getWeak() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

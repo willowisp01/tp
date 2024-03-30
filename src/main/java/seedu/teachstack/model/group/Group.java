@@ -9,8 +9,8 @@ import static seedu.teachstack.commons.util.AppUtil.checkArgument;
  */
 public class Group {
 
-    public static final String MESSAGE_CONSTRAINTS = "Groups names should only contain "
-            + "alphanumeric characters and space";
+    public static final String MESSAGE_CONSTRAINTS = "Group name cannot be empty, "
+            + "and should only contain alphanumeric characters and space";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+(\\s\\p{Alnum}+)*";
 
     public final String groupName;
