@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.teachstack.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.teachstack.model.util.SampleDataUtil.getGroupSet;
+import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
 import static seedu.teachstack.testutil.TypicalPersons.ALICE;
 import static seedu.teachstack.testutil.TypicalPersons.BENSON;
 import static seedu.teachstack.testutil.TypicalPersons.DANIEL;

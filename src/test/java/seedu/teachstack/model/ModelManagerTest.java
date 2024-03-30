@@ -142,7 +142,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         modelManager.updateFilteredPersonList(new PersonInGroupPredicate(getGroupSet("nooneingroup")));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, archivedBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
