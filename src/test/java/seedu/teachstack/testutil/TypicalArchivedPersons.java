@@ -23,32 +23,53 @@ import seedu.teachstack.model.person.Person;
  */
 public class TypicalArchivedPersons {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withStudentId("A0223456X")
-            .withEmail("e0345678@u.nus.edu")
+    public static final Person JOHN = new PersonBuilder().withName("John Doe")
+            .withStudentId("A1234567X")
+            .withEmail("e1234567@u.nus.edu")
             .withGrade("A+")
             .withGroups("Group 1").build();
-    public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withStudentId("A0323456X")
-            .withEmail("e1023456@u.nus.edu")
+
+    public static final Person JANE = new PersonBuilder().withName("Jane Smith")
+            .withStudentId("A2345678X")
+            .withEmail("e2345678@u.nus.edu")
             .withGrade("A")
             .withGroups("Group 2B", "Group 1").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withStudentId("A0823456X")
-            .withGrade("A-").withEmail("e1123456@u.nus.edu").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
-            .withStudentId("A0923456X").withGrade("B+").withEmail("e1234567@u.nus.edu").withGroups("Group 1").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withStudentId("A1023456X").withGrade("B").withEmail("e1345678@u.nus.edu").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withStudentId("A0123656X").withGrade("B-").withEmail("e1456789@u.nus.edu").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best")
-            .withStudentId("A0128956X").withGrade("C").withEmail("e0234567@u.nus.edu").build();
+
+    public static final Person EMILY = new PersonBuilder().withName("Emily Johnson")
+            .withStudentId("A3456789X")
+            .withGrade("A-")
+            .withEmail("e3456789@u.nus.edu")
+            .build();
+
+    public static final Person MICHAEL = new PersonBuilder().withName("Michael Brown")
+            .withStudentId("A4567890X")
+            .withGrade("B+")
+            .withEmail("e4567890@u.nus.edu")
+            .withGroups("Group 1").build();
+
+    public static final Person SARAH = new PersonBuilder().withName("Sarah Wilson")
+            .withStudentId("A5678901X")
+            .withGrade("B")
+            .withEmail("e5678901@u.nus.edu")
+            .build();
+
+    public static final Person DAVID = new PersonBuilder().withName("David Taylor")
+            .withStudentId("A6789012X")
+            .withGrade("B-")
+            .withEmail("e6789012@u.nus.edu")
+            .build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
-            .withStudentId("A1056438U").withEmail("e1034567@u.nus.edu").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
-            .withStudentId("A1078906H").withEmail("e1045678@u.nus.edu").build();
+    public static final Person EMMA = new PersonBuilder().withName("Emma Clark")
+            .withStudentId("A7890123X")
+            .withGrade("C")
+            .withEmail("e7890123@u.nus.edu")
+            .build();
+
+    public static final Person OLIVER = new PersonBuilder().withName("Oliver White")
+            .withStudentId("A8901234X")
+            .withEmail("e8901234@u.nus.edu")
+            .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withStudentId(VALID_STUDENTID_AMY)
@@ -75,6 +96,6 @@ public class TypicalArchivedPersons {
     }
 
     public static List<Person> getTypicalArchivedPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(JOHN, JANE, EMILY, MICHAEL, SARAH, DAVID));
     }
 }

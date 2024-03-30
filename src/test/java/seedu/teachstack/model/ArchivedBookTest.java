@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_GROUP_GROUP1;
 import static seedu.teachstack.testutil.Assert.assertThrows;
-import static seedu.teachstack.testutil.TypicalArchivedPersons.ALICE;
+import static seedu.teachstack.testutil.TypicalArchivedPersons.JOHN;
 import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
 
 import java.util.Arrays;
@@ -45,8 +45,8 @@ public class ArchivedBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withGroups(VALID_GROUP_GROUP1).build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
+        Person editedJohn = new PersonBuilder(JOHN).withGroups(VALID_GROUP_GROUP1).build();
+        List<Person> newPersons = Arrays.asList(JOHN, editedJohn);
         ArchivedBookStub newData = new ArchivedBookStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> archivedBook.resetData(newData));
@@ -59,20 +59,20 @@ public class ArchivedBookTest {
 
     @Test
     public void hasPerson_personNotInArchivedBook_returnsFalse() {
-        assertFalse(archivedBook.hasPerson(ALICE));
+        assertFalse(archivedBook.hasPerson(JOHN));
     }
 
     @Test
     public void hasPerson_personInArchivedBook_returnsTrue() {
-        archivedBook.addPerson(ALICE);
-        assertTrue(archivedBook.hasPerson(ALICE));
+        archivedBook.addPerson(JOHN);
+        assertTrue(archivedBook.hasPerson(JOHN));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInArchivedBook_returnsTrue() {
-        archivedBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withGroups(VALID_GROUP_GROUP1).build();
-        assertTrue(archivedBook.hasPerson(editedAlice));
+        archivedBook.addPerson(JOHN);
+        Person editedJohn = new PersonBuilder(JOHN).withGroups(VALID_GROUP_GROUP1).build();
+        assertTrue(archivedBook.hasPerson(editedJohn));
     }
 
     @Test

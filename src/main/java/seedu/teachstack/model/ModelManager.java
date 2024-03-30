@@ -112,6 +112,7 @@ public class ModelManager implements Model {
     @Override
     public void setArchivedBook(ReadOnlyArchivedBook archivedBook) {
         this.archivedBook.resetData(archivedBook);
+        this.archivedBook.sort();
     }
 
     @Override
@@ -188,6 +189,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteArchivedPerson(Person target) {
         archivedBook.removePerson(target);
+    }
+
+    @Override
+    public boolean hasArchivedPerson(Person person) {
+        requireNonNull(person);
+        return archivedBook.hasPerson(person);
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -10,14 +10,14 @@ import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
 import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_GROUP_GROUP1;
 import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
-import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.teachstack.logic.commands.CommandTestUtil.assertArchivedBookCommandFailure;
 import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.teachstack.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.teachstack.logic.commands.CommandTestUtil.showArchivedPersonAtIndex;
 import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
 import static seedu.teachstack.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.teachstack.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.teachstack.testutil.TypicalStudentIds.ID_FIRST_PERSON;
-import static seedu.teachstack.testutil.TypicalStudentIds.ID_SECOND_PERSON;
+import static seedu.teachstack.testutil.TypicalArchivedStudentIds.ID_FIRST_PERSON;
+import static seedu.teachstack.testutil.TypicalArchivedStudentIds.ID_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -102,20 +102,21 @@ public class EditArchiveCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showArchivedPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personInFilteredList = model.getPerson(ID_FIRST_PERSON);
+        Person personInFilteredList = model.getArchivedPerson(ID_FIRST_PERSON);
         Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(ID_FIRST_PERSON,
+        EditArchiveCommand editArchiveCommand = new EditArchiveCommand(ID_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditArchiveCommand.MESSAGE_EDIT_ARCHIVED_PERSON_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new ArchivedBook(model.getArchivedBook()), new UserPrefs());
-        expectedModel.setPerson(model.getPerson(ID_FIRST_PERSON), editedPerson);
+        expectedModel.setArchivedPerson(model.getArchivedPerson(ID_FIRST_PERSON), editedPerson);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editArchiveCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -124,19 +125,19 @@ public class EditArchiveCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditArchiveCommand editArchiveCommand = new EditArchiveCommand(ID_SECOND_PERSON, descriptor);
 
-        assertCommandFailure(editArchiveCommand, model, EditArchiveCommand.MESSAGE_DUPLICATE_PERSON);
+        assertArchivedBookCommandFailure(editArchiveCommand, model, EditArchiveCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showArchivedPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in archived book
         Person personInList = model.getArchivedPerson(ID_SECOND_PERSON);
         EditArchiveCommand editArchiveCommand = new EditArchiveCommand(ID_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(personInList).build());
 
-        assertCommandFailure(editArchiveCommand, model, EditArchiveCommand.MESSAGE_DUPLICATE_PERSON);
+        assertArchivedBookCommandFailure(editArchiveCommand, model, EditArchiveCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -145,7 +146,7 @@ public class EditArchiveCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditArchiveCommand editArchiveCommand = new EditArchiveCommand(outOfBoundId, descriptor);
 
-        assertCommandFailure(editArchiveCommand, model, Messages.MESSAGE_INVALID_DISPLAYED_STUDENT_ID);
+        assertArchivedBookCommandFailure(editArchiveCommand, model, Messages.MESSAGE_INVALID_DISPLAYED_STUDENT_ID);
     }
 
     /**
@@ -154,7 +155,7 @@ public class EditArchiveCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showArchivedPersonAtIndex(model, INDEX_FIRST_PERSON);
         StudentId outOfBoundId = ID_SECOND_PERSON;
         Person personNotInFilteredList = model.getArchivedPerson(ID_SECOND_PERSON);
         Person editedPerson = new PersonBuilder(personNotInFilteredList).withName(VALID_NAME_BOB).build();

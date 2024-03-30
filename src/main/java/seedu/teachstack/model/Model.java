@@ -77,6 +77,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the archived book.
+     */
+    boolean hasArchivedPerson(Person person);
+
+    /**
     * Deletes the given person.
     * The person must exist in the address book.
     */
