@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+hide methods
+hide empty members
+
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title After `find gp/Group 1 gp/Group 2`
+
+class uniquePersonList as "<u>uniquePersonList:UniquePersonList</u>"
+class model as "<u>model:ModelManager</u>"
+class student1 as "<u>student1:Person</u>" {
+    groups = Group 1, Group 2
+}
+class student2 as "<u>student2:Person</u>" {
+    groups = Group 1
+}
+class student3 as "<u>student3:Person</u>"
+
+student1 -[hidden]right-> student2
+student2 -[hidden]right-> student3
+
+uniquePersonList -down-> student1
+uniquePersonList -down-> student2
+uniquePersonList -down-> student3
+
+model -down-> student1 : filter
+
+@enduml

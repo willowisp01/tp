@@ -10,7 +10,6 @@ import static seedu.teachstack.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.teachstack.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.teachstack.commons.core.index.Index;
@@ -18,8 +17,8 @@ import seedu.teachstack.logic.commands.exceptions.CommandException;
 import seedu.teachstack.model.AddressBook;
 import seedu.teachstack.model.ArchivedBook;
 import seedu.teachstack.model.Model;
-import seedu.teachstack.model.person.NameContainsKeywordsPredicate;
 import seedu.teachstack.model.person.Person;
+import seedu.teachstack.model.person.StudentId;
 import seedu.teachstack.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -125,8 +124,8 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        final StudentId id = person.getStudentId();
+        model.updateFilteredPersonList(student -> student.getStudentId().equals(id));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
