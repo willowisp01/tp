@@ -27,7 +27,11 @@ public class SummaryCommand extends Command{
         double meanGrade = stats.getAverage();
         double standardDeviation = calculateStandardDeviation(students, meanGrade);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, totalStudents, meanGrade, standardDeviation));
+        String summaryMessage = String.format(MESSAGE_SUCCESS, totalStudents, meanGrade, standardDeviation);
+
+        // Return CommandResult with summary message
+        return new CommandResult(summaryMessage, false, false, true);
+        //return new CommandResult(String.format(MESSAGE_SUCCESS, totalStudents, meanGrade, standardDeviation));
     }
 
     private double calculateStandardDeviation(ObservableList<Person> students, double meanGrade) {
