@@ -140,5 +140,4 @@ public class Person implements Comparable<Person> {
         }
         return this.getEmail().equals(otherPerson.getEmail());
     }
-
 }

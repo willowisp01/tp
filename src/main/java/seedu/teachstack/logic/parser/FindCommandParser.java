@@ -27,8 +27,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (!argMultimap.getValue(PREFIX_GROUP).isPresent() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+
         Set<Group> groups = ParserUtil.parseGroups(argMultimap.getAllValues(PREFIX_GROUP));
         return new FindCommand(new PersonInGroupPredicate(groups));
     }
-
 }

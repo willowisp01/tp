@@ -286,7 +286,6 @@ The following activity diagram summarizes what happens when a user executes a de
 * **Alternative 2:** Only delete person that is displayed.
     * Pros: Allow user to refer to the displayed data to reduce risk of specifying a wrong id belonging to another person.
     * Cons: May reduce usability as user may have to enter additional command to ensure the student to be deleted is displayed.
-    * 
 
 **Aspect: Deleted `Person` stored or ready for garbage collection:**
 
@@ -405,7 +404,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 1 (current choice):** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
-
+  
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).

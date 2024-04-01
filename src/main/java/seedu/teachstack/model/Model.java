@@ -55,14 +55,37 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns the user prefs' archived book file path.
+     */
+    Path getArchivedBookFilePath();
+
+    /**
+     * Sets the user prefs' archived book file path.
+     */
+    void setArchivedBookFilePath(Path archivedBookFilePath);
+
+    /**
+     * Replaces archived book data with the data in {@code archivedBook}.
+     */
+    void setArchivedBook(ReadOnlyArchivedBook archivedBook);
+
+    /** Returns the ArchivedBook */
+    ReadOnlyArchivedBook getArchivedBook();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the archived book.
      */
+    boolean hasArchivedPerson(Person person);
+
+    /**
+    * Deletes the given person.
+    * The person must exist in the address book.
+    */
     void deletePerson(Person target);
 
     /**
@@ -70,6 +93,18 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Archives the given person.
+     * The person must exist in the address book.
+     */
+    void archivePerson(Person person);
+
+    /**
+     * Unarchives the given person.
+     * The person must exist in the archived book.
+     */
+    void unarchivePerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -87,9 +122,34 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns archived person with the given {@code id}. */
+    Person getArchivedPerson(StudentId id);
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Method to get filtered list for archived persons. */
+    ObservableList<Person> getFilteredArchivedList();
+
+    /**
+     * Deletes the given archived person.
+     * The person must exist in the archived book.
+     */
+    void deleteArchivedPerson(Person target);
+
+    /**
+     * Replaces the given archived person {@code target} with {@code editedPerson}.
+     * {@code target} must exist in the archived book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the archived book.
+     */
+    void setArchivedPerson(Person target, Person editedPerson);
+
+    /**
+     * Updates the filter of the filtered archived list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredArchivedList(Predicate<Person> predicate);
 }

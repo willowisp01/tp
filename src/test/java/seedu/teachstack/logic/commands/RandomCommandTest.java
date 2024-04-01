@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.teachstack.testutil.Assert.assertThrows;
+import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
 import static seedu.teachstack.testutil.TypicalPersons.ALICE;
 import static seedu.teachstack.testutil.TypicalPersons.FIONA;
 import static seedu.teachstack.testutil.TypicalPersons.GEORGE;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.teachstack.logic.commands.exceptions.CommandException;
 import seedu.teachstack.model.AddressBook;
+import seedu.teachstack.model.ArchivedBook;
 import seedu.teachstack.model.Model;
 import seedu.teachstack.model.ModelManager;
 import seedu.teachstack.model.UserPrefs;
@@ -32,7 +34,7 @@ public class RandomCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalArchivedBook(), new UserPrefs());
     }
 
 
@@ -49,7 +51,8 @@ public class RandomCommandTest {
 
         Person editedPerson = new PersonBuilder(GEORGE).withGroups(GROUP_NAME_A + " 1").build();
         Person editedPerson2Copy = new PersonBuilder(editedPerson2).withGroups(GROUP_NAME_A + " 1").build();
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new ArchivedBook(model.getArchivedBook()), new UserPrefs());
         expectedModel.setPerson(model.getPerson(ALICE.getStudentId()), editedPerson2Copy);
         expectedModel.setPerson(model.getPerson(GEORGE.getStudentId()), editedPerson);
         assertCommandSuccess(randomCommand, model,

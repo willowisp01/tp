@@ -1,0 +1,40 @@
+{
+  "_comment": "AddressBook save file which contains the same Person values as in TypicalArchivedPersons#getTypicalAddressBook()",
+  "persons" : [ {
+    "name" : "John Doe",
+    "studentId": "A1234567X",
+    "email" : "e1234567@u.nus.edu",
+    "grade" : "A+",
+    "groups" : [ "Group 1" ]
+  }, {
+    "name" : "Jane Smith",
+    "studentId": "A2345678X",
+    "email" : "e2345678@u.nus.edu",
+    "grade" : "A",
+    "groups" : [ "Group 2B", "Group 1" ]
+  }, {
+    "name" : "Emily Johnson",
+    "studentId": "A3456789X",
+    "email" : "e3456789@u.nus.edu",
+    "grade" : "A-",
+    "groups" : [ ]
+  }, {
+    "name" : "Michael Brown",
+    "studentId": "A4567890X",
+    "email" : "e4567890@u.nus.edu",
+    "grade" : "B+",
+    "groups" : [ "Group 1" ]
+  }, {
+    "name" : "Sarah Wilson",
+    "studentId": "A5678901X",
+    "email" : "e5678901@u.nus.edu",
+    "grade" : "B",
+    "groups" : [ ]
+  }, {
+    "name" : "David Taylor",
+    "studentId": "A6789012X",
+    "email" : "e6789012@u.nus.edu",
+    "grade" : "B-",
+    "groups" : [ ]
+  }]
+}
