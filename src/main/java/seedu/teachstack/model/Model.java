@@ -1,6 +1,7 @@
 package seedu.teachstack.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -114,6 +115,9 @@ public interface Model {
 
     /** Returns a person with the given {@code id}. */
     Person getPerson(StudentId id);
+
+    /** Returns a list of persons that are marked weak. */
+    List<Person> getWeak();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

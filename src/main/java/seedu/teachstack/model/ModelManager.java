@@ -157,6 +157,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public List<Person> getWeak() {
+        List<Person> weak = getAddressBook().getPersonList().filtered(person -> {
+            return person.isWeak();
+        });
+        return weak;
+    }
+
+    @Override
     public void setArchivedPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         archivedBook.setPerson(target, editedPerson);
