@@ -4,10 +4,12 @@ import javafx.collections.ObservableList;
 import seedu.teachstack.logic.commands.exceptions.CommandException;
 import seedu.teachstack.model.Model;
 import seedu.teachstack.model.person.Person;
+import java.util.DoubleSummaryStatistics;
+
 
 public class SummaryCommand extends Command{
     public static final String COMMAND_WORD = "summary";
-    public static final String MESSAGE_SUCCESS = "Summary: Total Students: %d";
+    public static final String MESSAGE_SUCCESS = "Summary: Total Students: %d %.2f %.2f";
 
     public SummaryCommand() {
 
@@ -19,7 +21,7 @@ public class SummaryCommand extends Command{
         int totalStudents = students.size();
 
         DoubleSummaryStatistics stats = students.stream()
-                .mapToDouble(student -> student.getGrade().getNumericValue())
+                .mapToDouble(student -> student.getGrade().gradeToInt())
                 .summaryStatistics();
 
         double meanGrade = stats.getAverage();
