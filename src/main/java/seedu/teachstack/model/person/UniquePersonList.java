@@ -27,6 +27,7 @@ import seedu.teachstack.model.person.exceptions.PersonNotFoundException;
 public class UniquePersonList implements Iterable<Person> {
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
+
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
@@ -57,6 +58,14 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
 
+        internalList.add(toAdd);
+    }
+
+    /**
+     * Adds a person to the archive list.
+     */
+    public void addToArchive(Person toAdd) {
+        requireNonNull(toAdd);
         internalList.add(toAdd);
     }
 

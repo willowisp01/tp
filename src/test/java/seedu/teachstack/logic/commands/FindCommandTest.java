@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.teachstack.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.teachstack.model.util.SampleDataUtil.getGroupSet;
+import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
 import static seedu.teachstack.testutil.TypicalPersons.ALICE;
 import static seedu.teachstack.testutil.TypicalPersons.BENSON;
 import static seedu.teachstack.testutil.TypicalPersons.DANIEL;
@@ -25,8 +26,8 @@ import seedu.teachstack.model.person.PersonInGroupPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalArchivedBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalArchivedBook(), new UserPrefs());
 
     @Test
     public void equals() {

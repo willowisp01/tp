@@ -21,6 +21,7 @@ import seedu.teachstack.logic.commands.exceptions.CommandException;
 import seedu.teachstack.model.AddressBook;
 import seedu.teachstack.model.Model;
 import seedu.teachstack.model.ReadOnlyAddressBook;
+import seedu.teachstack.model.ReadOnlyArchivedBook;
 import seedu.teachstack.model.ReadOnlyUserPrefs;
 import seedu.teachstack.model.person.Person;
 import seedu.teachstack.model.person.StudentId;
@@ -135,6 +136,31 @@ public class AddCommandTest {
         }
 
         @Override
+        public ReadOnlyArchivedBook getArchivedBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getArchivedBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setArchivedBookFilePath(Path archivedBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void archivePerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setArchivedBook(ReadOnlyArchivedBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -160,9 +186,44 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getFilteredArchivedList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredArchivedList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public Person getPerson(StudentId id) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Person getArchivedPerson(StudentId id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setArchivedPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteArchivedPerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unarchivePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasArchivedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

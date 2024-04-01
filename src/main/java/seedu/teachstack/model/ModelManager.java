@@ -23,25 +23,31 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final ArchivedBook archivedBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> filteredArchivedPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyArchivedBook archivedBook,
+                        ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.archivedBook = new ArchivedBook(archivedBook);
         this.addressBook.sort();
+        this.archivedBook.sort();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredArchivedPersons = new FilteredList<>(this.archivedBook.getArchivedList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new ArchivedBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -79,6 +85,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getArchivedBookFilePath() {
+        return userPrefs.getArchivedBookFilePath();
+    }
+
+    @Override
+    public void setArchivedBookFilePath(Path archivedBookFilePath) {
+        requireNonNull(archivedBookFilePath);
+        userPrefs.setArchivedBookFilePath(archivedBookFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -90,6 +107,17 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public void setArchivedBook(ReadOnlyArchivedBook archivedBook) {
+        this.archivedBook.resetData(archivedBook);
+        this.archivedBook.sort();
+    }
+
+    @Override
+    public ReadOnlyArchivedBook getArchivedBook() {
+        return archivedBook;
     }
 
     @Override
@@ -113,7 +141,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
         addressBook.sort();
     }
@@ -127,6 +154,47 @@ public class ModelManager implements Model {
                 .findFirst();
 
         return personOptional.orElse(null);
+    }
+
+    @Override
+    public void setArchivedPerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+        archivedBook.setPerson(target, editedPerson);
+        archivedBook.sort();
+    }
+
+    @Override
+    public Person getArchivedPerson(StudentId id) {
+        List<Person> lastShownList = getArchivedBook().getArchivedList();
+
+        Optional<Person> personOptional = lastShownList.stream()
+                .filter(p -> p.getStudentId().equals(id))
+                .findFirst();
+
+        return personOptional.orElse(null);
+    }
+
+    @Override
+    public void archivePerson(Person person) {
+        archivedBook.addPerson(person);
+        deletePerson(person);
+    }
+
+    @Override
+    public void unarchivePerson(Person person) {
+        deleteArchivedPerson(person);
+        addPerson(person);
+    }
+
+    @Override
+    public void deleteArchivedPerson(Person target) {
+        archivedBook.removePerson(target);
+    }
+
+    @Override
+    public boolean hasArchivedPerson(Person person) {
+        requireNonNull(person);
+        return archivedBook.hasPerson(person);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -148,6 +216,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getFilteredArchivedList() {
+        return filteredArchivedPersons;
+    }
+
+    @Override
+    public void updateFilteredArchivedList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        filteredArchivedPersons.setPredicate(predicate);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -160,8 +239,10 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
+                && archivedBook.equals(otherModelManager.archivedBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredArchivedPersons.equals(otherModelManager.filteredArchivedPersons);
     }
 
 }

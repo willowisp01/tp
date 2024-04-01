@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.teachstack.commons.core.GuiSettings;
 import seedu.teachstack.model.person.PersonInGroupPredicate;
 import seedu.teachstack.testutil.AddressBookBuilder;
+import seedu.teachstack.testutil.ArchivedBookBuilder;
 
 public class ModelManagerTest {
 
@@ -27,6 +28,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new ArchivedBook(), new ArchivedBook(modelManager.getArchivedBook()));
     }
 
     @Test
@@ -94,14 +96,33 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setArchivedBookFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setArchivedBookFilePath(null));
+    }
+
+    @Test
+    public void setArchivedBookFilePath_validPath_setsArchivedBookFilePath() {
+        Path path = Paths.get("archived/book/file/path");
+        modelManager.setArchivedBookFilePath(path);
+        assertEquals(path, modelManager.getArchivedBookFilePath());
+    }
+
+    @Test
+    public void getFilteredArchivedList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredArchivedList().remove(0));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
+        ArchivedBook archivedBook = new ArchivedBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        ArchivedBook differentArchivedBook = new ArchivedBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(addressBook, archivedBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, archivedBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -114,11 +135,14 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, archivedBook, userPrefs)));
+
+        // different archivedBook -> returns false
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentArchivedBook, userPrefs)));
 
         // different filteredList -> returns false
         modelManager.updateFilteredPersonList(new PersonInGroupPredicate(getGroupSet("nooneingroup")));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, archivedBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -126,6 +150,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, archivedBook, differentUserPrefs)));
     }
 }

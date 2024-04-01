@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import seedu.teachstack.commons.core.LogsCenter;
 import seedu.teachstack.commons.exceptions.DataLoadingException;
 import seedu.teachstack.model.ReadOnlyAddressBook;
+import seedu.teachstack.model.ReadOnlyArchivedBook;
 import seedu.teachstack.model.ReadOnlyUserPrefs;
 import seedu.teachstack.model.UserPrefs;
 
@@ -18,13 +19,16 @@ public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
+    private ArchivedBookStorage archivedBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, ArchivedBookStorage archivedBookStorage,
+                          UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
+        this.archivedBookStorage = archivedBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -75,4 +79,32 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ ArchivedBook methods ==============================
+
+    @Override
+    public Path getArchivedBookFilePath() {
+        return archivedBookStorage.getArchivedBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyArchivedBook> readArchivedBook() throws DataLoadingException {
+        return readArchivedBook(archivedBookStorage.getArchivedBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyArchivedBook> readArchivedBook(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return archivedBookStorage.readArchivedBook(filePath);
+    }
+
+    @Override
+    public void saveArchivedBook(ReadOnlyArchivedBook archivedBook) throws IOException {
+        saveArchivedBook(archivedBook, archivedBookStorage.getArchivedBookFilePath());
+    }
+
+    @Override
+    public void saveArchivedBook(ReadOnlyArchivedBook archivedBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        archivedBookStorage.saveArchivedBook(archivedBook, filePath);
+    }
 }

@@ -16,6 +16,7 @@ import seedu.teachstack.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniquePersonList archivedPersons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +27,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        archivedPersons = new UniquePersonList();
     }
 
     public AddressBook() {}
@@ -47,6 +49,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
     }
+
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
