@@ -6,9 +6,11 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -203,14 +205,11 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void showSummaryPopUp(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Summary");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
+    /**
+     * Creates the popup for the summary command
+     * @param chart is the pie chart of the grades
+     * @param commandtext is the resulting statistics data
+     */
     private void showChartPopup(Node chart, String commandtext) {
         Platform.runLater(() -> {
             Stage dialog = new Stage();

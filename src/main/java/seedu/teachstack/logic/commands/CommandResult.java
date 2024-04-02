@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.teachstack.commons.util.ToStringBuilder;
 import javafx.scene.Node;
+import seedu.teachstack.commons.util.ToStringBuilder;
+
+
 
 /**
  * Represents the result of a command execution.
@@ -26,7 +28,8 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showPopUp, Node additionalComponent) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean showPopUp, Node additionalComponent) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -34,6 +37,9 @@ public class CommandResult {
         this.additionalComponent = additionalComponent; // Assign the additional UI component
     }
 
+    /**
+     * Constructs a {@code CommandResult} with specified fields
+     */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;

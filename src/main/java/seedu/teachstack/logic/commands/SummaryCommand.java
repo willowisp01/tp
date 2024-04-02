@@ -1,5 +1,7 @@
 package seedu.teachstack.logic.commands;
 
+import java.util.DoubleSummaryStatistics;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
@@ -8,11 +10,12 @@ import seedu.teachstack.logic.commands.exceptions.CommandException;
 import seedu.teachstack.model.Model;
 import seedu.teachstack.model.person.Grade;
 import seedu.teachstack.model.person.Person;
-import java.util.DoubleSummaryStatistics;
 
 
-
-public class SummaryCommand extends Command{
+/**
+ * Opens a popup with summary statistics
+ */
+public class SummaryCommand extends Command {
     public static final String COMMAND_WORD = "summary";
     public static final String MESSAGE_SUCCESS = "Total Students: %d \nMean Grade: %s \nGrade "
             + "Standard Deviation: %.2f";
@@ -37,7 +40,7 @@ public class SummaryCommand extends Command{
         String summaryMessage = String.format(MESSAGE_SUCCESS, totalStudents, mean, standardDeviation);
 
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-        extracted(students, pieChartData);
+        populate(students, pieChartData);
 
         // Create the pie chart
         PieChart pieChart = new PieChart(pieChartData);
@@ -50,7 +53,12 @@ public class SummaryCommand extends Command{
 
     }
 
-    private void extracted(ObservableList<Person> students, ObservableList<PieChart.Data> pieChartData) {
+    /**
+     * Populates the pie chart
+     * @param students
+     * @param pieChartData
+     */
+    private void populate(ObservableList<Person> students, ObservableList<PieChart.Data> pieChartData) {
         pieChartData.add(new PieChart.Data("A+", countStudentsWithGrade(students, "A+")));
         pieChartData.add(new PieChart.Data("A", countStudentsWithGrade(students, "A")));
         pieChartData.add(new PieChart.Data("A-", countStudentsWithGrade(students, "A-")));

@@ -42,6 +42,9 @@ public class Grade implements Comparable<Grade> {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * @return the int value corresponding to string grade
+     */
     public int gradeToInt() {
         switch (value) {
         case ("A+"):
@@ -71,32 +74,36 @@ public class Grade implements Comparable<Grade> {
         }
     }
 
+    /**
+     * @param value
+     * @return the string value corresponding to int grade
+     */
     public static String intToGrade(int value) {
         switch (value) {
-            case 11:
-                return "A+";
-            case 10:
-                return "A";
-            case 9:
-                return "A-";
-            case 8:
-                return "B+";
-            case 7:
-                return "B";
-            case 6:
-                return "B-";
-            case 5:
-                return "C+";
-            case 4:
-                return "C";
-            case 3:
-                return "D+";
-            case 2:
-                return "D";
-            case 1:
-                return "F";
-            default:
-                return "";
+        case 11:
+            return "A+";
+        case 10:
+            return "A";
+        case 9:
+            return "A-";
+        case 8:
+            return "B+";
+        case 7:
+            return "B";
+        case 6:
+            return "B-";
+        case 5:
+            return "C+";
+        case 4:
+            return "C";
+        case 3:
+            return "D+";
+        case 2:
+            return "D";
+        case 1:
+            return "F";
+        default:
+            return "";
         }
     }
 
