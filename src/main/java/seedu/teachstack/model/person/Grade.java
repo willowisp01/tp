@@ -71,6 +71,36 @@ public class Grade implements Comparable<Grade> {
         }
     }
 
+    public static String intToGrade(int value) {
+        switch (value) {
+            case 11:
+                return "A+";
+            case 10:
+                return "A";
+            case 9:
+                return "A-";
+            case 8:
+                return "B+";
+            case 7:
+                return "B";
+            case 6:
+                return "B-";
+            case 5:
+                return "C+";
+            case 4:
+                return "C";
+            case 3:
+                return "D+";
+            case 2:
+                return "D";
+            case 1:
+                return "F";
+            default:
+                return "";
+        }
+    }
+
+
     @Override
     public String toString() {
         return value;

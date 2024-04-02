@@ -2,14 +2,18 @@ package seedu.teachstack.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.teachstack.commons.core.GuiSettings;
 import seedu.teachstack.commons.core.LogsCenter;
@@ -187,8 +191,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isShowPopUp()) {
-                showSummaryPopUp(commandResult.getFeedbackToUser());
+            if (commandResult.isShowPopUp() && commandResult.getAdditionalComponent() != null) {
+                showChartPopup(commandResult.getAdditionalComponent(), commandResult.getFeedbackToUser());
             }
 
             return commandResult;
@@ -206,4 +210,30 @@ public class MainWindow extends UiPart<Stage> {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    private void showChartPopup(Node chart, String commandtext) {
+        Platform.runLater(() -> {
+            Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(primaryStage);
+            dialog.setTitle("Summary Statistics");
+
+            // Create a label to display the commandText
+            Label commandLabel = new Label("Statistics");
+            TextArea commandTextArea = new TextArea();
+            commandTextArea.setText(commandtext);
+            commandTextArea.setEditable(false);
+            commandTextArea.setWrapText(true);
+
+            // Create a VBox to hold the chart and the command text
+            VBox vBox = new VBox();
+            vBox.getChildren().addAll(commandLabel, commandTextArea, chart);
+
+            Scene scene = new Scene(vBox, 600, 400); // Adjust size as necessary
+            dialog.setScene(scene);
+
+            dialog.show();
+        });
+    }
+
 }
