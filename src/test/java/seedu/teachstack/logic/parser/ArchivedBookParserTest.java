@@ -39,7 +39,7 @@ public class ArchivedBookParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_edit_archived() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditArchiveCommand command = (EditArchiveCommand) parser.parseCommand(EditArchiveCommand.COMMAND_WORD
