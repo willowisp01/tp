@@ -1,6 +1,7 @@
 package seedu.teachstack.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.teachstack.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ public class SetWeakThresholdCommandParserTest {
 
     @Test
     public void parse_setweakCommand() throws ParseException {
-        String args = "B";
+        String args = " g/B";
         SetWeakThresholdCommand expectedCommand = new SetWeakThresholdCommand(new Grade("B"));
         assertEquals(expectedCommand, weakParser.parse(args));
     }
@@ -21,9 +22,16 @@ public class SetWeakThresholdCommandParserTest {
     @Test
     public void parse_inputWithLeadingTrailingSpaces_success() throws ParseException {
         // Input with leading/trailing spaces
-        String args = "   C+   ";
+        String args = "   g/C+   ";
         SetWeakThresholdCommand expectedCommand = new SetWeakThresholdCommand(new Grade("C+"));
         assertEquals(expectedCommand, weakParser.parse(args));
+    }
+
+    @Test
+    public void parse_invalidInput() {
+        // Input with missing grade value
+        String args = "g/";
+        assertThrows(ParseException.class, () -> weakParser.parse(args));
     }
 
 }

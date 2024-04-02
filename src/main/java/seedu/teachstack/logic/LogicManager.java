@@ -12,9 +12,11 @@ import seedu.teachstack.logic.commands.Command;
 import seedu.teachstack.logic.commands.CommandResult;
 import seedu.teachstack.logic.commands.exceptions.CommandException;
 import seedu.teachstack.logic.parser.AddressBookParser;
+import seedu.teachstack.logic.parser.ArchivedBookParser;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
 import seedu.teachstack.model.Model;
 import seedu.teachstack.model.ReadOnlyAddressBook;
+import seedu.teachstack.model.ReadOnlyArchivedBook;
 import seedu.teachstack.model.person.Person;
 import seedu.teachstack.storage.Storage;
 
@@ -32,6 +34,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private final ArchivedBookParser archivedBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -40,18 +43,28 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+        archivedBookParser = new ArchivedBookParser();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
+        boolean isArchivedBookCommand = commandText.contains("archived");
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command;
+
+        if (isArchivedBookCommand) {
+            command = archivedBookParser.parseCommand(commandText);
+        } else {
+            command = addressBookParser.parseCommand(commandText);
+        }
+
         commandResult = command.execute(model);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveArchivedBook(model.getArchivedBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -72,8 +85,23 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ReadOnlyArchivedBook getArchivedBook() {
+        return model.getArchivedBook();
+    }
+
+    @Override
+    public ObservableList<Person> getFilteredArchivedList() {
+        return model.getFilteredArchivedList();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
+    }
+
+    @Override
+    public Path getArchivedBookFilePath() {
+        return model.getArchivedBookFilePath();
     }
 
     @Override

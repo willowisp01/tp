@@ -131,7 +131,6 @@ public class ParserUtilTest {
     @Test
     public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
         Email expectedEmail = new Email(VALID_EMAIL);
-        System.out.println(expectedEmail);
         assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
     }
 

@@ -13,6 +13,7 @@ import static seedu.teachstack.testutil.TypicalStudentIds.ID_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.teachstack.logic.commands.AddCommand;
+import seedu.teachstack.logic.commands.ArchiveCommand;
 import seedu.teachstack.logic.commands.ClearCommand;
 import seedu.teachstack.logic.commands.DeleteCommand;
 import seedu.teachstack.logic.commands.EditCommand;
@@ -21,6 +22,7 @@ import seedu.teachstack.logic.commands.ExitCommand;
 import seedu.teachstack.logic.commands.FindCommand;
 import seedu.teachstack.logic.commands.HelpCommand;
 import seedu.teachstack.logic.commands.ListCommand;
+import seedu.teachstack.logic.commands.RandomCommand;
 import seedu.teachstack.logic.commands.ViewCommand;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
 import seedu.teachstack.model.person.Person;
@@ -92,6 +94,20 @@ public class AddressBookParserTest {
         ViewCommand command = (ViewCommand) parser.parseCommand(
                 ViewCommand.COMMAND_WORD + " " + ID_FIRST_PERSON);
         assertEquals(new ViewCommand(ID_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_random() throws Exception {
+        RandomCommand command = (RandomCommand) parser.parseCommand(
+                RandomCommand.COMMAND_WORD + " 1 " + PersonUtil.getGroupDetails("Consultation Group"));
+        assertEquals(new RandomCommand("Consultation Group", 1), command);
+    }
+
+    @Test
+    public void parseCommand_archive() throws Exception {
+        ArchiveCommand command = (ArchiveCommand) parser.parseCommand(
+                ArchiveCommand.COMMAND_WORD + " " + ID_FIRST_PERSON);
+        assertEquals(new ArchiveCommand(ID_FIRST_PERSON), command);
     }
 
     @Test

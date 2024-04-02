@@ -43,6 +43,36 @@ public class Grade implements Comparable<Grade> {
         return test.matches(VALIDATION_REGEX);
     }
 
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Grade)) {
+            return false;
+        }
+
+        Grade otherGrade = (Grade) other;
+        return value.equals(otherGrade.value);
+    }
+
+    @Override
+    public int compareTo(Grade o) {
+        return this.gradeToInt() - o.gradeToInt();
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
     private int gradeToInt() {
         switch (value) {
         case ("A+"):
@@ -70,36 +100,6 @@ public class Grade implements Comparable<Grade> {
         default:
             return -1;
         }
-    }
-
-    @Override
-    public String toString() {
-        return value;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Grade)) {
-            return false;
-        }
-
-        Grade otherGrade = (Grade) other;
-        return value.equals(otherGrade.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
-    @Override
-    public int compareTo(Grade o) {
-        return this.gradeToInt() - o.gradeToInt();
     }
 
     /**

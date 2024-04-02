@@ -59,4 +59,10 @@ public class PersonUtil {
         }
         return sb.toString();
     }
+
+    public static String getGroupDetails(String group) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_GROUP).append(group);
+        return sb.toString();
+    }
 }

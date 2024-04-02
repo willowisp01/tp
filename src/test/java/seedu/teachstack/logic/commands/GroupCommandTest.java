@@ -4,6 +4,7 @@ import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandFailu
 import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.teachstack.model.util.SampleDataUtil.getGroupSet;
 import static seedu.teachstack.model.util.SampleDataUtil.getStudentIdSetFromStudentIds;
+import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
 import static seedu.teachstack.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import seedu.teachstack.logic.Messages;
 import seedu.teachstack.logic.commands.exceptions.CommandException;
 import seedu.teachstack.model.AddressBook;
+import seedu.teachstack.model.ArchivedBook;
 import seedu.teachstack.model.Model;
 import seedu.teachstack.model.ModelManager;
 import seedu.teachstack.model.UserPrefs;
@@ -23,7 +25,7 @@ import seedu.teachstack.testutil.PersonBuilder;
 import seedu.teachstack.testutil.TypicalPersons;
 
 public class GroupCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalArchivedBook(), new UserPrefs());
 
     /**
      * Clears the default ID of a person (in this case, Alice).
@@ -38,7 +40,8 @@ public class GroupCommandTest {
         // Should clear all groups
         String expectedMessage = String.format(GroupCommand.MESSAGE_CLEAR_SUCCESS, Messages.format(alice));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new ArchivedBook(model.getArchivedBook()), new UserPrefs());
         expectedModel.setPerson(model.getPerson(alice.getStudentId()), alice);
 
         assertCommandSuccess(groupCommand, model, expectedMessage, expectedModel);
@@ -60,7 +63,8 @@ public class GroupCommandTest {
 
         String expectedMessage = String.format(GroupCommand.MESSAGE_GROUP_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new ArchivedBook(model.getArchivedBook()), new UserPrefs());
         expectedModel.setPerson(model.getPerson(editedPerson.getStudentId()), editedPerson);
 
         assertCommandSuccess(groupCommand, model, expectedMessage, expectedModel);
@@ -101,7 +105,8 @@ public class GroupCommandTest {
 
         String expectedMessage = String.format(GroupCommand.MESSAGE_GROUP_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new ArchivedBook(model.getArchivedBook()), new UserPrefs());
         expectedModel.setPerson(model.getPerson(editedPerson.getStudentId()), editedPerson); // Alice in group 99, 100
 
         addToGroup99.execute(model);
