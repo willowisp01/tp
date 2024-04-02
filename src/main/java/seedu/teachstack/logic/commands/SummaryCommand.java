@@ -20,9 +20,7 @@ public class SummaryCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Total Students: %d \nMean Grade: %s \nGrade "
             + "Standard Deviation: %.2f";
 
-    public SummaryCommand() {
 
-    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

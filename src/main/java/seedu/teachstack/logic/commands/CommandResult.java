@@ -107,8 +107,4 @@ public class CommandResult {
         return additionalComponent; // Getter for the additional UI component
     }
 
-
-
-
-
 }
