@@ -16,14 +16,18 @@ import seedu.teachstack.commons.util.StringUtil;
 import seedu.teachstack.logic.Logic;
 import seedu.teachstack.logic.LogicManager;
 import seedu.teachstack.model.AddressBook;
+import seedu.teachstack.model.ArchivedBook;
 import seedu.teachstack.model.Model;
 import seedu.teachstack.model.ModelManager;
 import seedu.teachstack.model.ReadOnlyAddressBook;
+import seedu.teachstack.model.ReadOnlyArchivedBook;
 import seedu.teachstack.model.ReadOnlyUserPrefs;
 import seedu.teachstack.model.UserPrefs;
 import seedu.teachstack.model.util.SampleDataUtil;
 import seedu.teachstack.storage.AddressBookStorage;
+import seedu.teachstack.storage.ArchivedBookStorage;
 import seedu.teachstack.storage.JsonAddressBookStorage;
+import seedu.teachstack.storage.JsonArchivedBookStorage;
 import seedu.teachstack.storage.JsonUserPrefsStorage;
 import seedu.teachstack.storage.Storage;
 import seedu.teachstack.storage.StorageManager;
@@ -36,7 +40,7 @@ import seedu.teachstack.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 2, 1, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -48,7 +52,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing TeachStack ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -58,7 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ArchivedBookStorage archivedBookStorage = new JsonArchivedBookStorage(userPrefs.getArchivedBookFilePath());
+        storage = new StorageManager(addressBookStorage, archivedBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -74,23 +79,29 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getArchivedBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyArchivedBook> archivedBookOptional;
+        ReadOnlyArchivedBook initialData2;
         try {
             addressBookOptional = storage.readAddressBook();
+            archivedBookOptional = storage.readArchivedBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+                        + " populated with sample TeachStack data.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData2 = archivedBookOptional.orElseGet(ArchivedBook::new);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+                    + " Will be starting with an empty TeachStack.");
             initialData = new AddressBook();
+            initialData2 = new ArchivedBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, initialData2, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -170,13 +181,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting TeachStack " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping TeachStack ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

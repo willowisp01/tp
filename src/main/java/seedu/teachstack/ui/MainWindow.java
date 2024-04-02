@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -41,6 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ArchivedPersonListPanel archivedPersonListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -56,6 +58,10 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+    @FXML
+    private StackPane archivedListPanelPlaceholder;
+    @FXML
+    private TabPane tabPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -128,6 +134,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        archivedPersonListPanel = new ArchivedPersonListPanel(logic.getFilteredArchivedList());
+        archivedListPanelPlaceholder.getChildren().add(archivedPersonListPanel.getRoot());
     }
 
     /**

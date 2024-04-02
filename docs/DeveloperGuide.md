@@ -155,12 +155,185 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Group feature
+
+#### Implementation
+
+The group feature is a modification of the original "tag" feature, where each person can have multiple tags with various sorts of information.
+We have adapted the tags for the express purpose of putting students into groups.
+
+The command, like all others, implements `execute`. If possible, all students will be put into the specified group.
+A valid student needs to have a `studentId` which fulfils various criteria as specified in the `StudentId` class.
+A valid student should also be in the list of current students. **If any students are invalid, the whole command fails.**
+Students who are not in the list of existing students are given in the exception message of `GroupCommand` itself.
+
+Internally, the command makes use of the pre-existing `EditCommand#execute(StudentId, editPersonDescriptor)` method.
+It calls this method for all given students in a loop.
+
+It is also possible to give no argument for `groups`. 
+In which case, the students given will have their groups set to none (i.e., removed).
+
+**Here is an example usage scenario:** 
+
+Step 1. The user enters command `group gp/3 id/A0123456X id/A0000000H` where
+`id/A0123456X` is in the list of existing students, but `id/A0000000H` is not.
+
+![GroupState1](images/GroupState1.png)
+
+In this case, `id/A0123456X` is not in the list of existing students, so the whole command fails.
+
+Step 2. The user then enters command `group gp/3 id/A0123456X`.
+The `group` command calls `EditCommand#execute(StudentId, editPersonDescriptor)` for `id/A0123456X`. 
+Hence, the student is added to group 3. 
+
+![GroupState2](images/GroupState2.png)
+
+Step 3. The user then enters command `group gp/7 id/A0123456X id/A1234567H`.
+Since both students are in the list, they are both added to group 7. 
+Note that `p0` still retains the original group, group 3.
+
+![GroupState3](images/GroupState3.png)
+
+#### Design considerations:
+
+**Aspect: To allow partial success of command or not? 
+(i.e. successfully add some students even if only some provided IDs are valid)**
+
+* **Alternative 1 (current choice):** Disallow partial success.
+    * Pros: Leads to less confusion regarding whether students are successfully added to a group or not (either they all are, or they all aren't.)
+    * Is the standard expectation of a CLI command. 
+    * Cons: Will have to retype command if it fails.
+  
+
+* **Alternative 2:** Allow partial success.
+    * Pros and cons are the opposite of those of alternative 1.
+
+
+### Add Feature
+
+#### Implementation
+
+The `add` command allows users to add students' details into the list.
+
+Given below is an example usage scenario of `add` command:
+
+Step 1. Assume the user has some existing students in the `UniquePersonList`.
+![AddState1](images/AddState1.png)
+
+Step 2. The user executes `add id/A0123456X n/John e/e0123456@u.nus.edu g/A` command to add the student into the list.
+* The `add` command invokes `LogicManager#execute()`.
+* `LogicManager#execute()` would first invoke `AddressBookParser#parseCommand()`.
+* `AddressBookParser#parseCommand()` will identifies the `add` command and then invokes `AddCommandParser#parse()` to parse the arguments accordingly.
+* `AddCommandParser#parse()` will return a `AddCommand` object which takes in a `Person` object.
+* `LogicManager#execute()` invokes `AddCommand#execute()`. Then, `model#addPerson` is called to add the person into the list.
+![AddState2](images/AddState2.png)
+
+Given below is the sequence diagram for `add` command:
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect: Whether to restrict to the context of NUS**
+* **Alternative 1 (current choice):** The `student_id` and `email` must be in the format of `A0123456X` and `e0123456@u.nus.edu`.
+  * Pros: Aligns with the target users who are CS instructors in NUS.
+  * Cons: Restrictive to users who are not instructors in NUS.
+
+* **Alternative 2:** Allow any other format for `student_id` and valid format for `email`.
+  * Pros: Can accommodate users from other universities, not only NUS.
+  * Cons: Validation may be more complex as need to account for a wider range of possible inputs.
+
+### Delete feature
+
+#### Implementation
+
+The delete feature is adapted from the delete feature of `AddressBook`. Instead of identifying a student by the index displayed, it uses the `StudentId` that is unique to each student. Calling `DeleteCommand#execute(model)` will delete any student that is in the `UniquePersonList` that is not necessarily in but not in `FilteredList` to be deleted.
+
+Given below is an example usage scenario and how the delete mechanism behaves at each step.
+
+Step 1. The user has added some students to `UniquePersonList`.
+
+![DeleteState1](images/DeleteState1.png)
+
+Step 2. The user executes `find` command where only `student1` and `student2` matches the predicate so only `student1` and `student2` are in the `FilteredList` of `ModelManager`.
+
+![DeleteState2](images/DeleteState2.png)
+
+Step 3. The user executes `delete A0123456A` command to delete student with student ID `A0123456A`. `ModelManager#getPerson(StudentId)` returns `student3` which the id belongs to. `student3` will be removed from `UniquePersonList`
+
+![DeleteState3](images/DeleteState3.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If `ModelManager#getPerson(StudentId)` returns 0, then there no `Person` having the `studentId`. `DeleteCommand#execute(model)` will check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the deletion.
+</div>
+
+
+The following sequence diagram shows how a delete operation goes through the `Logic` component:
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a delete command:
+
+![DeleteActivityDiagram](images/DeleteActivityDiagram.png)
+
+
+#### Design considerations:
+
+**Aspect: Allow deletion of all `Person` added or only those displayed:**
+
+* **Alternative 1 (current choice):** Can delete any person in the list.
+    * Pros: Delete command will execute successfully without having to run additional command to ensure that the person to be deleted is being displayed.
+    * Cons: May result in accidental deletion if wrong student id is given.
+
+* **Alternative 2:** Only delete person that is displayed.
+    * Pros: Allow user to refer to the displayed data to reduce risk of specifying a wrong id belonging to another person.
+    * Cons: May reduce usability as user may have to enter additional command to ensure the student to be deleted is displayed.
+
+**Aspect: Deleted `Person` stored or ready for garbage collection:**
+
+* **Alternative 1 (current choice):** Person deleted is no longer used and ready for garbage collection.
+    * Pros: Easy to implement.
+    * Cons: May result in lost of data upon accidental deletion.
+
+* **Alternative 2:** Create a list to store all deleted person.
+    * Pros: Easier to implement command to recover a deleted person in the future.
+    * Cons: Stored deleted person may never be used. May have performance issue in terms of memory usage.
+
+### Find feature
+
+#### Implementation
+
+Our find feature is a rework of the one found in AB3, which allowed users to find persons with names containing specified keywords. Since we now have a stronger method of identifying students (their unique student IDs), we decided to update the feature to find and list students by their membership in groups instead.
+
+A `FindCommand` instance has its own `PersonInGroupPredicate`, which contains a `Set<Group>` and is used to test if a `Person` is in the `Group`s in the set. These groups are specified as arguments when entering the find command. It is also important to note that the `Person` must be in all the `Group`s in the set in order to pass the predicate.
+
+When `FindCommand#execute(model)` is called, `ModelManager#updateFilteredPersonList(predicate)` is invoked to update the filter of the currently shown FilteredList` to match the predicate. To illustrate further, here is a step-by-step breakdown of what happens:
+
+Step 1. The user launches the application. The initial list shown is simply the `UniquePersonList`.
+
+![FindState1](images/FindState1.png)
+
+Step 2. The user executes `find gp/Group 1 gp/ Group 2` to find all students that are in both Groups 1 and 2. Only `student1` is in both groups, so after `ModelManager#updateFilteredPersonList(predicate)` is called, only `student1` will be in the `FilteredList`.
+
+![FindState2](images/FindState2.png)
+
+Here is the sequence diagram which shows the overall flow:
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+**Aspect: Which model attribute to use for find:**
+
+* **Alternative 1 (current choice):** Filter by `Group`
+    * Pros: `Group` names are easy to remember, especially since they are assigned by the user.
+    * Cons: Some students may not have a `Group` assigned and can only be found by manually looking through all entries in `UniquePersonList`.
+
+* **Alternative 2:** Filter by `StudentId`
+    * Pros: Any student can be found as long as their `StudentId` is known.
+    * Cons: It is not practical for users to remember the `StudentId` of each student.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
@@ -231,7 +404,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 1 (current choice):** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
-
+  
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
@@ -245,6 +418,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
+### Set Weakness Threshold Feature
+
+This is a new command to designate students as being "weak" or not based on their grades.
+By default, we have set C+ as the threshold, meaning that a student with grade lower than C+ is 
+displayed with a weak marker next to their name. 
+
+The command "set weak [grade]" followed by the grade allows the instructor to set a difference grade as the 
+new threshold. This command resets students' weak markers immediately. 
+
+
+The following activity diagram: 
+![SetWeakSequenceDiagram](images/SetWeakActivityDiagram.png)
+
+The State prior to set weak command
+![SetWeakStateDisgram](images/SetWeak1.png)
+
+The State after set weak command
+![SetWeakStateDiagram](images/SetWeak2.png)
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 

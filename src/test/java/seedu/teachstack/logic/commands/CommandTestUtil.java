@@ -10,15 +10,15 @@ import static seedu.teachstack.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.teachstack.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.teachstack.commons.core.index.Index;
 import seedu.teachstack.logic.commands.exceptions.CommandException;
 import seedu.teachstack.model.AddressBook;
+import seedu.teachstack.model.ArchivedBook;
 import seedu.teachstack.model.Model;
-import seedu.teachstack.model.person.NameContainsKeywordsPredicate;
 import seedu.teachstack.model.person.Person;
+import seedu.teachstack.model.person.StudentId;
 import seedu.teachstack.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -115,6 +115,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -123,10 +124,40 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        final StudentId id = person.getStudentId();
+        model.updateFilteredPersonList(student -> student.getStudentId().equals(id));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered archived list to show only the person at the given {@code targetIndex} in the
+     * {@code model}'s archived book.
+     */
+    public static void showArchivedPersonAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredArchivedList().size());
+
+        Person person = model.getFilteredArchivedList().get(targetIndex.getZeroBased());
+        final StudentId id = person.getStudentId();
+        model.updateFilteredArchivedList(student -> student.getStudentId().equals(id));
+
+        assertEquals(1, model.getFilteredArchivedList().size());
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - the archived book, filtered person list and selected person in {@code actualModel} remain unchanged
+     */
+    public static void assertArchivedBookCommandFailure(Command command, Model actualModel, String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        ArchivedBook expectedArchivedBook = new ArchivedBook(actualModel.getArchivedBook());
+        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredArchivedList());
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedArchivedBook, actualModel.getArchivedBook());
+        assertEquals(expectedFilteredList, actualModel.getFilteredArchivedList());
+    }
 }

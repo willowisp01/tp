@@ -11,6 +11,7 @@ import static seedu.teachstack.commons.util.AppUtil.checkArgument;
 
 public class Grade implements Comparable<Grade> {
 
+    private static Grade thresholdGrade = new Grade("C+");
     private static final String VALID_GRADES = "[A+, A, A-, B+, B, B-, C+, C, D+, D, F]";
     private static final String VALIDATION_REGEX = "A[+-]?|B[+-]?|C[+]?|D[+]?|F";
 
@@ -20,8 +21,6 @@ public class Grade implements Comparable<Grade> {
             + VALID_GRADES;
 
     public final String value;
-
-    private String thresholdGrade = "C+";
 
     /**
      * Constructs an {@code Grade}.
@@ -45,7 +44,7 @@ public class Grade implements Comparable<Grade> {
     /**
      * @return the int value corresponding to string grade
      */
-    public int gradeToInt() {
+    private int gradeToInt() {
         switch (value) {
         case ("A+"):
             return 11;
@@ -142,11 +141,19 @@ public class Grade implements Comparable<Grade> {
      * Returns whether grade constitutes weak or not
      */
     public boolean isWeak() {
-        if (this.value.compareTo(thresholdGrade) >= 0) {
+        if (this.compareTo(thresholdGrade) <= 0) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public static void modifyThreshold(Grade g) {
+        thresholdGrade = g;
+    }
+
+    public String retrieveThreshold() {
+        return thresholdGrade.value;
     }
 
 }

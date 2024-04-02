@@ -5,7 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.teachstack.commons.core.LogsCenter;
 import seedu.teachstack.commons.core.index.Index;
 import seedu.teachstack.commons.util.StringUtil;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
@@ -21,6 +23,8 @@ import seedu.teachstack.model.person.StudentId;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final Logger logger = LogsCenter.getLogger(ParserUtil.class);
+
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -29,6 +33,7 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        log(trimmedIndex);
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
@@ -44,6 +49,7 @@ public class ParserUtil {
     public static StudentId parseStudentId(String studentId) throws ParseException {
         requireNonNull(studentId);
         String trimmedStudentId = studentId.trim();
+        log(trimmedStudentId);
         if (!StudentId.isValidStudentId(trimmedStudentId)) {
             throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
@@ -59,26 +65,12 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        log(trimmedName);
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * Parses a {@code String email} into an {@code Email}.
@@ -89,6 +81,7 @@ public class ParserUtil {
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
+        log(trimmedEmail);
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
@@ -104,6 +97,7 @@ public class ParserUtil {
     public static Grade parseGrade(String grade) throws ParseException {
         requireNonNull(grade);
         String trimmedGrade = grade.trim();
+        log(trimmedGrade);
         if (!Grade.isValidGrade(trimmedGrade)) {
             throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
         }
@@ -119,6 +113,7 @@ public class ParserUtil {
     public static Group parseGroup(String group) throws ParseException {
         requireNonNull(group);
         String trimmedGroup = group.trim();
+        log(trimmedGroup);
         if (!Group.isValidGroupName(trimmedGroup)) {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);
         }
@@ -150,5 +145,8 @@ public class ParserUtil {
         return studentIdSet;
     }
 
+    private static void log(String argument) {
+        logger.fine("----------------[ARGUMENT][" + argument + "]");
+    }
 
 }

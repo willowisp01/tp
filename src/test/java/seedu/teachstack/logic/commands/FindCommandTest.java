@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.teachstack.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.teachstack.testutil.TypicalPersons.CARL;
-import static seedu.teachstack.testutil.TypicalPersons.ELLE;
-import static seedu.teachstack.testutil.TypicalPersons.FIONA;
+import static seedu.teachstack.model.util.SampleDataUtil.getGroupSet;
+import static seedu.teachstack.testutil.TypicalArchivedPersons.getTypicalArchivedBook;
+import static seedu.teachstack.testutil.TypicalPersons.ALICE;
+import static seedu.teachstack.testutil.TypicalPersons.BENSON;
+import static seedu.teachstack.testutil.TypicalPersons.DANIEL;
 import static seedu.teachstack.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -18,21 +20,19 @@ import org.junit.jupiter.api.Test;
 import seedu.teachstack.model.Model;
 import seedu.teachstack.model.ModelManager;
 import seedu.teachstack.model.UserPrefs;
-import seedu.teachstack.model.person.NameContainsKeywordsPredicate;
+import seedu.teachstack.model.person.PersonInGroupPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalArchivedBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalArchivedBook(), new UserPrefs());
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        PersonInGroupPredicate firstPredicate = new PersonInGroupPredicate(getGroupSet("first"));
+        PersonInGroupPredicate secondPredicate = new PersonInGroupPredicate(getGroupSet("second"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -55,9 +55,9 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_noOneInGroup_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        PersonInGroupPredicate predicate = preparePredicate("thisgroupnameshouldnotbeused");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -65,27 +65,50 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+    public void execute_oneGroup_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        PersonInGroupPredicate predicate = preparePredicate("2B");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(FIONA, ELLE, CARL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneGroup_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        PersonInGroupPredicate predicate = preparePredicate("1");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleGroups_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        PersonInGroupPredicate predicate = preparePredicate("1 2B");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
     }
 
     @Test
     public void toStringMethod() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
+        PersonInGroupPredicate predicate = new PersonInGroupPredicate(getGroupSet("keyword"));
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code PersonInGroupPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private PersonInGroupPredicate preparePredicate(String userInput) {
+        return new PersonInGroupPredicate(getGroupSet(Arrays.asList(userInput.split("\\s+"))
+                .stream()
+                .map(group -> "Group " + group)
+                .toArray(String[]::new)));
     }
 }
