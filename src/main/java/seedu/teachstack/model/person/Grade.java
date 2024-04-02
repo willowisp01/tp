@@ -44,7 +44,7 @@ public class Grade implements Comparable<Grade> {
     /**
      * @return the int value corresponding to string grade
      */
-    private int gradeToInt() {
+    public int gradeToInt() {
         switch (value) {
         case ("A+"):
             return 11;

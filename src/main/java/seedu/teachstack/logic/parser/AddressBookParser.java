@@ -19,9 +19,9 @@ import seedu.teachstack.logic.commands.FindCommand;
 import seedu.teachstack.logic.commands.GroupCommand;
 import seedu.teachstack.logic.commands.HelpCommand;
 import seedu.teachstack.logic.commands.ListCommand;
-import seedu.teachstack.logic.commands.SummaryCommand;
 import seedu.teachstack.logic.commands.RandomCommand;
 import seedu.teachstack.logic.commands.SetWeakThresholdCommand;
+import seedu.teachstack.logic.commands.SummaryCommand;
 import seedu.teachstack.logic.commands.ViewCommand;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
 
@@ -91,7 +91,6 @@ public class AddressBookParser {
 
         case SummaryCommand.COMMAND_WORD:
             return new SummaryCommand();
-            
         case ArchiveCommand.COMMAND_WORD:
             return new ArchiveCommandParser().parse(arguments);
 
