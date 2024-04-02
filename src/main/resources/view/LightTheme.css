@@ -148,8 +148,9 @@
 
 .result-display {
     -fx-background-color: transparent;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-family: "Segoe UI";
     -fx-font-size: 13pt;
+    -fx-font-weight: 100;
     -fx-text-fill: black;
 }
 
@@ -337,8 +338,8 @@
 }
 
 #groups .label {
-    -fx-text-fill: black;
-    -fx-background-color: #EFEFEF;
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
@@ -346,10 +347,10 @@
 }
 
 #weakLabel {
-    -fx-text-fill: black;
-    -fx-background-color: #C2C2C2;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-text-fill: white;
+        -fx-background-color: #963232;
+        -fx-padding: 1 3 1 3;
+        -fx-border-radius: 2;
+        -fx-background-radius: 2;
+        -fx-font-size: 11;
 }

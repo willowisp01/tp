@@ -20,8 +20,8 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
+        <URL value="@LightTheme.css" />
+        <URL value="@LightExtensions.css" />
       </stylesheets>
 
       <VBox>
@@ -31,6 +31,10 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+          </Menu>
+          <Menu mnemonicParsing="false" text="Theme">
+            <MenuItem fx:id="darkThemeMenuItem" mnemonicParsing="false" onAction="#handleDarkTheme" text="Dark" />
+            <MenuItem fx:id="lightThemeMenuItem" mnemonicParsing="false" onAction="#handleLightTheme" text="Light" />
           </Menu>
         </MenuBar>
 
