@@ -67,10 +67,8 @@ public class SummaryCommand extends Command {
         pieChartData.add(new PieChart.Data("B-", countStudentsWithGrade(students, "B-")));
         pieChartData.add(new PieChart.Data("C+", countStudentsWithGrade(students, "C+")));
         pieChartData.add(new PieChart.Data("C", countStudentsWithGrade(students, "C")));
-        pieChartData.add(new PieChart.Data("C-", countStudentsWithGrade(students, "C-")));
         pieChartData.add(new PieChart.Data("D+", countStudentsWithGrade(students, "D+")));
         pieChartData.add(new PieChart.Data("D", countStudentsWithGrade(students, "D")));
-        pieChartData.add(new PieChart.Data("D-", countStudentsWithGrade(students, "D-")));
         pieChartData.add(new PieChart.Data("F", countStudentsWithGrade(students, "F")));
     }
 
