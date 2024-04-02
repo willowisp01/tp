@@ -74,7 +74,13 @@ public class SummaryCommand extends Command {
         pieChartData.add(new PieChart.Data("F", countStudentsWithGrade(students, "F")));
     }
 
-    private double calculateStandardDeviation(ObservableList<Person> students, double meanGrade) {
+    /**
+     * Returns standard deviation of students' grades
+     * @param students
+     * @param meanGrade
+     * @return
+     */
+    public double calculateStandardDeviation(ObservableList<Person> students, double meanGrade) {
         double variance = students.stream()
                 .mapToDouble(student -> {
                     double diff = student.getGrade().gradeToInt() - meanGrade;
@@ -83,10 +89,18 @@ public class SummaryCommand extends Command {
                 .average()
                 .orElse(0);
 
-        return Math.sqrt(variance);
+        double standardDeviation = Math.sqrt(variance);
+
+        return Double.parseDouble(String.format("%.3f", standardDeviation));
     }
 
-    private int countStudentsWithGrade(ObservableList<Person> students, String grade) {
+    /**
+     * Returns number of students with a specific grade
+     * @param students
+     * @param grade
+     * @return
+     */
+    public int countStudentsWithGrade(ObservableList<Person> students, String grade) {
         return (int) students.stream()
                 .filter(student -> student.getGrade().toString().equals(grade))
                 .count();
