@@ -240,6 +240,10 @@ Furthermore, certain edits can cause the TeachStack to behave in unexpected ways
 
 _Details coming soon ..._
 
+### 7.11 Setting weak threshold
+
+### 7.12 Viewing summary statistics
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
