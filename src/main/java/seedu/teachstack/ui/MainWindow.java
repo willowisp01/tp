@@ -172,6 +172,20 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleDarkTheme() {
+        primaryStage.getScene().getStylesheets().clear();
+        primaryStage.getScene().getStylesheets().add("view/DarkTheme.css");
+        primaryStage.getScene().getStylesheets().add("view/DarkExtensions.css");
+    }
+
+    @FXML
+    private void handleLightTheme() {
+        primaryStage.getScene().getStylesheets().clear();
+        primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
+        primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
