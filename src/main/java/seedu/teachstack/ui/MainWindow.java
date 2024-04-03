@@ -237,7 +237,7 @@ public class MainWindow extends UiPart<Stage> {
             VBox vBox = new VBox();
             vBox.getChildren().addAll(commandLabel, commandTextArea, chart);
 
-            Scene scene = new Scene(vBox, 600, 400); // Adjust size as necessary
+            Scene scene = new Scene(vBox, 600, 400);
             dialog.setScene(scene);
 
             dialog.show();
