@@ -331,10 +331,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                         |
-|------------|--------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [t/TAG]​​` <br> e.g., `add id/A01234567X n/James Ho e/e0123456@u.nus.edu g/B+` |
-| **Delete** | `delete id/STUDENT_ID`<br> e.g., `delete A01234567X`                                                                     |
-| **Edit**   | `edit id/STUDENT_ID [g/GRADE] `<br> e.g.,`edit A0123466C g/A+`                                                           |
-| **View**   | `view id/STUDENT_ID`<br> e.g., `view A0123466D`                                                                          |
-| **Group**  | `group id/STUDENT_ID_1 [id/STUDENT_ID_2] …` <br> e.g., `group A1234567R, A2345678R`                                      |
+| Action      | Format, Examples                                                                                                         |
+|-------------|--------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [t/TAG]​​` <br> e.g., `add id/A01234567X n/James Ho e/e0123456@u.nus.edu g/B+` |
+| **Delete**  | `delete id/STUDENT_ID`<br> e.g., `delete A01234567X`                                                                     |
+| **Edit**    | `edit id/STUDENT_ID [g/GRADE] `<br> e.g.,`edit A0123466C g/A+`                                                           |
+| **View**    | `view id/STUDENT_ID`<br> e.g., `view A0123466D`                                                                          |
+| **Group**   | `group id/STUDENT_ID_1 [id/STUDENT_ID_2] …` <br> e.g., `group A1234567R, A2345678R`                                      |
+| **Weak**    | `setweak g/GRADE` <br> e.g., `setweak g/B-`                                                                              |
+| **Summary** | e.g., `summary` <br>                                                                                                     |
