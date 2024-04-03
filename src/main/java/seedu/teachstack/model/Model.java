@@ -131,6 +131,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+
     /** Method to get filtered list for archived persons. */
     ObservableList<Person> getFilteredArchivedList();
 
@@ -152,4 +153,5 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredArchivedList(Predicate<Person> predicate);
+
 }

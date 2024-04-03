@@ -22,8 +22,6 @@ public class Grade implements Comparable<Grade> {
 
     public final String value;
 
-
-
     /**
      * Constructs an {@code Grade}.
      *
@@ -43,37 +41,10 @@ public class Grade implements Comparable<Grade> {
         return test.matches(VALIDATION_REGEX);
     }
 
-    @Override
-    public String toString() {
-        return value;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Grade)) {
-            return false;
-        }
-
-        Grade otherGrade = (Grade) other;
-        return value.equals(otherGrade.value);
-    }
-
-    @Override
-    public int compareTo(Grade o) {
-        return this.gradeToInt() - o.gradeToInt();
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
-    private int gradeToInt() {
+    /**
+     * @return the int value corresponding to string grade
+     */
+    public int gradeToInt() {
         switch (value) {
         case ("A+"):
             return 11;
@@ -100,6 +71,70 @@ public class Grade implements Comparable<Grade> {
         default:
             return -1;
         }
+    }
+
+    /**
+     * @param value
+     * @return the string value corresponding to int grade
+     */
+    public static String intToGrade(int value) {
+        switch (value) {
+        case 11:
+            return "A+";
+        case 10:
+            return "A";
+        case 9:
+            return "A-";
+        case 8:
+            return "B+";
+        case 7:
+            return "B";
+        case 6:
+            return "B-";
+        case 5:
+            return "C+";
+        case 4:
+            return "C";
+        case 3:
+            return "D+";
+        case 2:
+            return "D";
+        case 1:
+            return "F";
+        default:
+            return "";
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Grade)) {
+            return false;
+        }
+
+        Grade otherGrade = (Grade) other;
+        return value.equals(otherGrade.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Grade o) {
+        return this.gradeToInt() - o.gradeToInt();
     }
 
     /**

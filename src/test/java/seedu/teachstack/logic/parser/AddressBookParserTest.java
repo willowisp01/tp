@@ -23,6 +23,7 @@ import seedu.teachstack.logic.commands.FindCommand;
 import seedu.teachstack.logic.commands.HelpCommand;
 import seedu.teachstack.logic.commands.ListCommand;
 import seedu.teachstack.logic.commands.RandomCommand;
+import seedu.teachstack.logic.commands.SummaryCommand;
 import seedu.teachstack.logic.commands.ViewCommand;
 import seedu.teachstack.logic.parser.exceptions.ParseException;
 import seedu.teachstack.model.person.Person;
@@ -119,5 +120,12 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_summary() throws Exception {
+        AddressBookParser parser = new AddressBookParser();
+        assertTrue(parser.parseCommand(SummaryCommand.COMMAND_WORD) instanceof SummaryCommand);
+        assertTrue(parser.parseCommand(SummaryCommand.COMMAND_WORD + " 3") instanceof SummaryCommand);
     }
 }

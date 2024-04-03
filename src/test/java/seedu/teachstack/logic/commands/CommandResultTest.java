@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.scene.layout.VBox;
+
 public class CommandResultTest {
     @Test
     public void equals() {
@@ -59,5 +61,15 @@ public class CommandResultTest {
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
+    }
+
+    @Test
+    public void showPopup_getAdditionalComponent_success() {
+        boolean showPopup = true;
+        VBox vbox = new VBox();
+        CommandResult commandResult = new CommandResult("feedback", true, true, showPopup,
+                vbox);
+        assertEquals(commandResult.isShowPopUp(), true);
+        assertEquals(commandResult.getAdditionalComponent(), vbox);
     }
 }
