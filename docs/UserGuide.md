@@ -5,7 +5,7 @@ title: User Guide
 
 ## Table of contents
 - [Table of Contents](#table-of-contents)
-- [1. Welcome](#1-welcome-)
+- [1. Welcome](#1-welcome)
 - [2. How to use this user guide](#2-how-to-use-the-user-guide)
     - [2.1 Terminologies and Symbols](#21-terminologies--symbols)
 - [3. Target User](#3-target-useraudience)
@@ -21,9 +21,9 @@ title: User Guide
     - [7.4 Editing a student](#74-editing-a-person--edit)
     - [7.5 Viewing a student](#75-viewing-students-by-name--view)
     - [7.6 Deleting a student](#76-deleting-a-person--delete)
-    - [7.7 Forming focus groups](#77-forming-focus-groups--group)
-      - [7.7.1 Forming focus groups manually](#)
-      - [7.7.2 Forming focus groups randomly](#)
+    - [7.7 Forming focus groups](#77-forming-focus-groups)
+      - [7.7.1 Forming focus groups manually](#771-forming-focus-groups-manually-group)
+      - [7.7.2 Forming focus groups randomly](#772-forming-random-groups-random)
     - [7.8 Clearing all entries](#78-clearing-all-entries--clear)
     - [7.9 Exiting the program](#79-exiting-the-program--exit)
     - [7.10 Saving data](#710-saving-the-data)
@@ -31,6 +31,7 @@ title: User Guide
     - [7.12 Archiving a student](#712-archiving-data-files-coming-in-v20)
     - [7.13 Setting a weak threshold](#713-setting-weak-threshold-and-marker)
     - [7.14 Viewing summary statistics](#714-viewing-summary-statistics)
+    - [7.15 Light / Dark mode](#)
   
 
       {:toc}
@@ -57,8 +58,8 @@ So, are you ready to help students in need?
 
 This guide explains how you can use TeachStack to manage weaker students. It will walk you through each feature and functionality of the app, ensuring you're equipped to make the most of Teachstack's capabilities.
 
-* To get started with TeachStack. [Quick start](#quick-start)
-* To understand the GUI. [Understanding our GUI](#understanding-our-gui)
+* To get started with TeachStack. [Quick start](#5-quick-start)
+* To understand the GUI. [Understanding our GUI](#61-understanding-our-gui)
 * To see details of the commands and features. [Features](#features)
 * To quickly navigate to a specific section. [Table of contents](#table-of-contents)
 * To see an overview of all commands. [Command summary](#command-summary)
@@ -172,7 +173,7 @@ and ensure optimal utilization of the application's capabilities.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### 7.1 Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
@@ -181,7 +182,7 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### 7.2 Adding a person: `add`
 
 Adds student details to the list of students.
 
@@ -204,7 +205,7 @@ Shows a list of all students, ordered by grades.
 Format: list
 
 
-### Editing a person : `edit`
+### 7.4 Editing a person : `edit`
 
 Edits an existing person in the list of students.
 
@@ -222,7 +223,7 @@ Examples:
 *  `edit id/A2233445X n/Betsy Crower` Edits the name of the person with student_id = A2233445X to be `Betsy Crower`.
 
 
-### Viewing students by name: `view`
+### 7.5 Viewing students by name: `view`
 
 Shows the detailed information of the student with the specified student_id.
 
@@ -260,9 +261,11 @@ Format: `group gp/GROUP_NAME id/STUDENTID` (multiple groups, IDs allowed)
 * The group name includes students with the corresponding `STUDENT_IDs`.
 * If any of the given `STUDENT_IDs` do not exist, the command completely fails. 
 * `GROUP_NAME` cannot be empty, and must only contain alphanumeric characters and space.
+* *Giving no parameter for `GROUP_NAME` will clear the given students' current groups!*
 
 Examples: 
 * `group gp/3 id/A0123456X id/A0123456H` forms a group called `3` with 2 students in it. 
+* `group id/A0123456X id/A0123456H` removes the corresponding 2 students from any groups they are currently in. 
 
 #### 7.7.2 Forming random groups: `random`
 Puts all students marked as weak into the specified number of groups.
@@ -278,23 +281,23 @@ Format: `random NUMBER_OF_GROUPS gp/GROUP_NAME`
 Examples:
 * `random 3 gp/Random Group` randomly distributes all weaker students into 3 groups: Random Group 1, Random Group 2, Random Group 3 .
 
-### Clearing all entries : `clear`
+### 7.8 Clearing all entries : `clear`
 
 Clears all entries from the list of students.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### 7.9 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+### 7.10 Saving the data
 
 TeachStack data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### 7.11 Editing the data file
 
 TeachStack data is saved automatically as a JSON file `[JAR file location]/data/teachstack.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -303,13 +306,13 @@ If your changes to the data file makes its format invalid, TeachStack will disca
 Furthermore, certain edits can cause the TeachStack to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### 7.12 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
-### 7.11 Setting weak threshold
+### 7.13 Setting weak threshold
 
-### 7.12 Viewing summary statistics
+### 7.14 Viewing summary statistics
 
 --------------------------------------------------------------------------------------------------------------------
 
