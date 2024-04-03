@@ -21,14 +21,17 @@ title: User Guide
     - [7.4 Editing a student](#74-editing-a-person--edit)
     - [7.5 Viewing a student](#75-viewing-students-by-name--view)
     - [7.6 Deleting a student](#76-deleting-a-person--delete)
-    - [7.7 Clearing all entries](#77-clearing-all-entries--clear)
-    - [7.8 Exiting the program](#78-exiting-the-program--exit)
-    - [7.9 Saving data](#79-saving-the-data)
-    - [7.10 Editing the data file](#710-editing-the-data-file)
-    - [7.11 Archiving a student](#711-archiving-data-files-coming-in-v20)
-    - [7.12 Setting a weak threshold](#721-setting-weak-threshold-and-marker)
-    - [7.13 Viewing summary statistics](#713-viewing-summary-statistics)
-    - [7.14 Forming random groups](#714-forming-random-groups--random)
+    - [7.7 Forming focus groups](#77-forming-focus-groups--group)
+      - [7.7.1 Forming focus groups manually](#)
+      - [7.7.2 Forming focus groups randomly](#)
+    - [7.8 Clearing all entries](#78-clearing-all-entries--clear)
+    - [7.9 Exiting the program](#79-exiting-the-program--exit)
+    - [7.10 Saving data](#710-saving-the-data)
+    - [7.11 Editing the data file](#711-editing-the-data-file)
+    - [7.12 Archiving a student](#712-archiving-data-files-coming-in-v20)
+    - [7.13 Setting a weak threshold](#713-setting-weak-threshold-and-marker)
+    - [7.14 Viewing summary statistics](#714-viewing-summary-statistics)
+  
 
       {:toc}
 
@@ -239,12 +242,41 @@ Deletes the specified student from the list.
 Format: `delete STUDENT_ID`
 
 * Deletes the person at the specified `STUDENT_ID`.
-* The STUDENT_ID refers to the id corresponding to the student in the list.
-* The STUDENT_ID is case-insensitive, must be a String starting with ‘A’ and ending with any letter, with a total length of 9
+* The `STUDENT_ID` refers to the id corresponding to the student in the list.
+* The `STUDENT_ID` is case-insensitive, must be a String starting with ‘A’ and ending with any letter, with a total length of 9
 
 
 Examples:
 * `delete A0123456X` deletes the student with student id  A0123456X from the list.
+
+### 7.7 Forming focus groups 
+
+#### 7.7.1 Forming focus groups manually: `group`
+Creates a group with people corresponding to the selected IDs. 
+
+Format: `group gp/GROUP_NAME id/STUDENTID` (multiple groups, IDs allowed)
+
+* Forms a group with the specified `GROUP_NAME`.
+* The group name includes students with the corresponding `STUDENT_IDs`.
+* If any of the given `STUDENT_IDs` do not exist, the command completely fails. 
+* `GROUP_NAME` cannot be empty, and must only contain alphanumeric characters and space.
+
+Examples: 
+* `group gp/3 id/A0123456X id/A0123456H` forms a group called `3` with 2 students in it. 
+
+#### 7.7.2 Forming random groups: `random`
+Puts all students marked as weak into the specified number of groups.
+
+Format: `random NUMBER_OF_GROUPS gp/GROUP_NAME`
+
+* Form groups `NUMBER_OF_GROUPS` with the specified `GROUP_NAME` followed by numbering.
+* The `NUMBER_OF_GROUPS` refers to the number of groups to distribute students into.
+* `NUMBER_OF_GROUPS` must be a positive integer that is greater than the number of students marked as weak.
+* `GROUP_NAME` cannot be empty, and must only contain alphanumeric characters and space.
+
+
+Examples:
+* `random 3 gp/Random Group` randomly distributes all weaker students into 3 groups: Random Group 1, Random Group 2, Random Group 3 .
 
 ### Clearing all entries : `clear`
 
@@ -278,20 +310,6 @@ _Details coming soon ..._
 ### 7.11 Setting weak threshold
 
 ### 7.12 Viewing summary statistics
-
-### 7.14 Forming random groups: `random`
-Puts all students marked as weak into the specified number of groups.
-
-Format: `random NUMBER_OF_GROUPS gp/GROUP`
-
-* Form groups NUMBER_OF_GROUPS with the specified `GROUP` followed by numbering.
-* The NUMBER_OF_GROUPS refers to the number of groups to distribute students into.
-* NUMBER_OF_GROUPS must be a positive integer that is greater than the number of students marked as weak.
-* GROUP cannot be empty, and must only contain alphanumeric characters and space.
-
-
-Examples:
-* `random 3 gp/Random Group` randomly distributes all weaker students into 3 groups: Random Group 1, Random Group 2, Random Group 3 .
 
 --------------------------------------------------------------------------------------------------------------------
 
