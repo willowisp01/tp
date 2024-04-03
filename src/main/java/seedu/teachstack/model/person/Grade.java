@@ -112,6 +112,11 @@ public class Grade implements Comparable<Grade> {
         }
     }
 
+    /**
+     * Modifies the grade threshold to the given grade.
+     *
+     * @param g The grade to be modified to.
+     */
     public static void modifyThreshold(Grade g) {
         JsonSerializableUserData.setGradeThreshold(g);
         thresholdGrade = g;

@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.teachstack.model.person.Grade;
 
+/**
+ * Jackson-friendly version of the grade threshold field.
+ */
 public class JsonAdaptedGradeThreshold extends JsonAdaptedField {
     private final String gradeThreshold;
 

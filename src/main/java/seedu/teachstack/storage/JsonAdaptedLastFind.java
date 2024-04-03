@@ -17,9 +17,17 @@ import seedu.teachstack.model.group.Group;
 import seedu.teachstack.model.person.Person;
 import seedu.teachstack.model.person.PersonInGroupPredicate;
 
+/**
+ * Jackson-friendly version of the last find request executed.
+ */
 public class JsonAdaptedLastFind extends JsonAdaptedField {
     private final List<JsonAdaptedGroup> groups = new ArrayList<>();
 
+    /**
+     * Constructs a {@code JsonAdaptedLastFind} object with the given groups.
+     *
+     * @param groups The groups.
+     */
     @JsonCreator
     public JsonAdaptedLastFind(@JsonProperty("groups") List<JsonAdaptedGroup> groups) {
         if (groups != null) {
@@ -27,6 +35,11 @@ public class JsonAdaptedLastFind extends JsonAdaptedField {
         }
     }
 
+    /**
+     * Constructs a {@code JsonAdaptedLastFind} object with the given predicate.
+     *
+     * @param predicate The predicate.
+     */
     public JsonAdaptedLastFind(Predicate<Person> predicate) {
         if (predicate instanceof PersonInGroupPredicate) {
             PersonInGroupPredicate lastFind = (PersonInGroupPredicate) predicate;

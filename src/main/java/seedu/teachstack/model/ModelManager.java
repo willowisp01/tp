@@ -21,13 +21,13 @@ import seedu.teachstack.model.person.StudentId;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static Predicate<Person> startingFilter = PREDICATE_SHOW_ALL_PERSONS;
 
     private final AddressBook addressBook;
     private final ArchivedBook archivedBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Person> filteredArchivedPersons;
-    private static Predicate<Person> startingFilter = PREDICATE_SHOW_ALL_PERSONS;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
