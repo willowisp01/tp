@@ -1,12 +1,14 @@
 package seedu.teachstack.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.teachstack.logic.parser.AddressBookParser;
 import seedu.teachstack.model.person.Person;
 import seedu.teachstack.testutil.PersonBuilder;
 import seedu.teachstack.testutil.TypicalPersons;
@@ -44,5 +46,12 @@ public class SummaryCommandTest {
         assertEquals(1, countA);
         assertEquals(1, countB);
         assertEquals(0, countC);
+    }
+
+    @Test
+    public void parseCommand_summary() throws Exception {
+        AddressBookParser parser = new AddressBookParser();
+        assertTrue(parser.parseCommand(SummaryCommand.COMMAND_WORD) instanceof SummaryCommand);
+        assertTrue(parser.parseCommand(SummaryCommand.COMMAND_WORD + " 3") instanceof SummaryCommand);
     }
 }
