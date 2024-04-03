@@ -13,21 +13,24 @@ title: User Guide
 - [4. Purpose of User Guide (UG)](#4-purpose-of-user-guide--ug-)
 - [5. Quick Start](#5-quick-start)
 - [6. Getting to know TeachStack](#6-getting-to-know-teachstack)
-    - [6.1 Understanding our user interface](#61-user-interface)
+    - [6.1 Understanding our graphical user interface](#61-understanding-our-gui)
 - [7. Features](#7-features)
     - [7.1 Viewing Help](#71-viewing-help--help)
     - [7.2 Adding a student](#72-adding-a-person--add)
-    - [7.3 Editing a student](#73-editing-a-person--edit)
-    - [7.4 Viewing a student](#74-viewing-students-by-name--view)
-    - [7.5 Deleting a student](#75-deleting-a-person--delete)
-    - [7.6 Clearing all entries](#76-clearing-all-entries--clear)
-    - [7.7 Exiting the program](#77-exiting-the-program--exit)
-    - [7.8 Saving data](#78-saving-the-data)
-    - [7.9 Editing the data file](#79-editing-the-data-file)
-    - [7.10 Archiving a student](#710-archiving-data-files-coming-in-v20)
-    - [7.11 Setting a weak threshold](#711-setting-weak-threshold-and-marker)
-    - [7.12 Viewing summary statistics](#712-viewing-summary-statistics)
-  {:toc}
+    - [7.3 Listing all students](#73-listing-all-students--list)
+    - [7.4 Editing a student](#74-editing-a-person--edit)
+    - [7.5 Viewing a student](#75-viewing-students-by-name--view)
+    - [7.6 Deleting a student](#76-deleting-a-person--delete)
+    - [7.7 Clearing all entries](#77-clearing-all-entries--clear)
+    - [7.8 Exiting the program](#78-exiting-the-program--exit)
+    - [7.9 Saving data](#79-saving-the-data)
+    - [7.10 Editing the data file](#710-editing-the-data-file)
+    - [7.11 Archiving a student](#711-archiving-data-files-coming-in-v20)
+    - [7.12 Setting a weak threshold](#721-setting-weak-threshold-and-marker)
+    - [7.13 Viewing summary statistics](#713-viewing-summary-statistics)
+    - [7.14 Forming random groups](#714-forming-random-groups--random)
+
+      {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -39,7 +42,32 @@ This is achieved through the use of focus groups, which identifies students in n
 So, are you ready to help students in need?
 
 --------------------------------------------------------------------------------------------------------------------
+## 2. How to use the user guide
 
+This guide explains how you can use TeachStack to manage weaker students. It will walk you through each feature and functionality of the app, ensuring you're equipped to make the most of Teachstack's capabilities.
+
+* To get started with TeachStack. [Quick start](#quick-start)
+* To understand the GUI. [Understanding our GUI](#understanding-our-gui)
+* To see details of the commands and features. [Features](#features)
+* To quickly navigate to a specific section. [Table of contents](#table-of-contents)
+* To see an overview of all commands. [Command summary](#command-summary)
+* If you encounter any technical term, please refer to the glossary. [Glossary](#glossary)
+* If you encounter any problem, you may find your answer in the FAQ. [FAQ](#faq)
+
+### 2.1 Terminologies / Symbols
+
+Extra information are given in boxes:
+* <div markdown="block" class="alert alert-info">:information_source: denotes additional information</div>
+* <div markdown="block" class="alert alert-warning">:exclamation: denotes warning that can cause error</div>
+
+The explanation of each command will be formatted in the following convention:
+1. What the command does
+2. The format of the command
+3. Valid values that the command can take in
+4. Example usages
+5. _Optional Screenshot_
+
+--------------------------------------------------------------------------------------------------------------------
 ## 2. Target user/audience
 
 The growing population of computer science students worldwide presents a novel set of problems administratively for computer science instructors which TeachStack aims to address. Therefore, TeachStack is tailored for computer science instructors, not limited to those within NUS.
@@ -87,34 +115,26 @@ and ensure optimal utilization of the application's capabilities.
 
 1. Refer to the [Features](#features) below for details of each command.
 
-## Understanding our GUI
+## 6.1 Understanding our GUI
+![gui screenshot](images/understandingUi.png)
+1. Menu Bar: Provides a selection of menu items:
+    - File
+      - Exit: Allows you to close the application.
+    - Help
+      - Help: Shows a message on how to access the help page.
+    - Theme
+      - Dark: Switches the application theme to a dark mode for better visibility in dark environments.
+      - Light: Switches the application theme to a light mode for better visibility in bright environments. Theme is set to light mode by default.
+2. Command Box: Type in commands to be executed here.
+3. Result Display Box: Displays commands' results and any errors.
+4. List Selection Bar: Provides a selection of student lists to view:
+    - Persons: Displays active student list.
+    - Archived: Displays archived student list.
+5. Student List: Lists students and their details.
+6. Weak marker: Indicates a weaker student.
+7. Group labels: Indicates the groups in which a student belongs to.
 
 --------------------------------------------------------------------------------------------------------------------
-## 6. How to use the user guide
-
-This guide explains how you can use TeachStack to manage weaker students. It will walk you through each feature and functionality of the app, ensuring you're equipped to make the most of Teachstack's capabilities.
-
-* To get started with TeachStack. [Quick start](#quick-start)
-* To understand the GUI. [Understanding our GUI](#understanding-our-gui)
-* To see details of the commands and features. [Features](#features)
-* To quickly navigate to a specific section. [Table of contents](#table-of-contents)
-* To see an overview of all commands. [Command summary](#command-summary)
-* If you encounter any technical term, please refer to the glossary. [Glossary](#glossary)
-* If you encounter any problem, you may find your answer in the FAQ. [FAQ](#faq)
-
-## Terminologies / Symbols
-
-Extra information are given in boxes:
-* <div markdown="block" class="alert alert-info">:information_source: denotes additional information</div>
-* <div markdown="block" class="alert alert-warning">:exclamation: denotes warning that can cause error</div>
-
-The explanation of each command will be formatted in the following convention
-1. What the command does
-2. The format of the command
-3. Valid values that the command can take in
-4. Example usages
-5. _Optional Screenshot_
-
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -166,6 +186,13 @@ Examples:
 * `add id/A01234567H n/John Doe e/e0123456@u.nus.edu`
 
 
+### 7.3 Listing all students: `list`
+
+Shows a list of all students, ordered by grades.
+
+Format: list
+
+
 ### Editing a person : `edit`
 
 Edits an existing person in the list of students.
@@ -197,7 +224,7 @@ Format: `view STUDENT_ID`
 Examples:
 * `view A0123456X` Shows the detailed information of the student with `STUDENT_ID = A0123456X`
 
-### Deleting a person : `delete`
+### 7.6 Deleting a person : `delete`
 
 Deletes the specified student from the list.
 
@@ -243,6 +270,20 @@ _Details coming soon ..._
 ### 7.11 Setting weak threshold
 
 ### 7.12 Viewing summary statistics
+
+### 7.14 Forming random groups: `random`
+Puts all students marked as weak into the specified number of groups.
+
+Format: `random NUMBER_OF_GROUPS gp/GROUP`
+
+* Form groups NUMBER_OF_GROUPS with the specified `GROUP` followed by numbering.
+* The NUMBER_OF_GROUPS refers to the number of groups to distribute students into.
+* NUMBER_OF_GROUPS must be a positive integer that is greater than the number of students marked as weak.
+* GROUP cannot be empty, and must only contain alphanumeric characters and space.
+
+
+Examples:
+* `random 3 gp/Random Group` randomly distributes all weaker students into 3 groups: Random Group 1, Random Group 2, Random Group 3 .
 
 --------------------------------------------------------------------------------------------------------------------
 
