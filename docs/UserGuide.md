@@ -38,8 +38,16 @@ title: User Guide
 
 Thank you for choosing to use TeachStack! Our product aims to help you allocate resources to keep track of weaker students,
 and is optimized to be used with the Command Line Interface (CLI).
-This is achieved through the use of focus groups, which identifies students in need and monitors their performance.
+
+This is achieved through the use of focus groups, which are groups consisting of students of a weaker skill level. 
+Focus groups can then be assigned teaching resources such as consultation slots, instructors, teaching venues, and more.
+
+By teaching students of a similar skill level together (i.e. ability grouping), you can tailor your teaching to fit a specific student demographic 
+instead of a one-size-fits-all approach, saving you time and effort. 
+Not to mention, ability grouping is [proven to improve the group's progress as a whole.](https://www.ctd.northwestern.edu/blog/what-one-hundred-years-research-says-about-ability-grouping-and-acceleration-students-k-12)
+
 So, are you ready to help students in need?
+
 
 --------------------------------------------------------------------------------------------------------------------
 ## 2. How to use the user guide
