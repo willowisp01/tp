@@ -4,6 +4,29 @@ title: User Guide
 ---
 
 ## Table of contents
+- [Table of Contents](#table-of-contents)
+- [1. Welcome](#1-welcome-)
+- [2. How to use this user guide](#2-how-to-use-the-user-guide)
+    - [2.1 Terminologies and Symbols](#21-terminologies--symbols)
+- [3. Target User](#3-target-useraudience)
+    - [3.1 Assumptions](#31-assumptions)
+- [4. Purpose of User Guide (UG)](#4-purpose-of-user-guide--ug-)
+- [5. Quick Start](#5-quick-start)
+- [6. Getting to know TeachStack](#6-getting-to-know-teachstack)
+    - [6.1 Understanding our user interface](#61-user-interface)
+- [7. Features](#7-features)
+    - [7.1 Viewing Help](#71-viewing-help--help)
+    - [7.2 Adding a student](#72-adding-a-person--add)
+    - [7.3 Editing a student](#73-editing-a-person--edit)
+    - [7.4 Viewing a student](#74-viewing-students-by-name--view)
+    - [7.5 Deleting a student](#75-deleting-a-person--delete)
+    - [7.6 Clearing all entries](#76-clearing-all-entries--clear)
+    - [7.7 Exiting the program](#77-exiting-the-program--exit)
+    - [7.8 Saving data](#78-saving-the-data)
+    - [7.9 Editing the data file](#79-editing-the-data-file)
+    - [7.10 Archiving a student](#710-archiving-data-files-coming-in-v20)
+    - [7.11 Setting a weak threshold](#711-setting-weak-threshold-and-marker)
+    - [7.12 Viewing summary statistics](#712-viewing-summary-statistics)
   {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -216,6 +239,10 @@ Furthermore, certain edits can cause the TeachStack to behave in unexpected ways
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+### 7.11 Setting weak threshold
+
+### 7.12 Viewing summary statistics
 
 --------------------------------------------------------------------------------------------------------------------
 
