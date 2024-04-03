@@ -27,6 +27,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Person> filteredArchivedPersons;
+    private static Predicate<Person> startingFilter = PREDICATE_SHOW_ALL_PERSONS;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,6 +44,7 @@ public class ModelManager implements Model {
         this.archivedBook.sort();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        updateFilteredPersonList(startingFilter);
         filteredArchivedPersons = new FilteredList<>(this.archivedBook.getArchivedList());
     }
 
@@ -232,6 +234,14 @@ public class ModelManager implements Model {
     public void updateFilteredArchivedList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredArchivedPersons.setPredicate(predicate);
+    }
+
+    public static void setStartingFilter(Predicate<Person> predicate) {
+        startingFilter = predicate;
+    }
+
+    public static Predicate<Person> getStartingFilter() {
+        return startingFilter;
     }
 
     @Override
