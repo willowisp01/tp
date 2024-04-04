@@ -170,10 +170,10 @@ Students who are not in the list of existing students are given in the exception
 Internally, the command makes use of the pre-existing `EditCommand#execute(StudentId, editPersonDescriptor)` method.
 It calls this method for all given students in a loop.
 
-It is also possible to give no argument for `groups`. 
+It is also possible to give no argument for `groups`.
 In which case, the students given will have their groups set to none (i.e., removed).
 
-**Here is an example usage scenario:** 
+**Here is an example usage scenario:**
 
 Step 1. The user enters command `group gp/3 id/A0123456X id/A0000000H` where
 `id/A0123456X` is in the list of existing students, but `id/A0000000H` is not.
@@ -183,27 +183,27 @@ Step 1. The user enters command `group gp/3 id/A0123456X id/A0000000H` where
 In this case, `id/A0123456X` is not in the list of existing students, so the whole command fails.
 
 Step 2. The user then enters command `group gp/3 id/A0123456X`.
-The `group` command calls `EditCommand#execute(StudentId, editPersonDescriptor)` for `id/A0123456X`. 
-Hence, the student is added to group 3. 
+The `group` command calls `EditCommand#execute(StudentId, editPersonDescriptor)` for `id/A0123456X`.
+Hence, the student is added to group 3.
 
 ![GroupState2](images/GroupState2.png)
 
 Step 3. The user then enters command `group gp/7 id/A0123456X id/A1234567H`.
-Since both students are in the list, they are both added to group 7. 
+Since both students are in the list, they are both added to group 7.
 Note that `p0` still retains the original group, group 3.
 
 ![GroupState3](images/GroupState3.png)
 
 #### Design considerations:
 
-**Aspect: To allow partial success of command or not? 
+**Aspect: To allow partial success of command or not?
 (i.e. successfully add some students even if only some provided IDs are valid)**
 
 * **Alternative 1 (current choice):** Disallow partial success.
     * Pros: Leads to less confusion regarding whether students are successfully added to a group or not (either they all are, or they all aren't.)
-    * Is the standard expectation of a CLI command. 
+    * Is the standard expectation of a CLI command.
     * Cons: Will have to retype command if it fails.
-  
+
 
 * **Alternative 2:** Allow partial success.
     * Pros and cons are the opposite of those of alternative 1.
@@ -404,7 +404,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 1 (current choice):** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
-  
+
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
@@ -421,14 +421,14 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Set Weakness Threshold Feature
 
 This is a new command to designate students as being "weak" or not based on their grades.
-By default, we have set C+ as the threshold, meaning that a student with grade lower than C+ is 
-displayed with a weak marker next to their name. 
+By default, we have set C+ as the threshold, meaning that a student with grade lower than C+ is
+displayed with a weak marker next to their name.
 
-The command "set weak [grade]" followed by the grade allows the instructor to set a difference grade as the 
-new threshold. This command resets students' weak markers immediately. 
+The command "set weak [grade]" followed by the grade allows the instructor to set a difference grade as the
+new threshold. This command resets students' weak markers immediately.
 
 
-The following activity diagram: 
+The following activity diagram:
 ![SetWeakSequenceDiagram](images/SetWeakActivityDiagram.png)
 
 The State prior to set weak command
