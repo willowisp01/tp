@@ -36,6 +36,10 @@ title: User Guide
     - [7.13 Editing the data file](#713-editing-the-data-file)
     - [7.14 Setting a weak threshold](#714-setting-weak-threshold--setweak)
     - [7.15 Viewing summary statistics](#715-viewing-summary-statistics--summary)
+- [8 Glossary](#8-glossary)
+- [9 FAQ](#9-faq)
+- [10 Known Issues](#10-known-issues)
+- [11 Command Summary](#11-command-summary)
 
       {:toc}
 
@@ -63,9 +67,9 @@ This guide explains how you can use TeachStack to manage weaker students. It wil
 * To understand the GUI. [Understanding our GUI](#6-understanding-our-gui)
 * To see details of the commands and features. [Features](#7-features)
 * To quickly navigate to a specific section. [Table of contents](#table-of-contents)
-* To see an overview of all commands. [Command summary](#command-summary)
-* If you encounter any technical term, please refer to the glossary. [Glossary](#glossary)
-* If you encounter any problem, you may find your answer in the FAQ. [FAQ](#faq)
+* To see an overview of all commands. [Command summary](#11-command-summary)
+* If you encounter any technical term, please refer to the glossary. [Glossary](#8-glossary)
+* If you encounter any problem, you may find your answer in the FAQ. [FAQ](#9-faq)
 
 ### 2.1 Terminologies / Symbols
 
@@ -209,6 +213,8 @@ Expected output:
 ### 7.3 Listing all students : `list`
 
 Shows a list of all students, ordered by grades.
+
+* Displays student's email that is a clickable link to open the user's mailbox with a new email to the student's email address.
 
 Format: list
 
@@ -439,26 +445,26 @@ Displayed after command: `summary`
 ![](images/summary.png)
 
 --------------------------------------------------------------------------------------------------------------------
-## Glossary
+## 8. Glossary
 
 **Coming soon!**
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 9. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TeachStack home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## 10. Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 11. Command summary
 
 | Action      | Format, Examples                                                                                                         |
 |-------------|--------------------------------------------------------------------------------------------------------------------------|
