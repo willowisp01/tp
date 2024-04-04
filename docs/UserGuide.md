@@ -28,7 +28,7 @@ title: User Guide
     - [7.9 Exiting the program](#79-exiting-the-program--exit)
     - [7.10 Saving data](#710-saving-the-data)
     - [7.11 Editing the data file](#711-editing-the-data-file)
-    - [7.12 Archiving a student](#712-archiving-data-files-coming-in-v20)
+    - [7.12 Archiving a student](#712-archiving-a-student--archive)
     - [7.13 Setting a weak threshold](#713-setting-weak-threshold-and-marker)
     - [7.14 Viewing summary statistics](#714-viewing-summary-statistics)
     - [7.15 Light / Dark mode](#)
@@ -182,21 +182,27 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### 7.2 Adding a person: `add`
+### 7.2 Adding a student: `add`
 
-Adds student details to the list of students.
+Adds student details to the person list.
 
-Format: `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [t/TAG]​`
+Format: `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP_NAME]​`
 
-* Name, student_id, grade, and email must have.
-* Name can be case-insensitive, eg. john doe, JOHN DOE same as John Doe
-* Email must have the correct format and string length of 8 for the email username eg. e0000000@u.nus.edu
-* Grade: [A+, A, A-, B+, B, B-, C+, C, D+, D, F]
-* Student_id must start with A and end with a letter, string length of 9 eg. A0000000X
+* `NAME`, `STUDENT_ID`, `GRADE`, and `EMAIL` must have, `GROUP_NAME` is optional.
+* `NAME` is case-sensitive. 
+    * e.g. `John Doe is different from john doe`
+* `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
+    * e.g. `A0123459X`
+* `EMAIL` should be of the format **local-part@domain**. The local-part should only be in the **format of e/E follow by 7 digits from [0-9]**. The **domain name must end with a domain label u.nus.edu**.
+    * e.g. `e0123456@u.nus.edu`
+* `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
 
-Examples:
-* `add id/A01234567H n/John Doe e/e0123456@u.nus.edu`
 
+Example:
+* `add id/A0123459X n/John Doe e/e0123456@u.nus.edu g/A` adds the person named John Doe with student_id "A0123459X", email "e0123456@u.nus.edu" and grade "A" to the list.
+
+Expected output:
+![AddUi](images/AddUI.png)
 
 ### 7.3 Listing all students: `list`
 
@@ -287,6 +293,81 @@ Clears all entries from the list of students.
 
 Format: `clear`
 
+### 7.9 Archiving Features
+#### 7.9.1 Archiving a student : `archive`
+
+Archives a student from the person list to the archived list.
+
+Format: `archive STUDENT_ID`
+
+* Archives a student with the specified `STUDENT_ID`.
+* `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
+    * e.g. `A0123459X`
+* The student with the specified `STUDENT_ID` must exists in the person list.
+
+Example:
+* `archive A0123459X` archives a student with the student_id "A0123459X".
+
+Expected output:
+![](images/ArchiveUI.png)
+
+#### 7.9.2 Editing an archived student : `edit_archived`
+
+Edits details of an archived student.
+
+Format: `edit_archived STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...`
+
+* Edits the details of an archived student with the specified `STUDENT_ID`.
+* At least one of the optional fields indicated within the square bracket must be provided.
+* The `...` after the `GROUP_NAME` indicates that multiple `GROUP_NAME` can be provided for editing.
+* The student with the specified `STUDENT_ID` must exists in the archived list.
+
+Examples:
+* `edit_archived A0123459X g/B e/e0237861@u.nus.edu` edits the grade of the student with student_id "A0123459X" to "B" and the email to "e0237861@u.nus.edu".
+
+Expected output:
+![](images/EditArchivedUI.png)
+
+#### 7.9.3 Deleting an archived student : `delete_archived`
+
+Deletes an archived student from the archived list.
+
+Format: `delete_archived STUDENT_ID`
+
+* Deletes an archived student with the specified `STUDENT_ID`.
+* `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
+    * e.g. `A0123459X`
+* The student with the specified `STUDENT_ID` must exists in the archived list.
+
+Example: 
+* `delete_archived A0123459X` deletes the student with student_id "A0123459X" from the archived list.
+
+Expected output:
+![](images/DeleteArchivedUI.png)
+
+#### 7.9.4 Unarchiving a student : `unarchived`
+
+Unarchives a student from the archived list to the person list.
+
+Format: `unarchived STUDENT_ID`
+
+* Unarchives a student with the specified `STUDENT_ID`.
+* `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
+    * e.g. `A0123459X`
+* The student with the specified `STUDENT_ID` must exists in the archived list.
+
+Examples:
+* `unarchived A0123459X` unarchives a student with the student_id "A0123459X".
+
+Expected output:
+![](images/UnarchivedUI.png)
+
+#### 7.9.5 Clearing all entries : `clear_archived`
+
+Clears all entries from the archived list.
+
+Format: `clear_archived`
+
 ### 7.9 Exiting the program : `exit`
 
 Exits the program.
@@ -306,9 +387,6 @@ If your changes to the data file makes its format invalid, TeachStack will disca
 Furthermore, certain edits can cause the TeachStack to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### 7.12 Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 ### 7.13 Setting weak threshold
 
