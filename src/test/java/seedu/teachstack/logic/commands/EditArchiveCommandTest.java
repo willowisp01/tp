@@ -7,9 +7,7 @@ import static seedu.teachstack.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.teachstack.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
-import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_GROUP_GROUP1;
 import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.teachstack.logic.commands.CommandTestUtil.assertArchivedBookCommandFailure;
 import static seedu.teachstack.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.teachstack.logic.commands.CommandTestUtil.showArchivedPersonAtIndex;
@@ -44,7 +42,7 @@ public class EditArchiveCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().withStudentId("A0128956X").build();
+        Person editedPerson = new PersonBuilder().withStudentId("A0128957X").build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditArchiveCommand editArchiveCommand = new EditArchiveCommand(ID_FIRST_PERSON, descriptor);
 
@@ -66,12 +64,11 @@ public class EditArchiveCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
 
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withStudentId(VALID_STUDENTID_BOB)
-                .withGrade(VALID_GRADE_BOB).withEmail(VALID_EMAIL_BOB).withGroups(VALID_GROUP_GROUP1).build();
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withGrade(VALID_GRADE_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withStudentId(VALID_STUDENTID_BOB).withGrade(VALID_GRADE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withGroups(VALID_GROUP_GROUP1).build();
+                .withGrade(VALID_GRADE_BOB).withEmail(VALID_EMAIL_BOB).build();
 
         EditArchiveCommand editArchiveCommand = new EditArchiveCommand(id, descriptor);
 

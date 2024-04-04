@@ -71,7 +71,8 @@ public class EditArchiveCommand extends Command {
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasArchivedPerson(editedPerson)) {
+        if ((!personToEdit.isSameEmail(editedPerson) && model.hasArchivedEmail(editedPerson))
+                || !personToEdit.isSameId(editedPerson) && model.hasArchivedId(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 

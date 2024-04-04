@@ -164,4 +164,15 @@ public interface Model {
      */
     void updateFilteredArchivedList(Predicate<Person> predicate);
 
+    /**
+     * Returns true if a person with the same {@code StudentId} as {@code person} exists in the archived book.
+     */
+    boolean hasArchivedId(Person person);
+
+    /**
+     * Returns true if a person with the same {@code Email} as {@code person} exists in the archived book.
+     */
+    boolean hasArchivedEmail(Person person);
+
+
 }

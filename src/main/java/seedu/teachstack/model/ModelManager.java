@@ -219,6 +219,18 @@ public class ModelManager implements Model {
         return archivedBook.hasPerson(person);
     }
 
+    @Override
+    public boolean hasArchivedId(Person person) {
+        requireNonNull(person);
+        return archivedBook.hasArchivedId(person);
+    }
+
+    @Override
+    public boolean hasArchivedEmail(Person person) {
+        requireNonNull(person);
+        return archivedBook.hasArchivedEmail(person);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

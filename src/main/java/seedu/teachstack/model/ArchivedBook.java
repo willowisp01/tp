@@ -93,6 +93,22 @@ public class ArchivedBook implements ReadOnlyArchivedBook {
         archivedPersons.remove(key);
     }
 
+    /**
+     * Returns true if a person with the same {@code StudentId} as {@code person} exists in the archived book.
+     */
+    public boolean hasArchivedId(Person person) {
+        requireNonNull(person);
+        return archivedPersons.containsById(person);
+    }
+
+    /**
+     * Returns true if a person with the same {@code Email} as {@code person} exists in the archived book.
+     */
+    public boolean hasArchivedEmail(Person person) {
+        requireNonNull(person);
+        return archivedPersons.containsByEmail(person);
+    }
+
 
     //// util methods
 
