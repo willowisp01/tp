@@ -10,7 +10,7 @@ title: User Guide
     - [2.1 Terminologies and Symbols](#21-terminologies--symbols)
 - [3. Target User](#3-target-useraudience)
     - [3.1 Assumptions](#31-assumptions)
-- [4. Purpose of User Guide (UG)](#4-purpose-of-user-guide--ug)
+- [4. Purpose of User Guide (UG)](#4-purpose-of-user-guide-ug)
 - [5. Quick Start](#5-quick-start)
 - [6 Understanding our graphical user interface](#6-understanding-our-gui)
 - [7. Features](#7-features)
@@ -36,10 +36,10 @@ title: User Guide
     - [7.13 Editing the data file](#713-editing-the-data-file)
     - [7.14 Setting a weak threshold](#714-setting-weak-threshold--setweak)
     - [7.15 Viewing summary statistics](#715-viewing-summary-statistics--summary)
-- [8 Glossary](#8-glossary)
-- [9 FAQ](#9-faq)
-- [10 Known Issues](#10-known-issues)
-- [11 Command Summary](#11-command-summary)
+- [8. Glossary](#8-glossary)
+- [9. FAQ](#9-faq)
+- [10. Known Issues](#10-known-issues)
+- [11. Command Summary](#11-command-summary)
 
       {:toc}
 
