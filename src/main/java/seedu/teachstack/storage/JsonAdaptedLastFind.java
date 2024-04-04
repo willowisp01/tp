@@ -30,7 +30,7 @@ public class JsonAdaptedLastFind extends JsonAdaptedField {
      */
     @JsonCreator
     public JsonAdaptedLastFind(@JsonProperty("groups") List<JsonAdaptedGroup> groups) {
-        if (groups != null) {
+        if (!groups.isEmpty()) {
             this.groups.addAll(groups);
         }
     }
@@ -63,5 +63,20 @@ public class JsonAdaptedLastFind extends JsonAdaptedField {
                 ModelManager.setStartingFilter(Model.PREDICATE_SHOW_ALL_PERSONS);
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof JsonAdaptedLastFind)) {
+            return false;
+        }
+
+        JsonAdaptedLastFind otherFind = (JsonAdaptedLastFind) other;
+        return this.groups.equals(otherFind.groups);
     }
 }

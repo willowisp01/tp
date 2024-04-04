@@ -71,7 +71,6 @@ public class JsonUserDataStorage implements UserDataStorage {
     }
 
     public void setFields(JsonSerializableUserData data) {
-        logger.info(data.toFields().get(0).toString());
         for (JsonAdaptedField field : data.toFields()) {
             field.performAction();
         }
