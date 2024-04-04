@@ -3,7 +3,9 @@ package seedu.teachstack.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_GROUP_GROUP1;
+import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.teachstack.testutil.Assert.assertThrows;
 import static seedu.teachstack.testutil.TypicalPersons.ALICE;
 import static seedu.teachstack.testutil.TypicalPersons.BOB;
@@ -39,10 +41,46 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void containsByEmail_emailNotInList_returnsFalse() {
+        assertFalse(uniquePersonList.containsByEmail(ALICE));
+    }
+
+    @Test
+    public void containsByEmail_emailInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        assertTrue(uniquePersonList.containsByEmail(ALICE));
+    }
+
+    @Test
+    public void containsById_studentIdNotInList_returnsFalse() {
+        assertFalse(uniquePersonList.containsById(ALICE));
+    }
+
+    @Test
+    public void containsById_studentIdInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        assertTrue(uniquePersonList.containsById(ALICE));
+    }
+    @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withGroups(VALID_GROUP_GROUP1).build();
         assertTrue(uniquePersonList.contains(editedAlice));
+    }
+
+    @Test
+    public void contains_personWithSameEmailFieldInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withStudentId(VALID_STUDENTID_AMY)
+                .withGroups(VALID_GROUP_GROUP1).build();
+        assertTrue(uniquePersonList.containsByEmail(editedAlice));
+    }
+
+    @Test
+    public void contains_personWithSameStudentIdFieldInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_AMY).withGroups(VALID_GROUP_GROUP1).build();
+        assertTrue(uniquePersonList.containsById(editedAlice));
     }
 
     @Test

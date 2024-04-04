@@ -73,8 +73,8 @@ public class Person implements Comparable<Person> {
         }
 
         return otherPerson != null
-                && otherPerson.getStudentId().equals(getStudentId())
-                && otherPerson.isSameEmail(this);
+                && (otherPerson.getStudentId().equals(getStudentId())
+                && otherPerson.isSameEmail(this));
     }
 
     /**
@@ -139,5 +139,16 @@ public class Person implements Comparable<Person> {
             return false;
         }
         return this.getEmail().equals(otherPerson.getEmail());
+    }
+
+    /**
+     * @param otherPerson to be compared
+     * @return if both have same {@StudentId}
+     */
+    public boolean isSameId(Person otherPerson) {
+        if (otherPerson == null) {
+            return false;
+        }
+        return this.getStudentId().equals(otherPerson.getStudentId());
     }
 }

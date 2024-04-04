@@ -74,6 +74,36 @@ public class Grade implements Comparable<Grade> {
         }
     }
 
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Grade)) {
+            return false;
+        }
+
+        Grade otherGrade = (Grade) other;
+        return value.equals(otherGrade.value);
+    }
+
+    @Override
+    public int compareTo(Grade o) {
+        return this.gradeToInt() - o.gradeToInt();
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
     /**
      * @param value
      * @return the string value corresponding to int grade
@@ -105,37 +135,6 @@ public class Grade implements Comparable<Grade> {
         default:
             return "";
         }
-    }
-
-
-    @Override
-    public String toString() {
-        return value;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Grade)) {
-            return false;
-        }
-
-        Grade otherGrade = (Grade) other;
-        return value.equals(otherGrade.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
-    @Override
-    public int compareTo(Grade o) {
-        return this.gradeToInt() - o.gradeToInt();
     }
 
     /**

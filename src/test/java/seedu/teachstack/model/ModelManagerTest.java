@@ -93,6 +93,28 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasEmail_emailInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.hasEmail(ALICE));
+    }
+
+    @Test
+    public void hasEmail_emailNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasEmail(ALICE));
+    }
+
+    @Test
+    public void hasId_studentIdNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasId(ALICE));
+    }
+
+    @Test
+    public void hasId_studentIdInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.hasId(ALICE));
+    }
+
+    @Test
     public void getWeak_personBelowThreshold_returnsPersonInList() {
         modelManager.addPerson(GEORGE);
         assertEquals(modelManager.getAddressBook().getPersonList(), modelManager.getWeak());

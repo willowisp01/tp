@@ -95,6 +95,16 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Returns true if a person with the same {@code StudentId} as {@code person} exists in the address book.
+     */
+    boolean hasId(Person person);
+
+    /**
+     * Returns true if a person with the same {@code Email} as {@code person} exists in the address book.
+     */
+    boolean hasEmail(Person person);
+
+    /**
      * Archives the given person.
      * The person must exist in the address book.
      */
