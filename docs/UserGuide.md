@@ -219,17 +219,21 @@ Edits an existing person in the list of students.
 
 Format: `edit [id/STUDENT_ID] [e/EMAIL] `
 
-* Edits the person with the specified `STUDENT_ID`. The STUDENT_ID refers to the unique alphanumeric sequence assigned to a person shown in the displayed person list. The student_id **must be 9 digits long
-* Only 1 field may be provided.
+* Edits the person with the specified `STUDENT_ID`.
+* The `STUDENT_ID` refers to the id corresponding to the student in the list.
+* The `STUDENT_ID` is case-sensitive, must be a String starting with ‘A’ and ending with any letter, with a total length of 9
+* The student with the specified `STUDENT_ID` must exists in the list.
 * Existing value will be updated to the input value.
-* Name can be case-insensitive, e.g. john doe, JOHN DOE same as John Doe
+* `NAME` is case-sensitive, eg. john doe is different from John Doe
 * Email must have the correct domain (@u.nus.edu) and string length of 8 for the email username eg. e0000000@u.nus.edu
-* Grade may be of values:  [A+, A, A-, B+, B, B-, C+, C, D+, D, F]
+* `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
 
 Examples:
-*  `edit id/A0123456X e/johndoe@example.com` Edits the email address of the person with student_id = A0123456X to be `e1234567@u.nus.edu`.
-*  `edit id/A2233445X n/Betsy Crower` Edits the name of the person with student_id = A2233445X to be `Betsy Crower`.
+*  `edit A0123459X e/e0123450@u.nus.edu` Edits the email address of the person with student_id = A0123459X to be `e1234567@u.nus.edu`.
+*  `edit A0123459X n/John Doo` Edits the name of the person with student_id = A2233445X to be `Betsy Crower`.
 
+Expected output:
+![EditUI](images/EditUI.png)
 
 ### 7.5 Viewing students by name : `view`
 
@@ -238,11 +242,11 @@ Shows the detailed information of the student with the specified student_id.
 Format: `view STUDENT_ID`
 
 * Returns the detailed information of the student with the corresponding `STUDENT_ID`.
-* The `STUDENT_ID` is case-insensitive.
+* The `STUDENT_ID` is case-sensitive.
 * The `STUDENT_ID` starts with A, ends with a letter, and it must be 9 characters long.
 
 Examples:
-* `view A0123456X` Shows the detailed information of the student with `STUDENT_ID = A0123456X`
+* `view A0123459X` Shows the detailed information of the student with `STUDENT_ID = A0123456X`
 
 ### 7.6 Deleting a person : `delete`
 
@@ -252,11 +256,15 @@ Format: `delete STUDENT_ID`
 
 * Deletes the person at the specified `STUDENT_ID`.
 * The `STUDENT_ID` refers to the id corresponding to the student in the list.
-* The `STUDENT_ID` is case-insensitive, must be a String starting with ‘A’ and ending with any letter, with a total length of 9
+* The `STUDENT_ID` is case-sensitive, must be a String starting with ‘A’ and ending with any letter, with a total length of 9
+* The student with the specified `STUDENT_ID` must exists in the list.
 
 
 Examples:
-* `delete A0123456X` deletes the student with student id A0123456X from the list.
+* `delete A0123459X` deletes the student with `STUDENT_ID = A0123459X` from the list.
+
+Expected output:
+![DeleteUI](images/DeleteUI.png)
 
 ### 7.7 Forming focus groups
 
@@ -460,13 +468,14 @@ Displayed after command: `summary`
 
 ## Command summary
 
-| Action      | Format, Examples                                                                                                         |
-|-------------|--------------------------------------------------------------------------------------------------------------------------|
-| **Add**     | `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [t/TAG]​​` <br> e.g., `add id/A01234567X n/James Ho e/e0123456@u.nus.edu g/B+` |
-| **Delete**  | `delete id/STUDENT_ID`<br> e.g., `delete A01234567X`                                                                     |
-| **Edit**    | `edit id/STUDENT_ID [g/GRADE] `<br> e.g.,`edit A0123466C g/A+`                                                           |
-| **View**    | `view id/STUDENT_ID`<br> e.g., `view A0123466D`                                                                          |
-| **Group**   | `group id/STUDENT_ID_1 [id/STUDENT_ID_2] …` <br> e.g., `group A1234567R, A2345678R`                                      |
-| **Find**    | `find gp/GROUP_NAME…` <br> e.g., `find gp/Group 1`                                                                       |
-| **Weak**    | `setweak g/GRADE` <br> e.g., `setweak g/B`                                                                               |
-| **Summary** | e.g., `summary` <br>                                                                                                     |
+| Action      | Format, Examples                                                                                                             |
+|-------------|------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP]...` <br> e.g., `add id/A01234567X n/James Ho e/e0123456@u.nus.edu g/B+` |
+| **Delete**  | `delete STUDENT_ID`<br> e.g., `delete A01234567X`                                                                            |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [gp/GROUP]...` <br> e.g.,`edit A0123466C g/A+`                   |
+| **View**    | `view STUDENT_ID`<br> e.g., `view A0123466D`                                                                                 |
+| **Group**   | `group gp/GROUP_NAME id/STUDENT_ID_1 [id/STUDENT_ID_2] ...` <br> e.g., `group gp/Group 1 id/A1234567R, id/A2345678R`         |
+| **Random Group** | `random NUMBER_OF_GROUPS gp/GROUP_NAME` <br> e.g., `random 3 gp/Random Group`                                                |
+| **Weak**    | `setweak g/GRADE` <br> e.g., `setweak g/B`                                                                                   |
+| **Summary** | e.g., `summary` <br>                                                                                                         |
+
