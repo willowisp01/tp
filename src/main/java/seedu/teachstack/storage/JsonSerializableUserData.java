@@ -66,7 +66,6 @@ public class JsonSerializableUserData {
         }
 
         JsonSerializableUserData otherData = (JsonSerializableUserData) other;
-        return this.gradeThreshold.equals(otherData.gradeThreshold)
-                && this.lastRequestedFind.equals(otherData.lastRequestedFind);
+        return this.fields.equals(otherData.fields);
     }
 }
