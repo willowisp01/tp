@@ -5,33 +5,37 @@ title: User Guide
 
 ## Table of contents
 - [Table of Contents](#table-of-contents)
-- [1. Welcome](#1-welcome)
+- [1. Welcome](#1-welcome-)
 - [2. How to use this user guide](#2-how-to-use-the-user-guide)
     - [2.1 Terminologies and Symbols](#21-terminologies--symbols)
 - [3. Target User](#3-target-useraudience)
     - [3.1 Assumptions](#31-assumptions)
 - [4. Purpose of User Guide (UG)](#4-purpose-of-user-guide--ug-)
 - [5. Quick Start](#5-quick-start)
-- [6. Getting to know TeachStack](#6-getting-to-know-teachstack)
-    - [6.1 Understanding our graphical user interface](#61-understanding-our-gui)
+- [6 Understanding our graphical user interface](#6-understanding-our-gui)
 - [7. Features](#7-features)
     - [7.1 Viewing Help](#71-viewing-help--help)
-    - [7.2 Adding a student](#72-adding-a-person--add)
+    - [7.2 Adding a student](#72-adding-a-student--add)
     - [7.3 Listing all students](#73-listing-all-students--list)
     - [7.4 Editing a student](#74-editing-a-person--edit)
     - [7.5 Viewing a student](#75-viewing-students-by-name--view)
     - [7.6 Deleting a student](#76-deleting-a-person--delete)
     - [7.7 Forming focus groups](#77-forming-focus-groups)
-      - [7.7.1 Forming focus groups manually](#771-forming-focus-groups-manually-group)
-      - [7.7.2 Forming focus groups randomly](#772-forming-random-groups-random)
+      - [7.7.1 Forming focus groups manually](#771-forming-focus-groups-manually--group)
+      - [7.7.2 Forming focus groups randomly](#772-forming-random-groups--random)
     - [7.8 Filtering students by groups](#78-filtering-students-by-groups--find)
     - [7.9 Clearing all entries](#79-clearing-all-entries--clear)
-    - [7.10 Exiting the program](#710-exiting-the-program--exit)
-    - [7.11 Saving data](#711-saving-the-data)
-    - [7.12 Editing the data file](#712-editing-the-data-file)
-    - [7.13 Archiving a student](#713-archiving-data-files-coming-in-v20)
-    - [7.14 Setting a weak threshold](#714-setting-weak-threshold-and-marker)
-    - [7.15 Viewing summary statistics](#715-viewing-summary-statistics)
+    - [7.10 Archiving Features](#710-archiving-features)
+      - [7.10.1 Archiving a student](#7101-archiving-a-student--archive)
+      - [7.10.2 Editing an archived student](#7102-editing-an-archived-student--editarchived)
+      - [7.10.3 Deleting an archived student](#7103-deleting-an-archived-student--deletearchived)
+      - [7.10.4 Unarchiving a student](#7104-unarchiving-a-student--unarchived)
+      - [7.10.5 Clearing all entries](#7105-clearing-all-entries--cleararchived)
+    - [7.11 Exiting the program](#711-exiting-the-program--exit)
+    - [7.12 Saving data](#712-saving-the-data)
+    - [7.13 Editing the data file](#713-editing-the-data-file)
+    - [7.14 Setting a weak threshold](#714-setting-weak-threshold--setweak)
+    - [7.15 Viewing summary statistics](#715-viewing-summary-statistics--summary)
 
       {:toc}
 
@@ -56,8 +60,8 @@ So, are you ready to help students in need?
 This guide explains how you can use TeachStack to manage weaker students. It will walk you through each feature and functionality of the app, ensuring you're equipped to make the most of TeachStack's capabilities.
 
 * To get started with TeachStack. [Quick start](#5-quick-start)
-* To understand the GUI. [Understanding our GUI](#61-understanding-our-gui)
-* To see details of the commands and features. [Features](#features)
+* To understand the GUI. [Understanding our GUI](#6-understanding-our-gui)
+* To see details of the commands and features. [Features](#7-features)
 * To quickly navigate to a specific section. [Table of contents](#table-of-contents)
 * To see an overview of all commands. [Command summary](#command-summary)
 * If you encounter any technical term, please refer to the glossary. [Glossary](#glossary)
@@ -77,17 +81,17 @@ The explanation of each command will be formatted in the following convention:
 5. _Optional Screenshot_
 
 --------------------------------------------------------------------------------------------------------------------
-## 2. Target user/audience
+## 3. Target user/audience
 
-Therefore, TeachStack is tailored for computer science instructors, not limited to those within NUS.
+TeachStack is tailored for computer science instructors, not limited to those within NUS.
 
-## 2.1 Assumptions
+## 3.1 Assumptions
 1. We assume that users are passionate educators who wish to see their students succeed. This is important as TeachStack mainly allows instructors to track the performance of weaker students, so the application can only demonstrate its full potential in the hands of instructors who care.
 2. We also assume that users are somewhat familiar with computers and have used computer applications in the past, which will help them follow this guide and use TeachStack effectively. Since most instructors will have used similar applications (e.g. Canvas), this is a reasonable assumption to make.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 3. Purpose of User Guide (UG)
+## 4. Purpose of User Guide (UG)
 
 The purpose of the User Guide (UG) for TeachStack is to provide users
 with a comprehensive understanding of the application's features and
@@ -100,31 +104,32 @@ and ensure optimal utilization of the application's capabilities.
 
 --------------------------------------------------------------------------------------------------------------------
 
-
 ## 5. Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `TeachStack.jar` from [here](https://github.com/AY2324S2-CS2103T-T09-1/tp/releases).
+2. Download the latest `TeachStack.jar` from [here](https://github.com/AY2324S2-CS2103T-T09-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TeachStack.
+3. Copy the file to the folder you want to use as the _home folder_ for your TeachStack.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TeachStack.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TeachStack.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `list` : Lists all students.
     * `add id/A01234567H n/John Doe e/e0123456@u.nus.edu` : Adds a student named `John Doe` to the list.
     * `delete A0123456X` : Deletes the student with student id A0123456X from the list.
     * `clear` : Deletes all students.
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#7-features) below for details of each command.
 
-## 6.1 Understanding our GUI
+--------------------------------------------------------------------------------------------------------------------
+
+## 6. Understanding our GUI
 ![gui screenshot](images/understandingUi.png)
 1. Menu Bar: Provides a selection of menu items:
     - File
@@ -144,7 +149,7 @@ and ensure optimal utilization of the application's capabilities.
 7. Group labels: Indicates the groups in which a student belongs to.
 
 --------------------------------------------------------------------------------------------------------------------
-## Features
+## 7. Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -156,7 +161,7 @@ and ensure optimal utilization of the application's capabilities.
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [gp/GROUP]` can be used as `n/John Doe gp/Group 1` or as `n/John Doe`.
 
-* Ellipsis after a parameter indicates that the command can take in multiple values for the  parameter.<br>
+* Ellipsis after a parameter indicates that the command can take in multiple values for the parameter.<br>
   e.g. `id/STUDENT_ID…` can be used as `id/A0123434A id/A0232356C` or as `id/A0123434A`.
 
 * Parameters must be in specified order.<br>
@@ -172,14 +177,14 @@ and ensure optimal utilization of the application's capabilities.
 
 ### 7.1 Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 
-### 7.2 Adding a student: `add`
+### 7.2 Adding a student : `add`
 
 Adds student details to the person list.
 
@@ -201,7 +206,7 @@ Example:
 Expected output:
 ![AddUi](images/AddUI.png)
 
-### 7.3 Listing all students: `list`
+### 7.3 Listing all students : `list`
 
 Shows a list of all students, ordered by grades.
 
@@ -217,7 +222,7 @@ Format: `edit [id/STUDENT_ID] [e/EMAIL] `
 * Edits the person with the specified `STUDENT_ID`. The STUDENT_ID refers to the unique alphanumeric sequence assigned to a person shown in the displayed person list. The student_id **must be 9 digits long
 * Only 1 field may be provided.
 * Existing value will be updated to the input value.
-* Name can be case-insensitive, eg. john doe, JOHN DOE same as John Doe
+* Name can be case-insensitive, e.g. john doe, JOHN DOE same as John Doe
 * Email must have the correct domain (@u.nus.edu) and string length of 8 for the email username eg. e0000000@u.nus.edu
 * Grade may be of values:  [A+, A, A-, B+, B, B-, C+, C, D+, D, F]
 
@@ -226,7 +231,7 @@ Examples:
 *  `edit id/A2233445X n/Betsy Crower` Edits the name of the person with student_id = A2233445X to be `Betsy Crower`.
 
 
-### 7.5 Viewing students by name: `view`
+### 7.5 Viewing students by name : `view`
 
 Shows the detailed information of the student with the specified student_id.
 
@@ -234,7 +239,7 @@ Format: `view STUDENT_ID`
 
 * Returns the detailed information of the student with the corresponding `STUDENT_ID`.
 * The `STUDENT_ID` is case-insensitive.
-* The `STUDENT_ID` starts with A and ends with a letter and it must be 9 characters long.
+* The `STUDENT_ID` starts with A, ends with a letter, and it must be 9 characters long.
 
 Examples:
 * `view A0123456X` Shows the detailed information of the student with `STUDENT_ID = A0123456X`
@@ -251,14 +256,14 @@ Format: `delete STUDENT_ID`
 
 
 Examples:
-* `delete A0123456X` deletes the student with student id  A0123456X from the list.
+* `delete A0123456X` deletes the student with student id A0123456X from the list.
 
 ### 7.7 Forming focus groups
 
-#### 7.7.1 Forming focus groups manually: `group`
+#### 7.7.1 Forming focus groups manually : `group`
 Creates a group with people corresponding to the selected IDs.
 
-Format: `group gp/GROUP_NAME id/STUDENTID` (multiple groups, IDs allowed)
+Format: `group gp/GROUP_NAME… id/STUDENT_ID…` (multiple groups, IDs allowed)
 
 * Forms a group with the specified `GROUP_NAME`.
 * The group name includes students with the corresponding `STUDENT_IDs`.
@@ -270,7 +275,7 @@ Examples:
 * `group gp/3 id/A0123456X id/A0123456H` forms a group called `3` with 2 students in it.
 * `group id/A0123456X id/A0123456H` removes the corresponding 2 students from any groups they are currently in.
 
-#### 7.7.2 Forming random groups: `random`
+#### 7.7.2 Forming random groups : `random`
 Puts all students marked as weak into the specified number of groups.
 
 Format: `random NUMBER_OF_GROUPS gp/GROUP_NAME`
@@ -284,10 +289,10 @@ Format: `random NUMBER_OF_GROUPS gp/GROUP_NAME`
 Examples:
 * `random 3 gp/Random Group` randomly distributes all weaker students into 3 groups: Random Group 1, Random Group 2, Random Group 3.
 
-### 7.8 Filtering students by groups: `find`
+### 7.8 Filtering students by groups : `find`
 Updates the list to display only students that are in the group(s) specified.
 
-Format: `find gp/GROUP_NAME [gp/GROUP_NAME]`
+Format: `find gp/GROUP_NAME…`
 
 * At least one `GROUP_NAME` must be specified. Otherwise, the command will fail.
 * If multiple `GROUP_NAME`s are specified, only students who are in all groups entered will be displayed.
@@ -304,8 +309,8 @@ Clears all entries from the list of students.
 Format: `clear`
 
 
-### 7.9 Archiving Features
-#### 7.9.1 Archiving a student : `archive`
+### 7.10 Archiving Features
+#### 7.10.1 Archiving a student : `archive`
 
 Archives a student from the person list to the archived list.
 
@@ -322,7 +327,7 @@ Example:
 Expected output:
 ![](images/ArchiveUI.png)
 
-#### 7.9.2 Editing an archived student : `edit_archived`
+#### 7.10.2 Editing an archived student : `edit_archived`
 
 Edits details of an archived student.
 
@@ -339,7 +344,7 @@ Examples:
 Expected output:
 ![](images/EditArchivedUI.png)
 
-#### 7.9.3 Deleting an archived student : `delete_archived`
+#### 7.10.3 Deleting an archived student : `delete_archived`
 
 Deletes an archived student from the archived list.
 
@@ -356,7 +361,7 @@ Example:
 Expected output:
 ![](images/DeleteArchivedUI.png)
 
-#### 7.9.4 Unarchiving a student : `unarchived`
+#### 7.10.4 Unarchiving a student : `unarchived`
 
 Unarchives a student from the archived list to the person list.
 
@@ -373,24 +378,23 @@ Examples:
 Expected output:
 ![](images/UnarchivedUI.png)
 
-#### 7.9.5 Clearing all entries : `clear_archived`
+#### 7.10.5 Clearing all entries : `clear_archived`
 
 Clears all entries from the archived list.
 
 Format: `clear_archived`
 
-### 7.10 Exiting the program : `exit`
-
+### 7.11 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### 7.11 Saving the data
+### 7.12 Saving the data
 
 TeachStack data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 7.12 Editing the data file
+### 7.13 Editing the data file
 
 TeachStack data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -399,7 +403,7 @@ If your changes to the data file makes its format invalid, TeachStack will disca
 Furthermore, certain edits can cause the TeachStack to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### 7.14 Setting weak threshold
+### 7.14 Setting weak threshold : `setweak`
 
 Sets the weakness threshold for a weak marker.
 
@@ -421,7 +425,7 @@ After command `setweak B`
 
 ![](images/setWeakAfter.png)
 
-### 7.15 Viewing summary statistics
+### 7.15 Viewing summary statistics : `summary`
 
 Displays a summary of all students.
 
@@ -434,7 +438,10 @@ Format: `summary`
 Displayed after command: `summary`
 ![](images/summary.png)
 
+--------------------------------------------------------------------------------------------------------------------
+## Glossary
 
+**Coming soon!**
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -460,5 +467,6 @@ Displayed after command: `summary`
 | **Edit**    | `edit id/STUDENT_ID [g/GRADE] `<br> e.g.,`edit A0123466C g/A+`                                                           |
 | **View**    | `view id/STUDENT_ID`<br> e.g., `view A0123466D`                                                                          |
 | **Group**   | `group id/STUDENT_ID_1 [id/STUDENT_ID_2] …` <br> e.g., `group A1234567R, A2345678R`                                      |
+| **Find**    | `find gp/GROUP_NAME…` <br> e.g., `find gp/Group 1`                                                                       |
 | **Weak**    | `setweak g/GRADE` <br> e.g., `setweak g/B`                                                                               |
 | **Summary** | e.g., `summary` <br>                                                                                                     |
