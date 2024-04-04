@@ -416,6 +416,10 @@ Format: `setweak [g/GRADE]`
 Example: 
 * `setweak B` displays a weak marker for all students with grade B or lower.
 
+![](images/setWeakBefore.png)
+
+![](images/setWeakAfter.png)
+
 ### 7.15 Viewing summary statistics
 
 Displays a summary of all students.
@@ -425,6 +429,8 @@ Format: `summary`
 * Entering command opens a popup.
 * Popup contains statistics: Total Students, Average Grade, and Standard Deviation of Grades.
 * Popup contains pie chart of students' grades.
+
+![](images/summary.png)
 
 
 
