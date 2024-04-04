@@ -28,9 +28,12 @@ import seedu.teachstack.storage.AddressBookStorage;
 import seedu.teachstack.storage.ArchivedBookStorage;
 import seedu.teachstack.storage.JsonAddressBookStorage;
 import seedu.teachstack.storage.JsonArchivedBookStorage;
+import seedu.teachstack.storage.JsonSerializableUserData;
+import seedu.teachstack.storage.JsonUserDataStorage;
 import seedu.teachstack.storage.JsonUserPrefsStorage;
 import seedu.teachstack.storage.Storage;
 import seedu.teachstack.storage.StorageManager;
+import seedu.teachstack.storage.UserDataStorage;
 import seedu.teachstack.storage.UserPrefsStorage;
 import seedu.teachstack.ui.Ui;
 import seedu.teachstack.ui.UiManager;
@@ -63,13 +66,32 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         ArchivedBookStorage archivedBookStorage = new JsonArchivedBookStorage(userPrefs.getArchivedBookFilePath());
-        storage = new StorageManager(addressBookStorage, archivedBookStorage, userPrefsStorage);
+        UserDataStorage userDataStorage = new JsonUserDataStorage(userPrefs.getUserDataFilePath());
+        storage = new StorageManager(addressBookStorage, archivedBookStorage, userDataStorage, userPrefsStorage);
+
+        initUserData(storage);
 
         model = initModelManager(storage, userPrefs);
 
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+    }
+
+    private void initUserData(Storage storage) {
+        logger.info("Using user data file : " + storage.getUserDataFilePath());
+
+        Optional<JsonSerializableUserData> userDataOptional;
+
+        try {
+            userDataOptional = storage.readUserData();
+            if (!userDataOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
+                        + " with default values.");
+            }
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getUserDataFilePath() + " could not be loaded.");
+        }
     }
 
     /**
@@ -79,7 +101,7 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
-        logger.info("Using data file : " + storage.getArchivedBookFilePath());
+        logger.info("Using archive file : " + storage.getArchivedBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;

@@ -191,4 +191,9 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.clear();
         internalList.addAll(list);
     }
+
+    public ObservableList<Person> getStudents() {
+        ObservableList<Person> o = internalList;
+        return o;
+    }
 }

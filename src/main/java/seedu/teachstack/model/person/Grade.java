@@ -3,6 +3,7 @@ package seedu.teachstack.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.teachstack.commons.util.AppUtil.checkArgument;
 
+import seedu.teachstack.storage.JsonSerializableUserData;
 
 /**
  * Represents a Student's grade in the address book.
@@ -21,8 +22,6 @@ public class Grade implements Comparable<Grade> {
             + VALID_GRADES;
 
     public final String value;
-
-
 
     /**
      * Constructs an {@code Grade}.
@@ -43,7 +42,10 @@ public class Grade implements Comparable<Grade> {
         return test.matches(VALIDATION_REGEX);
     }
 
-    private int gradeToInt() {
+    /**
+     * @return the int value corresponding to string grade
+     */
+    public int gradeToInt() {
         switch (value) {
         case ("A+"):
             return 11;
@@ -103,6 +105,39 @@ public class Grade implements Comparable<Grade> {
     }
 
     /**
+     * @param value
+     * @return the string value corresponding to int grade
+     */
+    public static String intToGrade(int value) {
+        switch (value) {
+        case 11:
+            return "A+";
+        case 10:
+            return "A";
+        case 9:
+            return "A-";
+        case 8:
+            return "B+";
+        case 7:
+            return "B";
+        case 6:
+            return "B-";
+        case 5:
+            return "C+";
+        case 4:
+            return "C";
+        case 3:
+            return "D+";
+        case 2:
+            return "D";
+        case 1:
+            return "F";
+        default:
+            return "";
+        }
+    }
+
+    /**
      * Returns whether grade constitutes weak or not
      */
     public boolean isWeak() {
@@ -113,12 +148,18 @@ public class Grade implements Comparable<Grade> {
         }
     }
 
+    /**
+     * Modifies the grade threshold to the given grade.
+     *
+     * @param g The grade to be modified to.
+     */
     public static void modifyThreshold(Grade g) {
+        JsonSerializableUserData.setGradeThreshold(g);
         thresholdGrade = g;
     }
 
-    public String retrieveThreshold() {
-        return thresholdGrade.value;
+    public static Grade retrieveThreshold() {
+        return thresholdGrade;
     }
 
 }
