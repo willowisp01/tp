@@ -32,7 +32,6 @@ title: User Guide
     - [7.13 Archiving a student](#713-archiving-data-files-coming-in-v20)
     - [7.14 Setting a weak threshold](#714-setting-weak-threshold-and-marker)
     - [7.15 Viewing summary statistics](#715-viewing-summary-statistics)
-  
 
       {:toc}
 
@@ -45,11 +44,9 @@ and is optimized to be used with the Command Line Interface (CLI).
 
 This is achieved through the use of focus groups, which are groups consisting of students of a weaker skill level. 
 Focus groups can then be assigned teaching resources such as consultation slots, instructors, teaching venues, and more.
-
 By teaching students of a similar skill level together (i.e. ability grouping), you can tailor your teaching to fit a specific student demographic 
 instead of a one-size-fits-all approach, saving you time and effort. 
 Not to mention, ability grouping is [proven to improve the group's progress as a whole.](https://www.ctd.northwestern.edu/blog/what-one-hundred-years-research-says-about-ability-grouping-and-acceleration-students-k-12)
-
 So, are you ready to help students in need?
 
 
@@ -256,22 +253,22 @@ Format: `delete STUDENT_ID`
 Examples:
 * `delete A0123456X` deletes the student with student id  A0123456X from the list.
 
-### 7.7 Forming focus groups 
+### 7.7 Forming focus groups
 
 #### 7.7.1 Forming focus groups manually: `group`
-Creates a group with people corresponding to the selected IDs. 
+Creates a group with people corresponding to the selected IDs.
 
 Format: `group gp/GROUP_NAME id/STUDENTID` (multiple groups, IDs allowed)
 
 * Forms a group with the specified `GROUP_NAME`.
 * The group name includes students with the corresponding `STUDENT_IDs`.
-* If any of the given `STUDENT_IDs` do not exist, the command completely fails. 
+* If any of the given `STUDENT_IDs` do not exist, the command completely fails.
 * `GROUP_NAME` cannot be empty, and must only contain alphanumeric characters and space.
 * *Giving no parameter for `GROUP_NAME` will clear the given students' current groups!*
 
-Examples: 
-* `group gp/3 id/A0123456X id/A0123456H` forms a group called `3` with 2 students in it. 
-* `group id/A0123456X id/A0123456H` removes the corresponding 2 students from any groups they are currently in. 
+Examples:
+* `group gp/3 id/A0123456X id/A0123456H` forms a group called `3` with 2 students in it.
+* `group id/A0123456X id/A0123456H` removes the corresponding 2 students from any groups they are currently in.
 
 #### 7.7.2 Forming random groups: `random`
 Puts all students marked as weak into the specified number of groups.
@@ -353,7 +350,7 @@ Format: `delete_archived STUDENT_ID`
     * e.g. `A0123459X`
 * The student with the specified `STUDENT_ID` must exists in the archived list.
 
-Example: 
+Example:
 * `delete_archived A0123459X` deletes the student with student_id "A0123459X" from the archived list.
 
 Expected output:
@@ -413,7 +410,7 @@ Format: `setweak [g/GRADE]`
 * Students with grade lower or equal to threshold grade appear with a marker in the UI
 * `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
 
-Example: 
+Example:
 * `setweak B` displays a weak marker for all students with grade B or lower.
 
 Default Weakness Threshold
