@@ -45,4 +45,18 @@ class JsonAdaptedGroup {
         return new Group(groupName);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof JsonAdaptedGroup)) {
+            return false;
+        }
+
+        JsonAdaptedGroup otherGroup = (JsonAdaptedGroup) other;
+        return groupName.equals(otherGroup.groupName);
+    }
 }

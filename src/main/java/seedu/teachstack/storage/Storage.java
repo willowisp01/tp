@@ -13,7 +13,7 @@ import seedu.teachstack.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, ArchivedBookStorage, UserPrefsStorage {
+public interface Storage extends AddressBookStorage, ArchivedBookStorage, UserPrefsStorage, UserDataStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
@@ -39,4 +39,12 @@ public interface Storage extends AddressBookStorage, ArchivedBookStorage, UserPr
     @Override
     void saveArchivedBook(ReadOnlyArchivedBook archivedBook) throws IOException;
 
+    @Override
+    Path getUserDataFilePath();
+
+    @Override
+    Optional<JsonSerializableUserData> readUserData() throws DataLoadingException;
+
+    @Override
+    void saveUserData() throws IOException;
 }

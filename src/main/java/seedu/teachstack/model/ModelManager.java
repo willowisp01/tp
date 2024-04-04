@@ -21,6 +21,7 @@ import seedu.teachstack.model.person.StudentId;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static Predicate<Person> startingFilter = PREDICATE_SHOW_ALL_PERSONS;
 
     private final AddressBook addressBook;
     private final ArchivedBook archivedBook;
@@ -43,6 +44,7 @@ public class ModelManager implements Model {
         this.archivedBook.sort();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        updateFilteredPersonList(startingFilter);
         filteredArchivedPersons = new FilteredList<>(this.archivedBook.getArchivedList());
     }
 
@@ -232,6 +234,14 @@ public class ModelManager implements Model {
     public void updateFilteredArchivedList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredArchivedPersons.setPredicate(predicate);
+    }
+
+    public static void setStartingFilter(Predicate<Person> predicate) {
+        startingFilter = predicate;
+    }
+
+    public static Predicate<Person> getStartingFilter() {
+        return startingFilter;
     }
 
     @Override

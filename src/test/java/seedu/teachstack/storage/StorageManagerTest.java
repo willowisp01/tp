@@ -30,7 +30,8 @@ public class StorageManagerTest {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
         JsonArchivedBookStorage archivedBookStorage = new JsonArchivedBookStorage(getTempFilePath("aa"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, archivedBookStorage, userPrefsStorage);
+        JsonUserDataStorage userDataStorage = new JsonUserDataStorage(getTempFilePath("data"));
+        storageManager = new StorageManager(addressBookStorage, archivedBookStorage, userDataStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -87,4 +88,21 @@ public class StorageManagerTest {
         assertNotNull(storageManager.getArchivedBookFilePath());
     }
 
+    @Test
+    public void userDataStorageReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonUserDataStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonUserDataStorageTest} class.
+         */
+        UserDataStorage original = new JsonUserDataStorage(storageManager.getUserDataFilePath());
+        storageManager.saveUserData();
+        JsonSerializableUserData retrieved = storageManager.readUserData().get();
+        assertEquals(original.readUserData().get(), retrieved);
+    }
+
+    @Test
+    public void userDataStorage() {
+        assertNotNull(storageManager.getUserDataFilePath());
+    }
 }

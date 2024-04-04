@@ -7,6 +7,7 @@ import seedu.teachstack.commons.util.ToStringBuilder;
 import seedu.teachstack.logic.Messages;
 import seedu.teachstack.model.Model;
 import seedu.teachstack.model.person.PersonInGroupPredicate;
+import seedu.teachstack.storage.JsonSerializableUserData;
 
 /**
  * Finds and lists all persons in address book who is a member of any of the specified groups.
@@ -31,6 +32,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        JsonSerializableUserData.setLastRequestedFind(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

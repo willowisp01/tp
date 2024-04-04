@@ -24,14 +24,14 @@ title: User Guide
     - [7.7 Forming focus groups](#77-forming-focus-groups)
       - [7.7.1 Forming focus groups manually](#771-forming-focus-groups-manually-group)
       - [7.7.2 Forming focus groups randomly](#772-forming-random-groups-random)
-    - [7.8 Clearing all entries](#78-clearing-all-entries--clear)
-    - [7.9 Exiting the program](#79-exiting-the-program--exit)
-    - [7.10 Saving data](#710-saving-the-data)
-    - [7.11 Editing the data file](#711-editing-the-data-file)
-    - [7.12 Archiving a student](#712-archiving-a-student--archive)
-    - [7.13 Setting a weak threshold](#713-setting-weak-threshold-and-marker)
-    - [7.14 Viewing summary statistics](#714-viewing-summary-statistics)
-    - [7.15 Light / Dark mode](#)
+    - [7.8 Filtering students by groups](#78-filtering-students-by-groups--find)
+    - [7.9 Clearing all entries](#79-clearing-all-entries--clear)
+    - [7.10 Exiting the program](#710-exiting-the-program--exit)
+    - [7.11 Saving data](#711-saving-the-data)
+    - [7.12 Editing the data file](#712-editing-the-data-file)
+    - [7.13 Archiving a student](#713-archiving-data-files-coming-in-v20)
+    - [7.14 Setting a weak threshold](#714-setting-weak-threshold-and-marker)
+    - [7.15 Viewing summary statistics](#715-viewing-summary-statistics)
   
 
       {:toc}
@@ -56,7 +56,7 @@ So, are you ready to help students in need?
 --------------------------------------------------------------------------------------------------------------------
 ## 2. How to use the user guide
 
-This guide explains how you can use TeachStack to manage weaker students. It will walk you through each feature and functionality of the app, ensuring you're equipped to make the most of Teachstack's capabilities.
+This guide explains how you can use TeachStack to manage weaker students. It will walk you through each feature and functionality of the app, ensuring you're equipped to make the most of TeachStack's capabilities.
 
 * To get started with TeachStack. [Quick start](#5-quick-start)
 * To understand the GUI. [Understanding our GUI](#61-understanding-our-gui)
@@ -82,7 +82,7 @@ The explanation of each command will be formatted in the following convention:
 --------------------------------------------------------------------------------------------------------------------
 ## 2. Target user/audience
 
-The growing population of computer science students worldwide presents a novel set of problems administratively for computer science instructors which TeachStack aims to address. Therefore, TeachStack is tailored for computer science instructors, not limited to those within NUS.
+Therefore, TeachStack is tailored for computer science instructors, not limited to those within NUS.
 
 ## 2.1 Assumptions
 1. We assume that users are passionate educators who wish to see their students succeed. This is important as TeachStack mainly allows instructors to track the performance of weaker students, so the application can only demonstrate its full potential in the hands of instructors who care.
@@ -285,13 +285,27 @@ Format: `random NUMBER_OF_GROUPS gp/GROUP_NAME`
 
 
 Examples:
-* `random 3 gp/Random Group` randomly distributes all weaker students into 3 groups: Random Group 1, Random Group 2, Random Group 3 .
+* `random 3 gp/Random Group` randomly distributes all weaker students into 3 groups: Random Group 1, Random Group 2, Random Group 3.
 
-### 7.8 Clearing all entries : `clear`
+### 7.8 Filtering students by groups: `find`
+Updates the list to display only students that are in the group(s) specified.
+
+Format: `find gp/GROUP_NAME [gp/GROUP_NAME]`
+
+* At least one `GROUP_NAME` must be specified. Otherwise, the command will fail.
+* If multiple `GROUP_NAME`s are specified, only students who are in all groups entered will be displayed.
+* `GROUP_NAME` cannot be empty, and must only contain alphanumeric characters and space.
+
+Examples:
+* `find gp/Group 1` will update the list to display all students assigned to Group 1.
+* `find gp/Group 1 gp/Group 2` will update the list to display all students assigned to both Group 1 and Group 2.
+
+### 7.9 Clearing all entries : `clear`
 
 Clears all entries from the list of students.
 
 Format: `clear`
+
 
 ### 7.9 Archiving Features
 #### 7.9.1 Archiving a student : `archive`
@@ -368,29 +382,29 @@ Clears all entries from the archived list.
 
 Format: `clear_archived`
 
-### 7.9 Exiting the program : `exit`
+### 7.10 Exiting the program : `exit`
+
 
 Exits the program.
 
 Format: `exit`
 
-### 7.10 Saving the data
+### 7.11 Saving the data
 
 TeachStack data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 7.11 Editing the data file
+### 7.12 Editing the data file
 
-TeachStack data is saved automatically as a JSON file `[JAR file location]/data/teachstack.json`. Advanced users are welcome to update data directly by editing that data file.
+TeachStack data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TeachStack will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the TeachStack to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+### 7.14 Setting weak threshold
 
-### 7.13 Setting weak threshold
-
-### 7.14 Viewing summary statistics
+### 7.15 Viewing summary statistics
 
 --------------------------------------------------------------------------------------------------------------------
 
