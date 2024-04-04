@@ -416,7 +416,11 @@ Format: `setweak [g/GRADE]`
 Example: 
 * `setweak B` displays a weak marker for all students with grade B or lower.
 
+Default Weakness Threshold
+
 ![](images/setWeakBefore.png)
+
+After command `setweak B`
 
 ![](images/setWeakAfter.png)
 
@@ -430,6 +434,7 @@ Format: `summary`
 * Popup contains statistics: Total Students, Average Grade, and Standard Deviation of Grades.
 * Popup contains pie chart of students' grades.
 
+Displayed after command: `summary`
 ![](images/summary.png)
 
 
@@ -458,5 +463,5 @@ Format: `summary`
 | **Edit**    | `edit id/STUDENT_ID [g/GRADE] `<br> e.g.,`edit A0123466C g/A+`                                                           |
 | **View**    | `view id/STUDENT_ID`<br> e.g., `view A0123466D`                                                                          |
 | **Group**   | `group id/STUDENT_ID_1 [id/STUDENT_ID_2] …` <br> e.g., `group A1234567R, A2345678R`                                      |
-| **Weak**    | `setweak g/GRADE` <br> e.g., `setweak g/B-`                                                                              |
+| **Weak**    | `setweak g/GRADE` <br> e.g., `setweak g/B`                                                                               |
 | **Summary** | e.g., `summary` <br>                                                                                                     |
