@@ -30,7 +30,7 @@ title: User Guide
     - [7.11 Saving data](#711-saving-the-data)
     - [7.12 Editing the data file](#712-editing-the-data-file)
     - [7.13 Archiving a student](#713-archiving-data-files-coming-in-v20)
-    - [7.14 Setting a weak threshold](#714-setting-weak-threshold-and-marker--setweak)
+    - [7.14 Setting a weak threshold](#714-setting-weak-threshold--setweak)
     - [7.15 Viewing summary statistics](#715-viewing-summary-statistics--summary)
 
       {:toc}
@@ -429,7 +429,7 @@ After command `setweak B`
 
 ![](images/setWeakAfter.png)
 
-### 7.15 Viewing summary statistics
+### 7.15 Viewing summary statistics : `summary`
 
 Displays a summary of all students.
 
