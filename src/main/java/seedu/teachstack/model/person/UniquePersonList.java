@@ -36,7 +36,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson) || containsByEmail(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
     /**
@@ -46,6 +46,15 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean containsByEmail(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(person -> person.isSameEmail(toCheck));
+    }
+
+    /**
+     * Checks if the list contains a person with the same id as the given argument.
+     * Returns true if found, false otherwise.
+     */
+    public boolean containsById(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(person -> person.isSameId(toCheck));
     }
 
     /**

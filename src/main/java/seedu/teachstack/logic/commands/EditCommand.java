@@ -75,7 +75,8 @@ public class EditCommand extends Command {
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if ((!personToEdit.isSameEmail(editedPerson) && model.hasEmail(editedPerson))
+                || !personToEdit.isSameId(editedPerson) && model.hasId(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 

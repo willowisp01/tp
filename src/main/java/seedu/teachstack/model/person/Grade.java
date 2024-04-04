@@ -43,6 +43,35 @@ public class Grade implements Comparable<Grade> {
         return test.matches(VALIDATION_REGEX);
     }
 
+    private int gradeToInt() {
+        switch (value) {
+        case ("A+"):
+            return 11;
+        case ("A"):
+            return 10;
+        case ("A-"):
+            return 9;
+        case ("B+"):
+            return 8;
+        case ("B"):
+            return 7;
+        case ("B-"):
+            return 6;
+        case ("C+"):
+            return 5;
+        case ("C"):
+            return 4;
+        case ("D+"):
+            return 3;
+        case ("D"):
+            return 2;
+        case ("F"):
+            return 1;
+        default:
+            return -1;
+        }
+    }
+
     @Override
     public String toString() {
         return value;
@@ -71,35 +100,6 @@ public class Grade implements Comparable<Grade> {
     @Override
     public int hashCode() {
         return value.hashCode();
-    }
-
-    private int gradeToInt() {
-        switch (value) {
-        case ("A+"):
-            return 11;
-        case ("A"):
-            return 10;
-        case ("A-"):
-            return 9;
-        case ("B+"):
-            return 8;
-        case ("B"):
-            return 7;
-        case ("B-"):
-            return 6;
-        case ("C+"):
-            return 5;
-        case ("C"):
-            return 4;
-        case ("D+"):
-            return 3;
-        case ("D"):
-            return 2;
-        case ("F"):
-            return 1;
-        default:
-            return -1;
-        }
     }
 
     /**
