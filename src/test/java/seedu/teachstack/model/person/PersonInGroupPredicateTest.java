@@ -40,6 +40,13 @@ public class PersonInGroupPredicateTest {
     }
 
     @Test
+    public void getGroups() {
+        Set<Group> firstGroupSet = getGroupSet("first");
+        PersonInGroupPredicate firstPredicate = new PersonInGroupPredicate(firstGroupSet);
+        assertTrue(firstPredicate.getGroups().equals(firstGroupSet));
+    }
+
+    @Test
     public void test_personInGroup_returnsTrue() {
         // One group
         PersonInGroupPredicate predicate = new PersonInGroupPredicate(getGroupSet("Group 1"));

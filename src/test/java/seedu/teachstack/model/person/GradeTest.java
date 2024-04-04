@@ -1,5 +1,6 @@
 package seedu.teachstack.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.teachstack.testutil.Assert.assertThrows;
@@ -55,4 +56,10 @@ public class GradeTest {
         assertFalse(grade.equals(new Grade("A-")));
     }
 
+    @Test
+    public void compareTo() {
+        Grade first = new Grade("A+");
+        Grade second = new Grade("B");
+        assertEquals(first.compareTo(second), 4);
+    }
 }
