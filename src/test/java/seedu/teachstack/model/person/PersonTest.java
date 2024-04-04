@@ -3,6 +3,7 @@ package seedu.teachstack.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
 import static seedu.teachstack.logic.commands.CommandTestUtil.VALID_GROUP_GROUP1;
@@ -34,13 +35,11 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same student id, all other attributes different -> returns true
+        // same student id and email, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB)
                 .withGrade(VALID_GRADE_BOB).withGroups(VALID_GROUP_GROUP1).build();
 
         assertTrue(ALICE.isSamePerson(editedAlice));
-
-        assertFalse(ALICE.isSamePerson(null));
 
         // different student id, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withStudentId(VALID_STUDENTID_AMY).build();
@@ -49,7 +48,40 @@ public class PersonTest {
 
     @Test
     public void isSameEmail() {
+        // same object -> returns true
+        assertTrue(ALICE.isSameEmail(ALICE));
+
+        // null -> returns false
         assertFalse(ALICE.isSameEmail(null));
+
+        // same email, all other attributes different -> returns true
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withStudentId(VALID_STUDENTID_BOB)
+                .withGrade(VALID_GRADE_BOB).withGroups(VALID_GROUP_GROUP1).build();
+
+        assertTrue(ALICE.isSameEmail(editedAlice));
+
+        // different email, all other attributes same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_AMY).build();
+        assertFalse(ALICE.isSameEmail(editedAlice));
+    }
+
+    @Test
+    public void isSameId() {
+        // same object -> returns true
+        assertTrue(ALICE.isSameId(ALICE));
+
+        // null -> returns false
+        assertFalse(ALICE.isSameId(null));
+
+        // same student id, all other attributes different -> returns true
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB)
+                .withGrade(VALID_GRADE_BOB).withGroups(VALID_GROUP_GROUP1).build();
+
+        assertTrue(ALICE.isSameId(editedAlice));
+
+        // different student id, all other attributes same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withStudentId(VALID_STUDENTID_AMY).build();
+        assertFalse(ALICE.isSameId(editedAlice));
     }
 
     @Test
