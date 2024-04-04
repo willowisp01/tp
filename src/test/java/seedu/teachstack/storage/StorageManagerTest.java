@@ -88,4 +88,21 @@ public class StorageManagerTest {
         assertNotNull(storageManager.getArchivedBookFilePath());
     }
 
+    @Test
+    public void userDataStorageReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonUserDataStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonUserDataStorageTest} class.
+         */
+        UserDataStorage original = new JsonUserDataStorage(storageManager.getUserDataFilePath());
+        storageManager.saveUserData();
+        JsonSerializableUserData retrieved = storageManager.readUserData().get();
+        assertEquals(original.readUserData().get(), retrieved);
+    }
+
+    @Test
+    public void userDataStorage() {
+        assertNotNull(storageManager.getUserDataFilePath());
+    }
 }

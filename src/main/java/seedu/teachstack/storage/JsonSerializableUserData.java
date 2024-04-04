@@ -53,4 +53,20 @@ public class JsonSerializableUserData {
     public static void setLastRequestedFind(Predicate<Person> predicate) {
         lastRequestedFind = predicate;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof JsonSerializableUserData)) {
+            return false;
+        }
+
+        JsonSerializableUserData otherData = (JsonSerializableUserData) other;
+        return this.gradeThreshold.equals(otherData.gradeThreshold)
+                && this.lastRequestedFind.equals(otherData.lastRequestedFind);
+    }
 }
