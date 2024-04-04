@@ -422,7 +422,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 This is a new command to designate students as being "weak" or not based on their grades.
 By default, we have set C+ as the threshold, meaning that a student with grade lower than C+ is
-displayed with a weak marker next to their name. 
+displayed with a weak marker next to their name.
 
 The command "set weak [grade]" followed by the grade allows the instructor to set a difference grade as the
 new threshold. This command resets students' weak markers immediately.
