@@ -16,6 +16,10 @@ public class PersonInGroupPredicate implements Predicate<Person> {
         this.groups = groups;
     }
 
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
     @Override
     public boolean test(Person person) {
         return groups.stream()

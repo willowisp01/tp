@@ -3,6 +3,7 @@ package seedu.teachstack.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.teachstack.commons.util.AppUtil.checkArgument;
 
+import seedu.teachstack.storage.JsonSerializableUserData;
 
 /**
  * Represents a Student's grade in the address book.
@@ -148,12 +149,18 @@ public class Grade implements Comparable<Grade> {
         }
     }
 
+    /**
+     * Modifies the grade threshold to the given grade.
+     *
+     * @param g The grade to be modified to.
+     */
     public static void modifyThreshold(Grade g) {
+        JsonSerializableUserData.setGradeThreshold(g);
         thresholdGrade = g;
     }
 
-    public String retrieveThreshold() {
-        return thresholdGrade.value;
+    public static Grade retrieveThreshold() {
+        return thresholdGrade;
     }
 
 }

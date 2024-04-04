@@ -20,15 +20,17 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private ArchivedBookStorage archivedBookStorage;
+    private UserDataStorage userDataStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, ArchivedBookStorage archivedBookStorage,
-                          UserPrefsStorage userPrefsStorage) {
+                          UserDataStorage userDataStorage, UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
         this.archivedBookStorage = archivedBookStorage;
+        this.userDataStorage = userDataStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -48,7 +50,6 @@ public class StorageManager implements Storage {
     public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
-
 
     // ================ AddressBook methods ==============================
 
@@ -106,5 +107,34 @@ public class StorageManager implements Storage {
     public void saveArchivedBook(ReadOnlyArchivedBook archivedBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         archivedBookStorage.saveArchivedBook(archivedBook, filePath);
+    }
+
+    // ================ UserData methods ==============================
+
+    @Override
+    public Path getUserDataFilePath() {
+        return userDataStorage.getUserDataFilePath();
+    }
+
+    @Override
+    public Optional<JsonSerializableUserData> readUserData() throws DataLoadingException {
+        return readUserData(userDataStorage.getUserDataFilePath());
+    }
+
+    @Override
+    public Optional<JsonSerializableUserData> readUserData(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return userDataStorage.readUserData(filePath);
+    }
+
+    @Override
+    public void saveUserData() throws IOException {
+        saveUserData(userDataStorage.getUserDataFilePath());
+    }
+
+    @Override
+    public void saveUserData(Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        userDataStorage.saveUserData(filePath);
     }
 }

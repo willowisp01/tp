@@ -34,8 +34,6 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-
-
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("studentId") String studentId,
             @JsonProperty("email") String email,
             @JsonProperty("grade") String grade, @JsonProperty("groups") List<JsonAdaptedGroup> groups) {
