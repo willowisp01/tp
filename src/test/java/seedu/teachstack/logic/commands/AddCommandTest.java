@@ -240,6 +240,16 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public boolean hasArchivedId(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasArchivedEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
