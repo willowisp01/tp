@@ -404,7 +404,29 @@ Furthermore, certain edits can cause the TeachStack to behave in unexpected ways
 
 ### 7.14 Setting weak threshold
 
+Sets the weakness threshold for a weak marker.
+
+Format: `setweak [g/GRADE]`
+
+* By default, weakness threshold is set at Grade: C+
+* Updates weakness threshold value
+* Students with grade lower or equal to threshold grade appear with a marker in the UI
+* `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
+
+Example: 
+* `setweak B` displays a weak marker for all students with grade B or lower.
+
 ### 7.15 Viewing summary statistics
+
+Displays a summary of all students.
+
+Format: `summary`
+
+* Entering command opens a popup.
+* Popup contains statistics: Total Students, Average Grade, and Standard Deviation of Grades.
+* Popup contains pie chart of students' grades.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
