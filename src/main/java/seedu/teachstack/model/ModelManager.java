@@ -15,6 +15,7 @@ import seedu.teachstack.commons.core.GuiSettings;
 import seedu.teachstack.commons.core.LogsCenter;
 import seedu.teachstack.model.person.Person;
 import seedu.teachstack.model.person.StudentId;
+import seedu.teachstack.model.person.exceptions.DuplicatePersonException;
 
 /**
  * Represents the in-memory model of the address book data.
