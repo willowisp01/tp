@@ -283,6 +283,12 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasArchivedPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
