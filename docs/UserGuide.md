@@ -124,8 +124,8 @@ and ensure optimal utilization of the application's capabilities.
    Some example commands you can try:
 
     * `list` : Lists all students.
-    * `add id/A01234567H n/John Doe e/e0123456@u.nus.edu` : Adds a student named `John Doe` to the list.
-    * `delete A0123456X` : Deletes the student with student id A0123456X from the list.
+    * `add id/A0123459H n/John Doe e/e0123456@u.nus.edu g/B` : Adds a student named `John Doe` to the list.
+    * `delete A0123459H` : Deletes the student with student id A0123459H from the list.
     * `clear` : Deletes all students.
     * `exit` : Exits the app.
 
@@ -212,11 +212,11 @@ Expected output:
 
 ### 7.3 Listing all students : `list`
 
-Shows a list of all students, ordered by grades.
+Shows a list of all students, ordered by grades in descending order ie. **[F, D, D+, C, C+, B-, B, B+, A- A, A+]**.
+
+Format: `list`
 
 * Displays student's email that is a clickable link to open the user's mailbox with a new email to the student's email address.
-
-Format: list
 
 
 ### 7.4 Editing a person : `edit`
@@ -254,7 +254,7 @@ Format: `view STUDENT_ID`
 Examples:
 * `view A0123459X` Shows the detailed information of the student with `STUDENT_ID = A0123456X`
 
-### 7.6 Deleting a person : `delete`
+### 7.6 Deleting a student : `delete`
 
 Deletes the specified student from the list.
 
@@ -296,12 +296,23 @@ Format: `random NUMBER_OF_GROUPS gp/GROUP_NAME`
 
 * Form groups `NUMBER_OF_GROUPS` with the specified `GROUP_NAME` followed by numbering.
 * The `NUMBER_OF_GROUPS` refers to the number of groups to distribute students into.
-* `NUMBER_OF_GROUPS` must be a positive integer that is greater than the number of students marked as weak.
+* `NUMBER_OF_GROUPS` must be a positive integer that is smaller than the number of students marked as weak.
 * `GROUP_NAME` cannot be empty, and must only contain alphanumeric characters and space.
 
 
 Examples:
 * `random 3 gp/Random Group` randomly distributes all weaker students into 3 groups: Random Group 1, Random Group 2, Random Group 3.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about groups formed:**<br>
+
+* Group formed cannot be deleted individually unless using the [`group` command](#771-forming-focus-groups-manually--group) to clear all groups <br>
+  eg. `group id/A0123459X` removes student with `STUDENT_ID = A0123459X` from all the groups the student was in.
+* Random groups formed will not be affected by the [`setweak` command](#714-setting-weak-threshold--setweak)<br>
+  ie. student in a randomly formed group will remain in the group after `setweak` command, even if the student falls above the new weak threshold
+
+</div>
 
 ### 7.8 Filtering students by groups : `find`
 Updates the list to display only students that are in the group(s) specified.
@@ -311,6 +322,8 @@ Format: `find gp/GROUP_NAME…`
 * At least one `GROUP_NAME` must be specified. Otherwise, the command will fail.
 * If multiple `GROUP_NAME`s are specified, only students who are in all groups entered will be displayed.
 * `GROUP_NAME` cannot be empty, and must only contain alphanumeric characters and space.
+* Only the `persons` list will be updated, `archived` list will not be updated.
+* Result displayed refers to the number of students found in the `persons` list.
 
 Examples:
 * `find gp/Group 1` will update the list to display all students assigned to Group 1.
@@ -474,14 +487,14 @@ Displayed after command: `summary`
 
 ## 11. Command summary
 
-| Action      | Format, Examples                                                                                                             |
-|-------------|------------------------------------------------------------------------------------------------------------------------------|
+| Action      | Format, Examples                                                                                                            |
+|-------------|-----------------------------------------------------------------------------------------------------------------------------|
 | **Add**     | `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP]...` <br> e.g., `add id/A01234567X n/James Ho e/e0123456@u.nus.edu g/B+` |
-| **Delete**  | `delete STUDENT_ID`<br> e.g., `delete A01234567X`                                                                            |
-| **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [gp/GROUP]...` <br> e.g.,`edit A0123466C g/A+`                   |
-| **View**    | `view STUDENT_ID`<br> e.g., `view A0123466D`                                                                                 |
-| **Group**   | `group gp/GROUP_NAME id/STUDENT_ID_1 [id/STUDENT_ID_2] ...` <br> e.g., `group gp/Group 1 id/A1234567R, id/A2345678R`         |
-| **Random Group** | `random NUMBER_OF_GROUPS gp/GROUP_NAME` <br> e.g., `random 3 gp/Random Group`                                                |
-| **Weak**    | `setweak g/GRADE` <br> e.g., `setweak g/B`                                                                                   |
-| **Summary** | e.g., `summary` <br>                                                                                                         |
+| **Delete**  | `delete STUDENT_ID`<br> e.g., `delete A0123456X`                                                                            |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [gp/GROUP]...` <br> e.g.,`edit A0123466C g/A+`                  |
+| **View**    | `view STUDENT_ID`<br> e.g., `view A0123466D`                                                                                |
+| **Group**   | `group gp/GROUP_NAME id/STUDENT_ID_1 [id/STUDENT_ID_2] ...` <br> e.g., `group gp/Group 1 id/A1234567R, id/A2345678R`        |
+| **Random Group** | `random NUMBER_OF_GROUPS gp/GROUP_NAME` <br> e.g., `random 3 gp/Random Group`                                               |
+| **Weak**    | `setweak g/GRADE` <br> e.g., `setweak g/B`                                                                                  |
+| **Summary** | e.g., `summary` <br>                                                                                                        |
 
