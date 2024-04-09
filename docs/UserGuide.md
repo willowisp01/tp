@@ -312,6 +312,7 @@ Examples:
 * Random groups formed will not be affected by the [`setweak` command](#714-setting-weak-threshold--setweak)<br>
   ie. student in a randomly formed group will remain in the group after `setweak` command, even if the student falls above the new weak threshold
 
+</div>
 
 ### 7.8 Filtering students by groups : `find`
 Updates the list to display only students that are in the group(s) specified.
