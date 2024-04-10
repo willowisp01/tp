@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 import javafx.collections.ObservableList;
 import seedu.teachstack.commons.core.GuiSettings;
@@ -48,6 +47,9 @@ public class LogicManager implements Logic {
         archivedBookParser = new ArchivedBookParser();
     }
 
+    /**
+     * Returns true if a given string is an ArchivedBookCommand.
+     */
     public static boolean isArchivedBookCommand(String command) {
         System.out.println(command);
         System.out.println(command.matches(ARCHIVED_BOOK_COMMAND_FORMAT));
