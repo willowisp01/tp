@@ -17,7 +17,7 @@ import seedu.teachstack.model.person.StudentId;
  */
 public class UnarchiveCommand extends Command {
 
-    public static final String COMMAND_WORD = "unarchived";
+    public static final String COMMAND_WORD = "unarchive";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unarchives the person identified by their student id.\n"

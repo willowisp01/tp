@@ -10,7 +10,7 @@ import seedu.teachstack.model.Model;
  */
 public class ClearArchiveCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear_archived";
+    public static final String COMMAND_WORD = "clear_archive";
     public static final String MESSAGE_SUCCESS = "Archived book has been cleared!";
     @Override
     public CommandResult execute(Model model) {

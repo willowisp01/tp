@@ -27,7 +27,7 @@ import seedu.teachstack.model.person.StudentId;
  */
 public class EditArchiveCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit_archived";
+    public static final String COMMAND_WORD = "edit_archive";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the student id. "
