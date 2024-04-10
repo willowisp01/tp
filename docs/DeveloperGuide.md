@@ -438,6 +438,14 @@ The State after set weak command
 ![SetWeakStateDiagram](images/SetWeak2.png)
 --------------------------------------------------------------------------------------------------------------------
 
+### Summary Statistics Feature
+
+This is a new command to view summary statistics of all students.
+Entering the command `summary` results in a popup opening within the gui. It consists of summary data including total
+number of students, mean grade, and standard deviation of grades. Additionally, a colored pie chart is display of the
+students' grade distribution.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
