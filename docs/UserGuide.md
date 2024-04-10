@@ -17,7 +17,7 @@ title: User Guide
     - [7.1 Viewing Help](#71-viewing-help--help)
     - [7.2 Adding a student](#72-adding-a-student--add)
     - [7.3 Listing all students](#73-listing-all-students--list)
-    - [7.4 Editing a student](#74-editing-a-person--edit)
+    - [7.4 Editing a student](#74-editing-a-student--edit)
     - [7.5 Viewing a student](#75-viewing-students-by-name--view)
     - [7.6 Deleting a student](#76-deleting-a-person--delete)
     - [7.7 Forming focus groups](#77-forming-focus-groups)
@@ -219,7 +219,7 @@ Format: `list`
 * Displays student's email that is a clickable link to open the user's mailbox with a new email to the student's email address.
 
 
-### 7.4 Editing a person : `edit`
+### 7.4 Editing a student : `edit`
 
 Edits an existing person in the list of students.
 
