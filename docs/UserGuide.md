@@ -87,7 +87,7 @@ The explanation of each command will be formatted in the following convention:
 --------------------------------------------------------------------------------------------------------------------
 ## 3. Target user/audience
 
-TeachStack is tailored for computer science instructors, not limited to those within NUS.
+TeachStack is tailored for computer science instructors, currently only for those in NUS.
 
 ## 3.1 Assumptions
 1. We assume that users are passionate educators who wish to see their students succeed. This is important as TeachStack mainly allows instructors to track the performance of weaker students, so the application can only demonstrate its full potential in the hands of instructors who care.
@@ -192,12 +192,12 @@ Format: `help`
 
 Adds student details to the person list.
 
-Format: `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP_NAME]​`
+Format: `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP_NAME]​...`
 
-* `NAME`, `STUDENT_ID`, `GRADE`, and `EMAIL` must have, `GROUP_NAME` is optional.
+* `NAME`, `STUDENT_ID`, `GRADE`, and `EMAIL` must be specified, `GROUP_NAME` is optional.
 * `NAME` is case-sensitive.
     * e.g. `John Doe is different from john doe`
-* `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
+* `STUDENT_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
     * e.g. `A0123459X`
 * `EMAIL` should be of the format **local-part@domain**. The local-part should only be in the **format of e/E follow by 7 digits from [0-9]**. The **domain name must end with a domain label u.nus.edu**.
     * e.g. `e0123456@u.nus.edu`
@@ -223,20 +223,20 @@ Format: `list`
 
 Edits an existing person in the list of students.
 
-Format: `edit [id/STUDENT_ID] [e/EMAIL] `
+Format: `edit STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...`
 
 * Edits the person with the specified `STUDENT_ID`.
 * The `STUDENT_ID` refers to the id corresponding to the student in the list.
 * The `STUDENT_ID` is case-sensitive, must be a String starting with ‘A’ and ending with any letter, with a total length of 9
-* The student with the specified `STUDENT_ID` must exists in the list.
+* The student with the specified `STUDENT_ID` must exist in the list.
 * Existing value will be updated to the input value.
 * `NAME` is case-sensitive, eg. john doe is different from John Doe
 * Email must have the correct domain (@u.nus.edu) and string length of 8 for the email username eg. e0000000@u.nus.edu
 * `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
 
 Examples:
-*  `edit A0123459X e/e0123450@u.nus.edu` Edits the email address of the person with student_id = A0123459X to be `e1234567@u.nus.edu`.
-*  `edit A0123459X n/John Doo` Edits the name of the person with student_id = A2233445X to be `Betsy Crower`.
+*  `edit A0123459X e/e0123450@u.nus.edu` Edits the email address of the person with student_id = A0123459X to be `e0123450@u.nus.edu`.
+*  `edit A0123459X n/John Doe` Edits the name of the person with student_id = A0123459X to be `John Doe`.
 
 Expected output:
 ![EditUI](images/EditUI.png)
@@ -491,7 +491,7 @@ Displayed after command: `summary`
 |------------------|------------------------------------------------------------------------------------------------------------------------------|
 | **Add**          | `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP]...` <br> e.g., `add id/A01234567X n/James Ho e/e0123456@u.nus.edu g/B+` |
 | **Delete**       | `delete STUDENT_ID`<br> e.g., `delete A0123456X`                                                                             |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [gp/GROUP]...` <br> e.g.,`edit A0123466C g/A+`                   |
+| **Edit**         | `edit STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...` <br> e.g.,`edit A0123466C g/A+`            |
 | **View**         | `view STUDENT_ID`<br> e.g., `view A0123466D`                                                                                 |
 | **Group**        | `group gp/GROUP_NAME id/STUDENT_ID_1 [id/STUDENT_ID_2] ...` <br> e.g., `group gp/Group 1 id/A1234567R, id/A2345678R`         |
 | **Random Group** | `random NUMBER_OF_GROUPS gp/GROUP_NAME` <br> e.g., `random 3 gp/Random Group`                                                |
