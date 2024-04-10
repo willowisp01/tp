@@ -491,7 +491,7 @@ Displayed after command: `summary`
 |------------------|------------------------------------------------------------------------------------------------------------------------------|
 | **Add**          | `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP]...` <br> e.g., `add id/A01234567X n/James Ho e/e0123456@u.nus.edu g/B+` |
 | **Delete**       | `delete STUDENT_ID`<br> e.g., `delete A0123456X`                                                                             |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [gp/GROUP]...` <br> e.g.,`edit A0123466C g/A+`                   |
+| **Edit**         | `edit STUDENT_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [gp/GROUP]...` <br> e.g.,`edit A0123466C g/A+`                   |
 | **View**         | `view STUDENT_ID`<br> e.g., `view A0123466D`                                                                                 |
 | **Group**        | `group gp/GROUP_NAME id/STUDENT_ID_1 [id/STUDENT_ID_2] ...` <br> e.g., `group gp/Group 1 id/A1234567R, id/A2345678R`         |
 | **Random Group** | `random NUMBER_OF_GROUPS gp/GROUP_NAME` <br> e.g., `random 3 gp/Random Group`                                                |
