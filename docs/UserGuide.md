@@ -252,7 +252,7 @@ Format: `view STUDENT_ID`
 * The `STUDENT_ID` starts with A, ends with a letter, and it must be 9 characters long.
 
 Examples:
-* `view A0123459X` Shows the detailed information of the student with `STUDENT_ID = A0123456X`
+* `view A0123459X` Shows the detailed information of the student with `STUDENT_ID = A0123459X`
 
 ### 7.6 Deleting a student : `delete`
 
