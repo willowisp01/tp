@@ -355,11 +355,11 @@ Example:
 Expected output:
 ![](images/ArchiveUI.png)
 
-#### 7.10.2 Editing an archived student : `edit_archive`
+#### 7.10.2 Editing an archived student : `edit_archived`
 
 Edits details of an archived student.
 
-Format: `edit_archive STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...`
+Format: `edit_archived STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...`
 
 * Edits the details of an archived student with the specified `STUDENT_ID`.
 * At least one of the optional fields indicated within the square bracket must be provided.
@@ -368,16 +368,16 @@ Format: `edit_archive STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [g
 * This feature is only applicable to the archived list.
 
 Examples:
-* `edit_archive A0123459X g/B e/e0237861@u.nus.edu` edits the grade of the student with student_id "A0123459X" to "B" and the email to "e0237861@u.nus.edu".
+* `edit_archived A0123459X g/B e/e0237861@u.nus.edu` edits the grade of the student with student_id "A0123459X" to "B" and the email to "e0237861@u.nus.edu".
 
 Expected output:
 ![](images/EditArchivedUI.png)
 
-#### 7.10.3 Deleting an archived student : `delete_archive`
+#### 7.10.3 Deleting an archived student : `delete_archived`
 
 Deletes an archived student from the archived list.
 
-Format: `delete_archive STUDENT_ID`
+Format: `delete_archived STUDENT_ID`
 
 * Deletes an archived student with the specified `STUDENT_ID`.
 * `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
@@ -386,16 +386,16 @@ Format: `delete_archive STUDENT_ID`
 * This feature is only applicable to the archived list.
 
 Example:
-* `delete_archive A0123459X` deletes the student with student_id "A0123459X" from the archived list.
+* `delete_archived A0123459X` deletes the student with student_id "A0123459X" from the archived list.
 
 Expected output:
 ![](images/DeleteArchivedUI.png)
 
-#### 7.10.4 Unarchiving a student : `unarchive`
+#### 7.10.4 Unarchiving a student : `unarchived`
 
 Unarchives a student from the archived list to the person list.
 
-Format: `unarchive STUDENT_ID`
+Format: `unarchived STUDENT_ID`
 
 * Unarchives a student with the specified `STUDENT_ID`.
 * `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
@@ -404,18 +404,18 @@ Format: `unarchive STUDENT_ID`
 * This feature is only applicable to the archived list.
 
 Examples:
-* `unarchive A0123459X` unarchives a student with the student_id "A0123459X".
+* `unarchived A0123459X` unarchives a student with the student_id "A0123459X".
 
 Expected output:
 ![](images/UnarchivedUI.png)
 
-#### 7.10.5 Clearing all entries : `clear_archive`
+#### 7.10.5 Clearing all entries : `clear_archived`
 
 Clears all entries from the archived list.
 
 * This feature is only applicable to the archived list.
 
-Format: `clear_archive`
+Format: `clear_archived`
 
 ### 7.11 Exiting the program : `exit`
 
@@ -493,22 +493,22 @@ Displayed after command: `summary`
 
 ## 11. Command summary
 
-| Action            | Format, Examples                                                                                                                  |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| **Add**           | `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP]...` <br> e.g., `add id/A0123459X n/James Doe e/e0123456@u.nus.edu g/A`       |
-| **Delete**        | `delete STUDENT_ID`<br> e.g., `delete A0123456X`                                                                                  |
-| **Edit**          | `edit STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...` <br> e.g.,`edit A0123466C g/A+`                 |
-| **View**          | `view STUDENT_ID`<br> e.g., `view A0123466D`                                                                                      |
-| **Group**         | `group gp/GROUP_NAME id/STUDENT_ID_1 [id/STUDENT_ID_2] ...` <br> e.g., `group gp/Group 1 id/A1234567R, id/A2345678R`              |
-| **Random Group**  | `random NUMBER_OF_GROUPS gp/GROUP_NAME` <br> e.g., `random 3 gp/Random Group`                                                     |
-| **Weak**          | `setweak g/GRADE` <br> e.g., `setweak g/B`                                                                                        |
-| **Summary**       | e.g., `summary` <br>                                                                                                              |
-| **Archive**       | `archive STUDENT_ID` <br> e.g., `archive A0123459X`                                                                               |
-| **Unarchive**     | `unarchive STUDENT_ID` <br> e.g., `unarchive A0123459X`                                                                           |
-| **EditArchive**   | `edit_archive STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...` <br> e.g., `edit_archive A0123459X g/B` |
-| **DeleteArchive** | `delete_archive STUDENT_ID` <br> e.g., `delete_archive A0123459X`                                                                 |
-| **ClearArchive**  | `clear_archive`                                                                                                                   |
-| **Help**          | `help`                                                                                                                            |
-| **Clear**         | `clear`                                                                                                                           |
-| **Exit**          | `exit`                                                                                                                            |
+| Action          | Format, Examples                                                                                                                    |
+|-----------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**         | `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP]...` <br> e.g., `add id/A0123459X n/James Doe e/e0123456@u.nus.edu g/A`         |
+| **Delete**      | `delete STUDENT_ID`<br> e.g., `delete A0123456X`                                                                                    |
+| **Edit**        | `edit STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...` <br> e.g.,`edit A0123466C g/A+`                   |
+| **View**        | `view STUDENT_ID`<br> e.g., `view A0123466D`                                                                                        |
+| **Group**       | `group gp/GROUP_NAME id/STUDENT_ID_1 [id/STUDENT_ID_2] ...` <br> e.g., `group gp/Group 1 id/A1234567R, id/A2345678R`                |
+| **Random Group** | `random NUMBER_OF_GROUPS gp/GROUP_NAME` <br> e.g., `random 3 gp/Random Group`                                                       |
+| **Weak**        | `setweak g/GRADE` <br> e.g., `setweak g/B`                                                                                          |
+| **Summary**     | e.g., `summary` <br>                                                                                                                |
+| **Archive**     | `archive STUDENT_ID` <br> e.g., `archive A0123459X`                                                                                 |
+| **Unarchive**   | `unarchived STUDENT_ID` <br> e.g., `unarchived A0123459X`                                                                           |
+| **EditArchive** | `edit_archived STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...` <br> e.g., `edit_archived A0123459X g/B` |
+| **DeleteArchive** | `delete_archived STUDENT_ID` <br> e.g., `delete_archived A0123459X`                                                                 |
+| **ClearArchive** | `clear_archived`                                                                                                                    |
+| **Help**        | `help`                                                                                                                              |
+| **Clear**       | `clear`                                                                                                                             |
+| **Exit**        | `exit`                                                                                                                              |
   
