@@ -29,6 +29,7 @@ public class LogicManager implements Logic {
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
 
+    public static final String ARCHIVED_BOOK_COMMAND_FORMAT = "[a-z]+_?archive.*";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -46,15 +47,23 @@ public class LogicManager implements Logic {
         archivedBookParser = new ArchivedBookParser();
     }
 
+    /**
+     * Returns true if a given string is an ArchivedBookCommand.
+     */
+    public static boolean isArchivedBookCommand(String command) {
+        System.out.println(command);
+        System.out.println(command.matches(ARCHIVED_BOOK_COMMAND_FORMAT));
+        return command.matches(ARCHIVED_BOOK_COMMAND_FORMAT);
+    }
+
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
-        boolean isArchivedBookCommand = commandText.contains("archived");
         CommandResult commandResult;
         Command command;
 
-        if (isArchivedBookCommand) {
+        if (isArchivedBookCommand(commandText)) {
             command = archivedBookParser.parseCommand(commandText);
         } else {
             command = addressBookParser.parseCommand(commandText);

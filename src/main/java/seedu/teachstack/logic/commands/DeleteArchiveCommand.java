@@ -14,7 +14,7 @@ import seedu.teachstack.model.person.StudentId;
  */
 public class DeleteArchiveCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete_archived";
+    public static final String COMMAND_WORD = "delete_archive";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by their student id.\n"
