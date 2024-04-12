@@ -57,17 +57,13 @@ public class SummaryCommand extends Command {
      * @param pieChartData
      */
     private void populate(ObservableList<Person> students, ObservableList<PieChart.Data> pieChartData) {
-        pieChartData.add(new PieChart.Data("A+", countStudentsWithGrade(students, "A+")));
-        pieChartData.add(new PieChart.Data("A", countStudentsWithGrade(students, "A")));
-        pieChartData.add(new PieChart.Data("A-", countStudentsWithGrade(students, "A-")));
-        pieChartData.add(new PieChart.Data("B+", countStudentsWithGrade(students, "B+")));
-        pieChartData.add(new PieChart.Data("B", countStudentsWithGrade(students, "B")));
-        pieChartData.add(new PieChart.Data("B-", countStudentsWithGrade(students, "B-")));
-        pieChartData.add(new PieChart.Data("C+", countStudentsWithGrade(students, "C+")));
-        pieChartData.add(new PieChart.Data("C", countStudentsWithGrade(students, "C")));
-        pieChartData.add(new PieChart.Data("D+", countStudentsWithGrade(students, "D+")));
-        pieChartData.add(new PieChart.Data("D", countStudentsWithGrade(students, "D")));
-        pieChartData.add(new PieChart.Data("F", countStudentsWithGrade(students, "F")));
+        String[] grades = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F"};
+        for (String grade : grades) {
+            int count = countStudentsWithGrade(students, grade);
+            if (count > 0) {
+                pieChartData.add(new PieChart.Data(grade, count));
+            }
+        }
     }
 
     /**
