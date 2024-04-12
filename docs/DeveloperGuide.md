@@ -558,6 +558,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: UC04 - Setting weakness threshold**
+
+**MSS**
+1. User requests to set weakness threshold.
+2. TeachStack updates the weakness threshold grade.
+3. TeachStack updates the display.
+
+    Use Case ends.
+
+ **Extensions**
+* 1a. User requests weakness threshold be updated to an invalid grade.
+  * 1a1. TeachStack displays an error message.
+ 
+    Use Case ends.
 
 ### Non-Functional Requirements
 
@@ -572,6 +586,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Details of Contact**: 
+  * Name: Name of the contact
+  * Student ID: Unique identifier of the contact
+  * Email: Unique email address of contact
+  * Grade: Letter grade of contact
+  * Group: Formation of multiple contacts
 
 --------------------------------------------------------------------------------------------------------------------
 
