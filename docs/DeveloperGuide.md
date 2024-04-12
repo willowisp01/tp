@@ -477,16 +477,19 @@ students' grade distribution.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                             | I want to …​                                       | So that I can…​                                    |
-|----------|-------------------------------------|----------------------------------------------------|----------------------------------------------------|
+| Priority | As a …​                             | I want to …​                                       | So that I can…​                              |
+|----------|-------------------------------------|----------------------------------------------------|----------------------------------------------|
 | `* * *`  | Course Instructor who can type fast | enter new students’ information using command line | store the information efficiently            |
-| `* * *`  | Course Instructor                   | put students into groups                           |  tell which group each of the students are in |
-| `* * *`  | Course Instructor                   | access student’s contact information               | communicate with them easily                       |
+| `* * *`  | Course Instructor                   | put students into groups                           | tell which group each of the students are in |
+| `* * *`  | Course Instructor                   | access student’s contact information               | communicate with them easily                 |
 | `* *`    | Course Instructor                   | delete student details on command line             | remove students no longer in class           |
-| `* * *`  | Seasoned Course Instructor          | view a single student’s details                    | identify students of note                       |
-| `* *`    | Course Instructor                   | edit students’ info                                | update their info if it changes                    |
+| `* * *`  | Seasoned Course Instructor          | view a single student’s details                    | identify students of note                    |
+| `* *`    | Course Instructor                   | edit students’ info                                | update their info if it changes              |
+| `* *`    | Course Instructor                   | view summary statistics for all students           |                                              |
+| `* *`    | Course Instructor                   | put a weak marker on students                      | identify which students have low grades      |
+| `* *`    | Course Instructor                   | change the weak marker threshold                   | customize the weakness criteria              |
 
-*{More to be added -- this is the minimum viable product for v1.2}*
+*{More to be added -- this is the product for v1.4}*
 
 
 ### Use cases
