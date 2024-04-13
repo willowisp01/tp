@@ -22,6 +22,9 @@ class grade2 as "<u>grade2:Grade</u>"{
 class grade3 as "<u>grade3:Grade</u>"{
     value = "C+"
 }
+class grade4 as "<u>grade4:Grade</u>"{
+    value = "B"
+}
 class Grade as "<u>threshold:Grade</u>"{
     value = "C+"
 }
@@ -34,6 +37,7 @@ class group2 as "<u>:Group</u>"{
 class group3 as "<u>:Group</u>"{
     group = "Random Group 2"
 }
+
 
 student1 -[hidden]right-> student2
 student2 -[hidden]right-> student3
