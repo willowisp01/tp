@@ -420,30 +420,45 @@ _{Explain here how the data archiving feature will be implemented}_
 --------------------------------------------------------------------------------------------------------------------
 ### Set Weakness Threshold Feature
 
-This is a new command to designate students as being "weak" or not based on their grades.
-By default, we have set C+ as the threshold, meaning that a student with grade lower than C+ is
-displayed with a weak marker next to their name.
+This is a new command to designate students as being "weak" or not based on their grades. `thresholdGrade` is a value 
+within `Grade`. 
+By default, we have set C+ as the `thresholdGrade`, meaning that a student with grade lower than or equal to C+ is
+displayed with a weak marker next to their name (as shown below).
 
-The command "set weak [grade]" followed by the grade allows the instructor to set a difference grade as the
-new threshold. This command resets students' weak markers immediately.
+<img src="images/weak_label.png" alt="Weak Label" width="200">
 
 
-The following activity diagram:
-![SetWeakSequenceDiagram](images/SetWeakActivityDiagram.png)
+The command `set weak g/GRADE` followed by the grade parameter allows the instructor to set a different grade as the
+new `thresholdGrade`. This command resets students' weak markers and updates the display immediately.
 
-The State prior to set weak command
-![SetWeakStateDisgram](images/SetWeak1.png)
 
-The State after set weak command
-![SetWeakStateDiagram](images/SetWeak2.png)
+The below sequence diagram displays the interactions while executing the command: `setweak g/B`
+
+![SetWeakSequenceDiagram](images/SetWeakSequenceDiagram.png)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Summary Statistics Feature
 
 This is a new command to view summary statistics of all students.
-Entering the command `summary` results in a popup opening within the gui. It consists of summary data including total
-number of students, mean grade, and standard deviation of grades. Additionally, a colored pie chart is display of the
+Entering the command `summary` results in a popup window in the gui. The popup window consists of summary data including total
+number of students, mean grade, and standard deviation of grades. Additionally, a colored pie chart is displayed of the
 students' grade distribution.
+
+Implementation:
+The `summary` command is implemented as such: 
+
+- `LogicManager`'s execute method calls the `parseCommand` method from `AddressBookParser`
+- `parseCommand` creates a `SummaryCommand`
+- `SummaryCommand`'s execute method is called by `LogicManager`.
+- `SummaryCommand` computes the total number of students, mean grade, and standard deviation of grade. It also generates 
+a pie chart of grades.
+- `SummaryCommand` creates and passes a `CommandResult` object to `LogicManager`
+- `LogicManager` passes `CommandResult` to `UI` to display `Person` list with the summary. 
+
+Currently, if the `summary` command is used with 0 students, the popup window shows total number of students, mean grade, 
+and standard deviation as 0. And no pie chart is displayed. 
 
 --------------------------------------------------------------------------------------------------------------------
 
