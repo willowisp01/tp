@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+hide methods
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title random 2 gp/Random Group
+
+class uniquePersonList as "<u>uniquePersonList:UniquePersonList</u>"
+class student1 as "<u>student1:Person</u>"
+class student2 as "<u>student2:Person</u>"
+class student3 as "<u>student3:Person</u>"
+class grade1  as "<u>grade1:Grade</u>" {
+    value = "C"
+}
+class grade2 as "<u>grade2:Grade</u>"{
+    value = "D"
+}
+class grade3 as "<u>grade3:Grade</u>"{
+    value = "C+"
+}
+class Grade as "<u>threshold:Grade</u>"{
+    value = "C+"
+}
+class group1 as "<u>:Group</u>"{
+    group = "Random Group 1"
+}
+class group2 as "<u>:Group</u>"{
+    group = "Random Group 1"
+}
+class group3 as "<u>:Group</u>"{
+    group = "Random Group 2"
+}
+
+student1 -[hidden]right-> student2
+student2 -[hidden]right-> student3
+
+uniquePersonList -down-> student1
+uniquePersonList -down-> student2
+uniquePersonList -down-> student3
+uniquePersonList -down-> student4
+
+student1 *-down-> grade1
+student2 *-down-> grade2
+student3 *-down-> grade3
+student4 *-down-> grade4
+
+student1 *-down-> group1
+student2 *-down-> group3
+student3 *-down-> group2
+
+@enduml

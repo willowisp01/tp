@@ -71,6 +71,9 @@ deactivate CommandResult
 DeleteCommand --> LogicManager : r
 deactivate DeleteCommand
 
+DeleteCommand -[hidden]-> AddressBookParser
+destroy DeleteCommand
+
 [<--LogicManager
 deactivate LogicManager
 @enduml
