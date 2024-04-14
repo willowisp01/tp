@@ -2,6 +2,16 @@
 layout: page
 title: User Guide
 ---
+# TeachStack
+
+Welcome to TeachStack, where our mission is to ensure every computer science student receives the support they need to
+succeed. Designed specifically for Command Line Interface (CLI) users like you, TeachStack is an intuitive and
+customizable application that empowers instructors to actively manage their students through group-building features
+as well as strength categorization. 
+
+Join us on this journey of educational excellence with TeachStack. Together, let's empower students and elevate the standard of computer science education.
+
+Happy teaching!
 
 ## Table of contents
 - [Table of Contents](#table-of-contents)
@@ -41,7 +51,7 @@ title: User Guide
 - [10. Known Issues](#10-known-issues)
 - [11. Command Summary](#11-command-summary)
 
-      {:toc}
+      
 
 --------------------------------------------------------------------------------------------------------------------
 
