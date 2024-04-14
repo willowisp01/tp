@@ -1,0 +1,100 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam SequenceGroupBodyBackgroundColor transparent
+
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":RandomCommandParser" as RandomCommandParser LOGIC_COLOR
+participant "rand:RandomCommand" as RandomCommand LOGIC_COLOR
+participant "command:GroupCommand" as GroupCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("random 2 gp/Random Group")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("random 2 gp/Random Group")
+activate AddressBookParser
+
+create RandomCommandParser
+AddressBookParser -> RandomCommandParser
+activate RandomCommandParser
+
+RandomCommandParser --> AddressBookParser
+deactivate RandomCommandParser
+
+AddressBookParser -> RandomCommandParser : parse("2 gp/Random Group")
+activate RandomCommandParser
+
+create RandomCommand
+RandomCommandParser -> RandomCommand
+activate RandomCommand
+
+RandomCommand --> RandomCommandParser :
+deactivate RandomCommand
+
+RandomCommandParser --> AddressBookParser : rand
+deactivate RandomCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RandomCommandParser -[hidden]-> AddressBookParser
+destroy RandomCommandParser
+
+AddressBookParser --> LogicManager : rand
+deactivate AddressBookParser
+
+LogicManager -> RandomCommand : execute(m)
+activate RandomCommand
+
+RandomCommand -> Model : getWeak()
+activate Model
+
+Model --> RandomCommand : weak
+deactivate Model
+
+RandomCommand -> RandomCommand : addToGroup(m, weak, 2, 1)
+activate RandomCommand
+
+loop 2 times
+    create GroupCommand
+    RandomCommand -> GroupCommand
+    activate GroupCommand
+
+    GroupCommand --> RandomCommand :
+    deactivate GroupCommand
+
+    RandomCommand -> GroupCommand : execute(m)
+    activate GroupCommand
+
+    GroupCommand --> RandomCommand :
+    deactivate GroupCommand
+
+    RandomCommand -[hidden]-> GroupCommand
+    destroy GroupCommand
+end
+
+RandomCommand --> RandomCommand :
+deactivate RandomCommand
+
+create CommandResult
+RandomCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> RandomCommand
+deactivate CommandResult
+
+RandomCommand --> LogicManager : r
+deactivate RandomCommand
+
+RandomCommand -[hidden]-> AddressBookParser
+destroy RandomCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

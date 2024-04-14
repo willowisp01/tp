@@ -41,7 +41,7 @@ title: User Guide
 - [10. Known Issues](#10-known-issues)
 - [11. Command Summary](#11-command-summary)
 
-      {:toc}
+      
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -251,9 +251,10 @@ Format: `view STUDENT_ID`
 * Returns the detailed information of the student with the corresponding `STUDENT_ID`.
 * The `STUDENT_ID` is case-sensitive.
 * The `STUDENT_ID` starts with A, ends with a letter, and it must be 9 characters long.
+* This feature is not applicable to the archived list, i.e. you can only view current students.
 
 Examples:
-* `view A0123459X` Shows the detailed information of the student with `STUDENT_ID = A0123456X`
+* `view A0123459X` Shows the detailed information of the student with `STUDENT_ID = A0123459X`
 
 ### 7.6 Deleting a student : `delete`
 
