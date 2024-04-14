@@ -34,7 +34,7 @@ activate SetWeakThresholdCommandParser
 SetWeakThresholdCommandParser -> ParseUtil : parseGrade("g/B")
 activate ParseUtil
 
-ParseUtil -> SetWeakThresholdCommandParser
+ParseUtil --> SetWeakThresholdCommandParser
 deactivate ParseUtil
 
 create SetWeakThresholdCommand
