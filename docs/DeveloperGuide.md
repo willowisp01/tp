@@ -724,3 +724,13 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+---------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Team Size: 5
+
+- 1. Ensure that the archive bar as well as the summary statistics component follow the ui theme ie dark background in dark theme.
+- 2. Provide ability to view achived students.
+- 3. Expand the characters accepted for name to include 's/o' ,'-' etc.
