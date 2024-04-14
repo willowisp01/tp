@@ -168,7 +168,8 @@ and ensure optimal utilization of the application's capabilities.
 * Ellipsis after a parameter indicates that the command can take in multiple values for the parameter.<br>
   e.g. `id/STUDENT_ID…` can be used as `id/A0123434A id/A0232356C` or as `id/A0123434A`.
 
-* Parameters must be in specified order.<br>
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -241,7 +242,7 @@ Examples:
 Expected output:
 ![EditUI](images/EditUI.png)
 
-### 7.5 Viewing students by name : `view`
+### 7.5 Viewing students : `view`
 
 Shows the detailed information of the student with the specified student_id.
 
@@ -364,6 +365,7 @@ Format: `edit_archived STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [
 * At least one of the optional fields indicated within the square bracket must be provided.
 * The `...` after the `GROUP_NAME` indicates that multiple `GROUP_NAME` can be provided for editing.
 * The student with the specified `STUDENT_ID` must exists in the archived list.
+* This feature is only applicable to the archived list.
 
 Examples:
 * `edit_archived A0123459X g/B e/e0237861@u.nus.edu` edits the grade of the student with student_id "A0123459X" to "B" and the email to "e0237861@u.nus.edu".
@@ -381,6 +383,7 @@ Format: `delete_archived STUDENT_ID`
 * `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
     * e.g. `A0123459X`
 * The student with the specified `STUDENT_ID` must exists in the archived list.
+* This feature is only applicable to the archived list.
 
 Example:
 * `delete_archived A0123459X` deletes the student with student_id "A0123459X" from the archived list.
@@ -398,6 +401,7 @@ Format: `unarchived STUDENT_ID`
 * `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
     * e.g. `A0123459X`
 * The student with the specified `STUDENT_ID` must exists in the archived list.
+* This feature is only applicable to the archived list.
 
 Examples:
 * `unarchived A0123459X` unarchives a student with the student_id "A0123459X".
@@ -408,6 +412,8 @@ Expected output:
 #### 7.10.5 Clearing all entries : `clear_archived`
 
 Clears all entries from the archived list.
+
+* This feature is only applicable to the archived list.
 
 Format: `clear_archived`
 
@@ -487,14 +493,22 @@ Displayed after command: `summary`
 
 ## 11. Command summary
 
-| Action           | Format, Examples                                                                                                             |
-|------------------|------------------------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP]...` <br> e.g., `add id/A01234567X n/James Ho e/e0123456@u.nus.edu g/B+` |
-| **Delete**       | `delete STUDENT_ID`<br> e.g., `delete A0123456X`                                                                             |
-| **Edit**         | `edit STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...` <br> e.g.,`edit A0123466C g/A+`            |
-| **View**         | `view STUDENT_ID`<br> e.g., `view A0123466D`                                                                                 |
-| **Group**        | `group gp/GROUP_NAME id/STUDENT_ID_1 [id/STUDENT_ID_2] ...` <br> e.g., `group gp/Group 1 id/A1234567R, id/A2345678R`         |
-| **Random Group** | `random NUMBER_OF_GROUPS gp/GROUP_NAME` <br> e.g., `random 3 gp/Random Group`                                                |
-| **Weak**         | `setweak g/GRADE` <br> e.g., `setweak g/B`                                                                                   |
-| **Summary**      | e.g., `summary` <br>                                                                                                         |
-
+| Action          | Format, Examples                                                                                                                    |
+|-----------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**         | `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP]...` <br> e.g., `add id/A0123459X n/James Doe e/e0123456@u.nus.edu g/A`         |
+| **Delete**      | `delete STUDENT_ID`<br> e.g., `delete A0123456X`                                                                                    |
+| **Edit**        | `edit STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...` <br> e.g.,`edit A0123466C g/A+`                   |
+| **View**        | `view STUDENT_ID`<br> e.g., `view A0123466D`                                                                                        |
+| **Group**       | `group gp/GROUP_NAME id/STUDENT_ID_1 [id/STUDENT_ID_2] ...` <br> e.g., `group gp/Group 1 id/A1234567R, id/A2345678R`                |
+| **Random Group** | `random NUMBER_OF_GROUPS gp/GROUP_NAME` <br> e.g., `random 3 gp/Random Group`                                                       |
+| **Weak**        | `setweak g/GRADE` <br> e.g., `setweak g/B`                                                                                          |
+| **Summary**     | e.g., `summary` <br>                                                                                                                |
+| **Archive**     | `archive STUDENT_ID` <br> e.g., `archive A0123459X`                                                                                 |
+| **Unarchive**   | `unarchived STUDENT_ID` <br> e.g., `unarchived A0123459X`                                                                           |
+| **EditArchive** | `edit_archived STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...` <br> e.g., `edit_archived A0123459X g/B` |
+| **DeleteArchive** | `delete_archived STUDENT_ID` <br> e.g., `delete_archived A0123459X`                                                                 |
+| **ClearArchive** | `clear_archived`                                                                                                                    |
+| **Help**        | `help`                                                                                                                              |
+| **Clear**       | `clear`                                                                                                                             |
+| **Exit**        | `exit`                                                                                                                              |
+  
