@@ -475,7 +475,17 @@ Displayed after command: `summary`
 --------------------------------------------------------------------------------------------------------------------
 ## 8. Glossary
 
-**Coming soon!**
+* **GUI**: Graphical User Interface. An interface that uses visual representations, such as icons, buttons and windows where users can use to interact with the system.
+* **CLI**: Command Line Interface. A text-based interface that allows users to interact with the application by typing commands. Command is parsed to the system when users hit `Enter`.
+* **JAR**: Java Archive. Package file format used to aggregate the Java class files and associated metadata and resources required to run `TeachStack` into one file to distribute the application.
+* **Student**: Student studying at NUS and instructed by the user.
+* **Student ID**: Unique matriculation number of an NUS student. `TeachStack` only accepts a student id that starts with '**A**', followed by 7 consecutive digits and ends with a capital letter '**[A-Z]**'.
+* **Email**: An electronic mail address. `TeachSTack` only accepts NUS email addresses in the format '**eXXXXXXX@u.nus.edu**' where '**X**' can be any digit.
+* **Grade**: A letter that shows how good a student's performance is. `TeachStack` only accepts grades that exist in the NUS grading system (**[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**).
+* **Name**: Name of a student. `TeachStack` only accepts name consisting of alphabets, numbers and space.
+* **Focus group**: Group of students such that the user can pay more attention to assist the students in the group. Indicated by a `Group label` on the GUI
+* **Student details**: The student's name, id, email address, grade, and focus group that the student belongs in if any. 
+* **Grade threshold**: A threshold used by the system to determine if a student is considered as `weak` based on grades. If the student's grade falls below or is at the threshold, the student is considered as weak. It is set to **C+** by default and user can update using the `setweak` command to set expected performance.
 
 --------------------------------------------------------------------------------------------------------------------
 
