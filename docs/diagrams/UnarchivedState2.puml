@@ -24,5 +24,4 @@ uniquePersonList -down-> student1
 uniquePersonList -down-> student2
 student1 *-down-> studentId1
 student2 *-down-> studentId2
-
 @enduml
