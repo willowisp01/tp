@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+hide methods
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title initial state
+
+class uniquePersonList as "<u>uniquePersonList:UniquePersonList</u>"
+class student1 as "<u>student1:Person</u>"
+class student2 as "<u>student2:Person</u>"
+class student3 as "<u>student3:Person</u>"
+class student4 as "<u>student4:Person</u>"
+class grade1  as "<u>grade1:Grade</u>" {
+    value = "C"
+}
+class grade2 as "<u>grade2:Grade</u>"{
+    value = "D"
+}
+class grade3 as "<u>grade3:Grade</u>"{
+    value = "C+"
+}
+class grade4 as "<u>grade4:Grade</u>"{
+    value = "B"
+}
+class Grade as "<u>threshold:Grade</u>"{
+    value = "C+"
+}
+
+student1 -[hidden]right-> student2
+student2 -[hidden]right-> student3
+
+uniquePersonList -down-> student1
+uniquePersonList -down-> student2
+uniquePersonList -down-> student3
+uniquePersonList -down-> student4
+
+student1 *-down-> grade1
+student2 *-down-> grade2
+student3 *-down-> grade3
+student4 *-down-> grade4
+
+@enduml

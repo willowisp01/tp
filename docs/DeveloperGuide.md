@@ -270,6 +270,10 @@ The following sequence diagram shows how a delete operation goes through the `Lo
 
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
 The following activity diagram summarizes what happens when a user executes a delete command:
 
 ![DeleteActivityDiagram](images/DeleteActivityDiagram.png)
@@ -328,6 +332,66 @@ Here is the sequence diagram which shows the overall flow:
 * **Alternative 2:** Filter by `StudentId`
     * Pros: Any student can be found as long as their `StudentId` is known.
     * Cons: It is not practical for users to remember the `StudentId` of each student.
+
+### Random feature
+
+#### Implementation
+
+The random feature is an extension of the group feature. It creates a `GroupCommand` object to form groups, by passing a random set of `studentIds` and `group` of size 1 to the constructor. 
+
+When `RandomCommand#execute(model)` is called, it will filter `UniquePersonList` in `Model` to get a `List<Person>` of students where each student matches the predicate `person.isWeak()`. The randomness is achieved using `Collections#shuffle(List<Person>)`, to randomly reorder the `List<Person>`. Note that the result is approximately random where probability of getting each permutation of the list is approximately equal.
+
+Given below is an example usage scenario and how the random grouping mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `Grade#thresholdGrade.value` is set to `C+`. There are some students in the `UniquePersonList`.
+
+![RandomState1](images/RandomState1.png)
+
+Step 2. The user executes `random 2 gp/Random Group` to put all students having `Grade#value` below or equals to `C+` into 2 groups namely `Random Group 1` and `Random Group 2`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If `ModelManager#getWeak()` returns `List<Person>` of size less than or equals to the positive integer given in command, the `RandomCommand#execute(model)` will throw a `CommandException`.
+
+</div>
+
+![RandomState2](images/RandomState2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The `Group` objects created will always be the same when the same command is given and the `UniquePersonList` is the same Step 1. However, the association between `Person` and `Grade` objects may be different each time due to the randomness. 
+</div>
+
+The following sequence diagram shows how a random command goes through the `Logic` component:
+
+![RandomSequenceDiagram](images/RandomSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RandomCommandParser` and `RandomCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes a random command:
+
+![RandomActivityDiagram](images/RandomActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Allow forming groups if number of weak students is equals to the group number specified:**
+
+* **Alternative 1 (current choice):** Random command will not form any group.
+    * Pros: Command will not result in groups containing only one student since it will not actually group any student and is not very helpful.
+    * Cons: May restrict the use case where user wants to have focus session with weak students individually.
+
+* **Alternative 2:** Random command will form groups.
+    * Pros: Allow forming of groups with only one student, less likely to trigger an error message.
+    * Cons: May reduce usability as user may not get an actual group of multiple students as expected.
+
+**Aspect: Clear `Group` formed using the `RandomCommand` when `thresholdGrade` is updated and `Grade` of the `Person` is no longer below or at the threshold :**
+
+* **Alternative 1 (current choice):** Random groups formed will not be affected by any change in threshold.
+    * Pros: Easy to implement. Random groups formed may still be active and needed for record.
+    * Cons: User has to rerun the `random` command to form groups for the updated weak students.
+
+* **Alternative 2:** Remove `Person` from random groups formed if `Grade` of the `Person` is no longer below or at the threshold.
+    * Pros: User can use the same groupings for weak students who still require more focus on.
+    * Cons: More complicated to implement and record of previous random groupings a `Person` belongs to will be gone. 
+
 
 ### \[Proposed\] Undo/redo feature
 
