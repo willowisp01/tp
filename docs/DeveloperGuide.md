@@ -339,7 +339,7 @@ Here is the sequence diagram which shows the overall flow:
 
 #### Implementation
 
-The random feature is an extension of the group feature. It creates a `GroupCommand` object to form groups, by passing a random set of `studentIds` and `group` of size 1 to the constructor. 
+The random feature is an extension of the group feature. It creates a `GroupCommand` object to form groups, by passing a random set of `studentIds` and `group` of size 1 to the constructor.
 
 When `RandomCommand#execute(model)` is called, it will filter `UniquePersonList` in `Model` to get a `List<Person>` of students where each student matches the predicate `person.isWeak()`. The randomness is achieved using `Collections#shuffle(List<Person>)`, to randomly reorder the `List<Person>`. Note that the result is approximately random where probability of getting each permutation of the list is approximately equal.
 
@@ -357,7 +357,7 @@ Step 2. The user executes `random 2 gp/Random Group` to put all students having 
 
 ![RandomState2](images/RandomState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The `Group` objects created will always be the same when the same command is given and the `UniquePersonList` is the same Step 1. However, the association between `Person` and `Grade` objects may be different each time due to the randomness. 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The `Group` objects created will always be the same when the same command is given and the `UniquePersonList` is the same Step 1. However, the association between `Person` and `Grade` objects may be different each time due to the randomness.
 </div>
 
 The following sequence diagram shows how a random command goes through the `Logic` component:
@@ -392,9 +392,9 @@ The following activity diagram summarizes what happens when a user executes a ra
 
 * **Alternative 2:** Remove `Person` from random groups formed if `Grade` of the `Person` is no longer below or at the threshold.
     * Pros: User can use the same groupings for weak students who still require more focus on.
-    * Cons: More complicated to implement and record of previous random groupings a `Person` belongs to will be gone. 
+    * Cons: More complicated to implement and record of previous random groupings a `Person` belongs to will be gone.
 
-### Archive feature    
+### Archive feature
 
 #### Implementation
 
@@ -598,8 +598,8 @@ _{more aspects and alternatives to be added}_
 --------------------------------------------------------------------------------------------------------------------
 ### Set Weakness Threshold Feature
 
-This is a new command to designate students as being "weak" or not based on their grades. `thresholdGrade` is a value 
-within `Grade`. 
+This is a new command to designate students as being "weak" or not based on their grades. `thresholdGrade` is a value
+within `Grade`.
 By default, we have set C+ as the `thresholdGrade`, meaning that a student with grade lower than or equal to C+ is
 displayed with a weak marker next to their name (as shown below).
 
@@ -625,18 +625,18 @@ number of students, mean grade, and standard deviation of grades. Additionally, 
 students' grade distribution.
 
 Implementation:
-The `summary` command is implemented as such: 
+The `summary` command is implemented as such:
 
 - `LogicManager`'s execute method calls the `parseCommand` method from `AddressBookParser`
 - `parseCommand` creates a `SummaryCommand`
 - `SummaryCommand`'s execute method is called by `LogicManager`.
-- `SummaryCommand` computes the total number of students, mean grade, and standard deviation of grade. It also generates 
+- `SummaryCommand` computes the total number of students, mean grade, and standard deviation of grade. It also generates
 a pie chart of grades.
 - `SummaryCommand` creates and passes a `CommandResult` object to `LogicManager`
-- `LogicManager` passes `CommandResult` to `UI` to display `Person` list with the summary. 
+- `LogicManager` passes `CommandResult` to `UI` to display `Person` list with the summary.
 
-Currently, if the `summary` command is used with 0 students, the popup window shows total number of students, mean grade, 
-and standard deviation as 0. And no pie chart is displayed. 
+Currently, if the `summary` command is used with 0 students, the popup window shows total number of students, mean grade,
+and standard deviation as 0. And no pie chart is displayed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -763,7 +763,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
  **Extensions**
 * 1a. User requests weakness threshold be updated to an invalid grade.
   * 1a1. TeachStack displays an error message.
- 
+
     Use Case ends.
 
 ### Non-Functional Requirements
@@ -779,7 +779,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Details of Contact**: 
+* **Details of Contact**:
   * Name: Name of the contact
   * Student ID: Unique identifier of the contact
   * Email: Unique email address of contact
