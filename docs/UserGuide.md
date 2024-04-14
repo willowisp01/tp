@@ -488,6 +488,7 @@ Displayed after command: `summary`
 * **Focus group**: Group of students such that the user can pay more attention to assist the students in the group. Indicated by a `Group label` on the GUI
 * **Student details**: The student's name, id, email address, grade, and focus group that the student belongs in if any. 
 * **Grade threshold**: A threshold used by the system to determine if a student is considered as `weak` based on grades. If the student's grade falls below or is at the threshold, the student is considered as weak. It is set to **C+** by default and user can update using the `setweak` command to set expected performance.
+* **Summary statistics**: Statistics of all active students (not in archived list), including the total number of students, mean grade, standard deviation of grade and a pie chart showing grade distribution. 
 
 --------------------------------------------------------------------------------------------------------------------
 
