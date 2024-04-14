@@ -9,28 +9,16 @@ skinparam ClassBackgroundColor #FFFFAA
 
 title initial state
 
-class uniquePersonList as "<u>uniquePersonList:UniquePersonList</u>"
+class uniquePersonList as "<u>uniqueArchivedPersonList:UniquePersonList</u>"
 class student1 as "<u>student1:Person</u>" {}
-class studentName1 as "<u>studentName1:Name</u>" {
-    name = "Alice"
-}
 class studentId1 as "<u>studentId1:StudentId</u>" {
-    studentId = "A0234567X"
-}
-class studentEmail1 as "<u>studentEmail1:Email</u>" {
-    email = "e0234567@u.nus.edu"
+    studentId = "A0123456X"
 }
 class studentGrade1 as "<u>studentGrade1:Grade</u>" {
     grade = "A"
 }
-class studentGroup1 as "<u>studentGroup1:Group</u>" {
-    group = "Group 1"
-}
 
 uniquePersonList -down-> student1
-student1 *-down-> studentName1
 student1 *-down-> studentId1
-student1 *-down-> studentEmail1
 student1 *-down-> studentGrade1
-student1 *-down-> studentGroup1
 @enduml

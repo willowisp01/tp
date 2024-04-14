@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ArchivedBookParser" as ArchivedBookParser LOGIC_COLOR
+participant ":DeleteArchiveCommandParser" as DeleteArchiveCommandParser LOGIC_COLOR
+participant "d:DeleteArchiveCommand" as DeleteArchiveCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete_archived A0123456X")
+activate LogicManager
+
+LogicManager -> ArchivedBookParser : parseCommand("delete_archived A0123456X")
+activate ArchivedBookParser
+
+create DeleteArchiveCommandParser
+ArchivedBookParser -> DeleteArchiveCommandParser
+activate DeleteArchiveCommandParser
+
+DeleteArchiveCommandParser --> ArchivedBookParser
+deactivate DeleteArchiveCommandParser
+
+ArchivedBookParser -> DeleteArchiveCommandParser : parse("A0123456X")
+activate DeleteArchiveCommandParser
+
+create DeleteArchiveCommand
+DeleteArchiveCommandParser -> DeleteArchiveCommand
+activate DeleteArchiveCommand
+
+DeleteArchiveCommand --> DeleteArchiveCommandParser :
+deactivate DeleteArchiveCommand
+
+DeleteArchiveCommandParser --> ArchivedBookParser : d
+deactivate DeleteArchiveCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteArchiveCommandParser -[hidden]-> ArchivedBookParser
+destroy DeleteArchiveCommandParser
+
+ArchivedBookParser --> LogicManager : d
+deactivate ArchivedBookParser
+
+LogicManager -> DeleteArchiveCommand : execute(m)
+activate DeleteArchiveCommand
+
+DeleteArchiveCommand -> Model : getArchivedPerson(A0123456X)
+activate Model
+
+Model --> DeleteArchiveCommand : p
+deactivate Model
+
+DeleteArchiveCommand -> Model : deleteArchivedPerson(p)
+activate Model
+
+Model --> DeleteArchiveCommand
+deactivate Model
+
+create CommandResult
+DeleteArchiveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteArchiveCommand
+deactivate CommandResult
+
+DeleteCommand --> LogicManager : r
+deactivate DeleteArchiveCommand
+
+DeleteArchiveCommand -[hidden]-> ArchivedBookParser
+destroy DeleteArchiveCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
