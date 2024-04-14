@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* The **CS2103T teaching team** for providing us with the [base project](https://github.com/nus-cs2103-AY2324S2/tp) that Teachstack builds upon, as well as for their invaluable guidance throughout this project's development. 
+* **Any other libaries or 3rd-party code**  already used in the [base project](https://github.com/nus-cs2103-AY2324S2/tp). (see link for details)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -337,7 +338,7 @@ Here is the sequence diagram which shows the overall flow:
 
 #### Implementation
 
-The random feature is an extension of the group feature. It creates a `GroupCommand` object to form groups, by passing a random set of `studentIds` and `group` of size 1 to the constructor. 
+The random feature is an extension of the group feature. It creates a `GroupCommand` object to form groups, by passing a random set of `studentIds` and `group` of size 1 to the constructor.
 
 When `RandomCommand#execute(model)` is called, it will filter `UniquePersonList` in `Model` to get a `List<Person>` of students where each student matches the predicate `person.isWeak()`. The randomness is achieved using `Collections#shuffle(List<Person>)`, to randomly reorder the `List<Person>`. Note that the result is approximately random where probability of getting each permutation of the list is approximately equal.
 
@@ -355,7 +356,7 @@ Step 2. The user executes `random 2 gp/Random Group` to put all students having 
 
 ![RandomState2](images/RandomState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The `Group` objects created will always be the same when the same command is given and the `UniquePersonList` is the same Step 1. However, the association between `Person` and `Grade` objects may be different each time due to the randomness. 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The `Group` objects created will always be the same when the same command is given and the `UniquePersonList` is the same Step 1. However, the association between `Person` and `Grade` objects may be different each time due to the randomness.
 </div>
 
 The following sequence diagram shows how a random command goes through the `Logic` component:
@@ -390,8 +391,7 @@ The following activity diagram summarizes what happens when a user executes a ra
 
 * **Alternative 2:** Remove `Person` from random groups formed if `Grade` of the `Person` is no longer below or at the threshold.
     * Pros: User can use the same groupings for weak students who still require more focus on.
-    * Cons: More complicated to implement and record of previous random groupings a `Person` belongs to will be gone. 
-
+    * Cons: More complicated to implement and record of previous random groupings a `Person` belongs to will be gone.
 
 ### \[Proposed\] Undo/redo feature
 
