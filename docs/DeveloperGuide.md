@@ -510,7 +510,6 @@ Step 3. The user executes `delete_archived A0123456A` command to delete student 
 Given below is the sequence diagram for `delete_archived` command:
 ![DeleteArchiveSequenceDiagram](images/DeleteArchiveSequenceDiagram.png)
 
-
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
