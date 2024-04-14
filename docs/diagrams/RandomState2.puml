@@ -13,6 +13,7 @@ class uniquePersonList as "<u>uniquePersonList:UniquePersonList</u>"
 class student1 as "<u>student1:Person</u>"
 class student2 as "<u>student2:Person</u>"
 class student3 as "<u>student3:Person</u>"
+class student4 as "<u>student4:Person</u>"
 class grade1  as "<u>grade1:Grade</u>" {
     value = "C"
 }
