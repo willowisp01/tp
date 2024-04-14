@@ -484,30 +484,45 @@ _{Explain here how the data archiving feature will be implemented}_
 --------------------------------------------------------------------------------------------------------------------
 ### Set Weakness Threshold Feature
 
-This is a new command to designate students as being "weak" or not based on their grades.
-By default, we have set C+ as the threshold, meaning that a student with grade lower than C+ is
-displayed with a weak marker next to their name.
+This is a new command to designate students as being "weak" or not based on their grades. `thresholdGrade` is a value 
+within `Grade`. 
+By default, we have set C+ as the `thresholdGrade`, meaning that a student with grade lower than or equal to C+ is
+displayed with a weak marker next to their name (as shown below).
 
-The command "set weak [grade]" followed by the grade allows the instructor to set a difference grade as the
-new threshold. This command resets students' weak markers immediately.
+<img src="images/weak_label.png" alt="Weak Label" width="200">
 
 
-The following activity diagram:
-![SetWeakSequenceDiagram](images/SetWeakActivityDiagram.png)
+The command `set weak g/GRADE` followed by the grade parameter allows the instructor to set a different grade as the
+new `thresholdGrade`. This command resets students' weak markers and updates the display immediately.
 
-The State prior to set weak command
-![SetWeakStateDisgram](images/SetWeak1.png)
 
-The State after set weak command
-![SetWeakStateDiagram](images/SetWeak2.png)
+The below sequence diagram displays the interactions while executing the command: `setweak g/B`
+
+![SetWeakSequenceDiagram](images/SetWeakSequenceDiagram.png)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Summary Statistics Feature
 
 This is a new command to view summary statistics of all students.
-Entering the command `summary` results in a popup opening within the gui. It consists of summary data including total
-number of students, mean grade, and standard deviation of grades. Additionally, a colored pie chart is display of the
+Entering the command `summary` results in a popup window in the gui. The popup window consists of summary data including total
+number of students, mean grade, and standard deviation of grades. Additionally, a colored pie chart is displayed of the
 students' grade distribution.
+
+Implementation:
+The `summary` command is implemented as such: 
+
+- `LogicManager`'s execute method calls the `parseCommand` method from `AddressBookParser`
+- `parseCommand` creates a `SummaryCommand`
+- `SummaryCommand`'s execute method is called by `LogicManager`.
+- `SummaryCommand` computes the total number of students, mean grade, and standard deviation of grade. It also generates 
+a pie chart of grades.
+- `SummaryCommand` creates and passes a `CommandResult` object to `LogicManager`
+- `LogicManager` passes `CommandResult` to `UI` to display `Person` list with the summary. 
+
+Currently, if the `summary` command is used with 0 students, the popup window shows total number of students, mean grade, 
+and standard deviation as 0. And no pie chart is displayed. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -541,16 +556,19 @@ students' grade distribution.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                             | I want to …​                                       | So that I can…​                                    |
-|----------|-------------------------------------|----------------------------------------------------|----------------------------------------------------|
+| Priority | As a …​                             | I want to …​                                       | So that I can…​                              |
+|----------|-------------------------------------|----------------------------------------------------|----------------------------------------------|
 | `* * *`  | Course Instructor who can type fast | enter new students’ information using command line | store the information efficiently            |
-| `* * *`  | Course Instructor                   | put students into groups                           |  tell which group each of the students are in |
-| `* * *`  | Course Instructor                   | access student’s contact information               | communicate with them easily                       |
+| `* * *`  | Course Instructor                   | put students into groups                           | tell which group each of the students are in |
+| `* * *`  | Course Instructor                   | access student’s contact information               | communicate with them easily                 |
 | `* *`    | Course Instructor                   | delete student details on command line             | remove students no longer in class           |
-| `* * *`  | Seasoned Course Instructor          | view a single student’s details                    | identify students of note                       |
-| `* *`    | Course Instructor                   | edit students’ info                                | update their info if it changes                    |
+| `* * *`  | Seasoned Course Instructor          | view a single student’s details                    | identify students of note                    |
+| `* *`    | Course Instructor                   | edit students’ info                                | update their info if it changes              |
+| `* *`    | Course Instructor                   | view summary statistics for all students           |                                              |
+| `* *`    | Course Instructor                   | put a weak marker on students                      | identify which students have low grades      |
+| `* *`    | Course Instructor                   | change the weak marker threshold                   | customize the weakness criteria              |
 
-*{More to be added -- this is the minimum viable product for v1.2}*
+*{More to be added -- this is the product for v1.4}*
 
 
 ### Use cases
@@ -619,6 +637,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: UC04 - Setting weakness threshold**
+
+**MSS**
+1. User requests to set weakness threshold.
+2. TeachStack updates the weakness threshold grade.
+3. TeachStack updates the display.
+
+    Use Case ends.
+
+ **Extensions**
+* 1a. User requests weakness threshold be updated to an invalid grade.
+  * 1a1. TeachStack displays an error message.
+ 
+    Use Case ends.
 
 ### Non-Functional Requirements
 
@@ -633,6 +665,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Details of Contact**: 
+  * Name: Name of the contact
+  * Student ID: Unique identifier of the contact
+  * Email: Unique email address of contact
+  * Grade: Letter grade of contact
+  * Group: Formation of multiple contacts
 
 --------------------------------------------------------------------------------------------------------------------
 
