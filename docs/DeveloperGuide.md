@@ -2,8 +2,34 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+## Table of Contents
+- [Table of Contents]
+- [1. Acknowledgements]()
+- [2. Setting up, getting started]()
+- [3. Design]()
+  - [3.1 Architecture]()
+  - [3.2 UI Component]()
+  - [3.3 Logic Component]()
+  - [3.4 Model Component]()
+  - [3.5 Storage Component]()
+- [4. Implementation]()
+  - [4.1 Group feature]()
+  - [4.2 Add feature]()
+  - [4.3 Delete feature]()
+  - [4.4 Find feature]()
+  - [4.5 [Proposed] Undo/redo feature]()
+  - [4.6 [Proposed] Data Archiving]()
+  - [4.7 Set Weakness Threshold Feature]()
+  - [4.8 Summary Statistics Feature]()
+- [5. Documentation, logging, testing, configuration, dev-ops]()
+- [6. Appendix: Requirements]()
+  - [6.1 Product Scope]()
+  - [6.2 User Stories]()
+  - [6.3 Use Cases]()
+  - [6.4 Non-Functional Requirements]()
+  - [6.5 Glossary]()
+- [7. Appendix: Instructions for manual testing]()
+
 
 --------------------------------------------------------------------------------------------------------------------
 
