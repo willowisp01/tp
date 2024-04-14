@@ -43,7 +43,8 @@ public class EditArchiveCommand extends Command {
 
     public static final String MESSAGE_EDIT_ARCHIVED_PERSON_SUCCESS = "Edited Archived Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the archived book. "
+    public static final String MESSAGE_DUPLICATE_PERSON =
+            "This person already exists in the persons list/archived list. "
             + "Check to make sure StudentID and email are unique.";
 
     private final StudentId id;
@@ -73,6 +74,11 @@ public class EditArchiveCommand extends Command {
 
         if ((!personToEdit.isSameEmail(editedPerson) && model.hasArchivedEmail(editedPerson))
                 || !personToEdit.isSameId(editedPerson) && model.hasArchivedId(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if ((!personToEdit.isSameEmail(editedPerson) && model.hasEmail(editedPerson))
+                || !personToEdit.isSameId(editedPerson) && model.hasId(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
