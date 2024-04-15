@@ -207,7 +207,7 @@ Format: `help`
 
 ### 7.2 Adding a student : `add`
 
-Adds student details to the person list.
+Adds student details to the person list. Specifying a group is optional.
 
 Format: `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP_NAME]​...`
 
@@ -219,7 +219,7 @@ Format: `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP_NAME]​...`
 * `EMAIL` should be of the format `username@domain`. The `username` should start with **e**, followed by 7 digits. The `domain` should be **u.nus.edu**.
     * e.g. `e0123456@u.nus.edu`
 * `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
-* `GROUP_NAME` is optional. It must only contain alphanumeric characters and space.
+* `GROUP_NAME` must only contain alphanumeric characters and space, if you choose to specify a group.
 
 
 Example:
