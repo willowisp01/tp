@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ArchivedBookParser" as ArchivedBookParser LOGIC_COLOR
+participant ":UnarchiveCommandParser" as UnarchiveCommandParser LOGIC_COLOR
+participant "u:UnarchiveCommand" as UnarchiveCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("unarchived A0123456X")
+activate LogicManager
+
+LogicManager -> ArchivedBookParser : parseCommand("unarchived A0123456X")
+activate ArchivedBookParser
+
+create UnarchiveCommandParser
+ArchivedBookParser -> UnarchiveCommandParser
+activate UnarchiveCommandParser
+
+UnarchiveCommandParser --> ArchivedBookParser
+deactivate UnarchiveCommandParser
+
+ArchivedBookParser -> UnarchiveCommandParser : parse("A0123456X")
+activate UnarchiveCommandParser
+
+create UnarchiveCommand
+UnarchiveCommandParser -> UnarchiveCommand
+activate UnarchiveCommand
+
+UnarchiveCommand --> UnarchiveCommandParser :
+deactivate UnarchiveCommand
+
+UnarchiveCommandParser --> ArchivedBookParser : u
+deactivate UnarchiveCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+UnarchiveCommandParser -[hidden]-> ArchivedBookParser
+destroy UnarchiveCommandParser
+
+ArchivedBookParser --> LogicManager : u
+deactivate ArchivedBookParser
+
+LogicManager -> UnarchiveCommand : execute(m)
+activate UnarchiveCommand
+
+UnarchiveCommand -> Model : unarchivePerson(toUnarchive)
+activate Model
+
+Model --> UnarchiveCommand
+deactivate Model
+
+create CommandResult
+UnarchiveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> UnarchiveCommand
+deactivate CommandResult
+
+UnarchiveCommand --> LogicManager : r
+deactivate UnarchiveCommand
+
+UnarchiveCommand -[hidden]-> ArchivedBookParser
+destroy UnarchiveCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

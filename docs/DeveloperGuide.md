@@ -214,9 +214,11 @@ Note that `p0` still retains the original group, group 3.
 
 #### Implementation
 
-The `add` command allows users to add students' details into the list.
+The add feature is similar to the add feature in AB3, which allows users to add students' details into the list.
+However, in our implementation, we decided to extend the add feature to add students' details such as, `name`, `student_id`, `email`, `grade`, `group`
+that tailored to our target audience.
 
-Given below is an example usage scenario of `add` command:
+Given below is an example usage scenario of `add` feature:
 
 Step 1. Assume the user has some existing students in the `UniquePersonList`.
 ![AddState1](images/AddState1.png)
@@ -391,7 +393,123 @@ The following activity diagram summarizes what happens when a user executes a ra
 
 * **Alternative 2:** Remove `Person` from random groups formed if `Grade` of the `Person` is no longer below or at the threshold.
     * Pros: User can use the same groupings for weak students who still require more focus on.
-    * Cons: More complicated to implement and record of previous random groupings a `Person` belongs to will be gone.
+    * Cons: More complicated to implement and record of previous random groupings a `Person` belongs to will be gone. 
+
+### Archive feature
+
+#### Implementation
+
+The archive feature allows the users to keep a record of past students' details.
+
+Given below is an example usage scenario of `archive` feature:
+
+Step 1. Assume the user has some existing students in the `UniquePersonList` of person list.
+![ArchiveState1](images/ArchiveState1.png)
+
+Step 2. The user executes `archive A0123456X` to archive the student into the archived list.
+* The `archive` command invokes `LogicManager#execute()`.
+* `LogicManager#execute` would first invoke `AddressBookParser#parseCommand()`.
+* `AddressBookParser#parseCommand()` will identifies the `archive` command and then invokes `ArchiveCommandParser#parse()` to parse the arguments accordingly.
+* `ArchiveCommandParser#parse()` will return a `ArchiveCommand` object which takes in a `StudentId` object.
+* `LogicManager#execute()` invokes `ArchiveCommand#execute()`. Then, `model#archivePerson` is called to archive the person into the archived list.
+* The archived person will now be added into `UniquePersonList` of the archived list.
+* The archived person will also be removed from the `UniquePersonList` of the person list.
+![ArchiveState2](images/ArchiveState2.png)
+
+Given below is the sequence diagram for `archive` command:
+![ArchiveSequenceDiagram](images/ArchiveSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect: Mass archiving.**
+* **Alternative 1 (current choice):** Allow archiving only one student at a time.
+    * Pros: Reduce the complexity of archiving process for the users.
+    * Cons: May be time-consuming for users who need to archive multiple students.
+
+* **Alternative 2:** Allow users to select and archive multiple students at once.
+    * Pros: Increases efficiency by allowing users to archive multiple students simultaneously.
+    * Cons: May increase the risk of unintentional archiving.
+
+### Unarchived feature
+
+#### Implementation
+
+The unarchived feature allows the users to unarchive past students' details.
+
+Given below is an example usage scenario of `unarchived` feature:
+
+Step 1. Assume the user has some existing students in the `UniquePersonList` of archived list.
+![UnarchivedState1](images/UnarchivedState1.png)
+
+Step 2. The user executes `unarchived A0123456X` to unarchive the student into the person list.
+* The `unarchive` command invokes `LogicManager#execute()`.
+* `LogicManager#execute` would first invoke `ArchivedBookParser#parseCommand()`.
+* `ArchivedBookParser#parseCommand()` will identifies the `unarchived` command and then invokes `UnarchiveCommandParser#parse()` to parse the arguments accordingly.
+* `UnarchiveCommandParser#parse()` will return a `UnarchiveCommand` object which takes in a `StudentId` object.
+* `LogicManager#execute()` invokes `UnarchiveCommand#execute()`. Then, `model#unarchivePerson` is called to unarchive the archived person into the person list.
+* The archived person will now be added into `UniquePersonList` of the person list.
+* The archived person will also be removed from the `UniquePersonList` of the archived list.
+![UnarchivedState2](images/UnarchivedState2.png)
+
+Given below is the sequence diagram for `unarchived` command:
+![UnarchiveSequenceDiagram](images/UnarchivedSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect: Mass unarchiving.**
+* **Alternative 1 (current choice):** Allow unarchiving only one student at a time.
+    * Pros: Reduce the complexity of unarchiving process for the users.
+    * Cons: May be time-consuming for users who need to unarchive multiple students.
+
+* **Alternative 2:** Allow users to select and unarchive multiple students at once.
+    * Pros: Increases efficiency by allowing users to unarchive multiple students simultaneously.
+    * Cons: May increase the risk of unintentional unarchiving.
+
+### Edit_Archived feature
+
+#### Implementation
+
+The edit_archived feature is similar to the edit feature. However, edit_archived is only applicable to edit persons in the archived list.
+
+Given below is an example usage scenario of `edit_archived` feature:
+
+Step 1. Assume the user has some existing students in the `UniquePersonList` of archived list.
+![EditArchiveState1](images/EditArchiveState1.png)
+
+Step 2. The user executes `edit_archived A0123456X g/B` to edit the student's grade to 'B' in the archived list.
+* The `edit_archived` command invokes `LogicManager#execute()`.
+* `LogicManager#execute` would first invoke `ArchivedBookParser#parseCommand()`.
+* `ArchivedBookParser#parseCommand()` will identifies the `edit_archived` command and then invokes `EditArchiveCommandParser#parse()` to parse the arguments accordingly.
+  * `EditArchiveCommandParser#parse()` will return a `EditArchiveCommand` object which takes in a `StudentId` object and `EditPersonDescriptor` object.
+* `LogicManager#execute()` invokes `EditArchiveCommand#execute()`. Then, `model#setArchivedPerson` is called to replace the `personToEdit` with the `editedPerson`.
+* Lastly, the `model#updateFilteredArchivedList()` is called to update the archived list with the editedPerson.
+![EditArchiveState2](images/EditArchiveState2.png)
+
+Given below is the sequence diagram for `edit_archived` command:
+![EditArchiveSequenceDiagram](images/EditArchiveSequenceDiagram.png)
+
+### Delete_Archived feature
+
+#### Implementation
+
+The delete_archived feature is similar to the delete feature. However, delete_archived is only applicable to delete persons in the archived list.
+
+Given below is an example usage scenario of `delete_archived` feature:
+
+Step 1. The user has added some students to `UniquePersonList` of the archived list.
+
+![DeleteArchiveState1](images/DeleteArchiveState1.png)
+
+Step 2. The user executes `find` command where only `student1` and `student2` matches the predicate so only `student1` and `student2` are in the `FilteredArchivedList` of `ModelManager`.
+
+![DeleteState2](images/DeleteArchiveState2.png)
+
+Step 3. The user executes `delete_archived A0123456A` command to delete student with student ID `A0123456A`. `ModelManager#getArchivedPerson(StudentId)` returns `student3` which the id belongs to. `student3` will be removed from `UniquePersonList` of the archived list.
+
+![DeleteState3](images/DeleteArchiveState3.png)
+
+Given below is the sequence diagram for `delete_archived` command:
+![DeleteArchiveSequenceDiagram](images/DeleteArchiveSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -474,11 +592,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -563,12 +676,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Course Instructor                   | access student’s contact information               | communicate with them easily                 |
 | `* *`    | Course Instructor                   | delete student details on command line             | remove students no longer in class           |
 | `* * *`  | Seasoned Course Instructor          | view a single student’s details                    | identify students of note                    |
+| `* *`    | Course Instructor                   | find all students in a specific group              | focus on the students in the group           |
 | `* *`    | Course Instructor                   | edit students’ info                                | update their info if it changes              |
 | `* *`    | Course Instructor                   | view summary statistics for all students           |                                              |
 | `* *`    | Course Instructor                   | put a weak marker on students                      | identify which students have low grades      |
 | `* *`    | Course Instructor                   | change the weak marker threshold                   | customize the weakness criteria              |
 
-*{More to be added -- this is the product for v1.4}*
 
 
 ### Use cases
@@ -659,7 +772,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  Should not lose data up to the latest operation in case of accidental close of application.
 4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -696,37 +808,211 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Saving weakness threshold preference
 
-### Deleting a person
+   1. Use the `setweak` command to set a weak threshold other than the default **C+**. Close the window.
 
-1. Deleting a person while all persons are being shown
+   1. Re-launch the app by double-clicking the jar file.<br>
+      Expected: Students will be marked as weak according to the latest grade threshold set. 
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete A0123456B`<br>
-      Expected: Student with id: A0123456B is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+### Editing a student
 
-   1. Test case: `delete A0000000B`<br>
-      Expected: No student with id: A000000B exists. Error details shown in the status message. Status bar remains the same.
+1. Editing a student's id
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Test case: `edit A0123458X id/A0123458T`<br>
+      Expected: Student with id: A0123458X now has id: A0123458T. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `edit A0000000B id/A0123458T`<br>
+      Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case: `edit A0123458X id/A0123456A`<br>
+      Expected: Student with id: A0123456A exists. Error details shown in the status message. Status bar remains the same.
+   
+   1. Test case: `edit A0123458X id/A0123456A id/A0123456Z`<br>
+      Expected: More than one student id specified. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect edit commands to try: `edit`, `edit x id/y` (where x, or y is not a valid student id), `edit id/x` (where x can be a valid student id)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Editing a student's email
 
+   1. Test case: `edit A0123458X e/e9876543@u.nus.edu`<br>
+      Expected: Student with id: A0123458X now has email: e9876543@u.nus.edu. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `edit A0000000B e/e9876543@u.nus.edu`<br>
+      Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case: `edit A0123458X e/e0654321@u.nus.edu`<br>
+      Expected: Student with email: e0654321@u.nus.edu exists. Error details shown in the status message. Status bar remains the same.
+   
+   1. Test case: `edit A0123458X e/e0654321@u.nus.edu e/e0654322@u.nus.edu`<br>
+      Expected: More than one email specified. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect edit commands to try: `edit`, `edit x e/y` (where x is not a valid student id, or y is not a valid email), `edit e/x` (where x can be a valid email)<br>
+      Expected: Similar to previous.
+
+1. Editing a student's group
+
+   1. Test case: `edit A0123458X gp/Group 1`<br>
+      Expected: Student with id: A0123458X now has group: Group 1. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `edit A0123458X gp/Group 1 gp/Group 2`<br>
+      Expected: Student with id: A0123458X now has groups: Group 1, Group 2. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `edit A0123458X gp/`<br>
+      Expected: Student with id: A0123458X no longer has any group. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `edit A0000000B gp/Group 1`<br>
+      Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case: `edit A0123458X gp/Group 1 gp/`<br>
+      Expected: Inconsistent command to clear groups and assign group. Error details shown in the status message. Status bar remains the same.
+
+      1. Other incorrect edit commands to try: `edit`, `edit x g/y` (where x is not a valid student id, or y is not a valid group name), `edit gp/x` (where x can be a valid group name)<br>
+         Expected: Similar to previous.
+
+### Deleting a student
+
+1. Deleting a student while all students are being shown
+
+   1. Prerequisites: List all students using the `list` command. Multiple students in the person list.
+
+   1. Test case: `delete A0123458X`<br>
+      Expected: Student with id: A0123458X is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `delete A0000000B`<br>
+      Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is not a valid student id)<br>
+      Expected: Similar to previous.
+
+1. Deleting a student that is not being shown
+
+   1. Prerequisites: Find persons in `Group 20` using the `find gp/Group 20` command. Zero or more students in the person list.
+
+   1. Test case: `delete A0123458X`<br>
+      Expected: Student with id: A0123458X is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `delete A0000000B`<br>
+      Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is not a valid student id)<br>
+      Expected: Similar to previous.
+
+
+### Grouping students
+
+1. Grouping students
+
+   1. Prerequisites: Multiple students added to person list.
+
+   1. Test case: `group gp/Group 10 id/A0123458X`<br>
+      Expected: Student with id: A0123458X now has group: Group 10. Status message shown. Timestamp in the status bar is updated.
+
+   1. Test case: `group gp/Group 10 id/A0123458X id/A0123456U`<br>
+      Expected: Student with id: A0123458X and student with id: A0123456U now have group: Group 10. Status message shown. Timestamp in the status bar is updated.
+
+   1. Test case: `group gp/Group 10 gp/Group 11 id/A0123458X`<br>
+      Expected: Student with id: A0123458X now has groups: Group 10, Group 11. Status message shown. Timestamp in the status bar is updated.
+
+   1. Test case: `group gp/ id/A0123458X`<br>
+      Expected: Student with id: A0123458X now has no group. Status message shown. Timestamp in the status bar is updated.
+
+   1. Test case: `group gp/Group 10 id/A0123458X id/A0000000B`<br>
+      Expected: No student with id: A0000000B exists. Group command aborted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect group commands to try: `group`, `group id/x` (where x can be a valid student id), `group gp/z id/x id/y` (where x or y is an invalid student id, or z is an invalid group name)<br>
+      Expected: Similar to previous.
+
+
+### Archiving a student
+
+1. Archiving a student while all students are being shown
+
+   1. Prerequisites: List all students using the `list` command. Multiple students in the person list.
+
+   1. Test case: `archive A0123458X`<br>
+      Expected: Student with id: A0123458X is moved from person to the archived list. Details of the archived student shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `archive A0000000B`<br>
+      Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect archive commands to try: `archive`, `archive x` (where x is not a valid student id)<br>
+      Expected: Similar to previous.
+
+1. Archiving a student that is not being shown
+
+   1. Prerequisites: Find persons in `Group 20` using the `find gp/Group 20` command. Zero or more students in the person list.
+
+   1. Test case: `archive A0123458X`<br>
+      Expected: Student with id: A0123458X is moved from person to the archived list. Details of the archived student shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `archive A0000000B`<br>
+      Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect archive commands to try: `archive`, `archive x` (where x is not a valid student id)<br>
+      Expected: Similar to previous.
+
+
+### Un-archiving a student
+
+1. Un-archiving a student
+
+   1. Prerequisites: One or more students in the archived list.
+
+   1. Test case: `unarchived A0123458X`<br>
+      Expected: Student with id: A0123458X is moved from archived to the person list. Details of the unarchived student shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `unarchived A0123456A`<br>
+      Expected: No student with id: A0123456A exists in the archived list. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case: `unarchived A0000000B`<br>
+      Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect unarchive commands to try: `unarchived`, `unarchived x` (where x is not a valid student id)<br>
+      Expected: Similar to previous.
+
+
+### Setting a grade threshold
+
+1. Set grade threshold.
+
+   1. Test case: `setweak g/A`<br>
+      Expected: Update weakness threshold: A. Status message shown. `Weak` marker appear next to name of all students with grade below or at **A** . Timestamp in the status bar is updated.
+
+   1. Test case: `setweak A`<br>
+      Expected: Incorrect format. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect setweak commands to try: `setweak`, `setweak g/x` (where x is not a valid grade)<br>
+      Expected: Similar to previous.
+
+      
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: Folder named `data` exists in the same directory where the program is running, containing a file named `addressbook.json`. Application is running. Delete the first line of `addressbook.json`.
 
-1. _{ more test cases …​ }_
+   1. Test case: Enter any successful command.<br>
+      Expected: Running of application is not affected.
 
----------------------------------------------------------------------------------------------------------------
+   1. Test case: Stop application. Rerun application.<br>
+      Expected: Application starts with an empty person list.
 
+1. Dealing with missing data files
+
+   1. Prerequisites: Folder named `data` exists in the same directory where the program is running, containing a file named `archivedbook.json`. Application is running and there is at least one student in archived list. Delete the file `archivedbook.json`.
+
+   1. Test case: Enter any successful command.<br>
+      Expected: Running of application is not affected. No loss of data, file `archived.json` appears in `data` folder.
+   
+   1. Test case: Stop application. Rerun application.<br>
+      Expected: Application starts with an empty archived list.
+
+--------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancements**
 
 Team Size: 5
