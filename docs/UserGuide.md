@@ -52,6 +52,8 @@ Happy teaching!
     - [7.15 Viewing summary statistics](#715-viewing-summary-statistics--summary)
 - [8. Glossary](#8-glossary)
 - [9. FAQ](#9-faq)
+    - [9.1 General concerns](#91-general-concerns)
+    - [9.2 Using TeachStack](#92-using-teachstack)
 - [10. Known Issues](#10-known-issues)
 - [11. Command Summary](#11-command-summary)
 
@@ -444,12 +446,12 @@ Format: `exit`
 
 TeachStack data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 7.13 Editing the data file
+### 7.13 Editing the data files
 
-TeachStack data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TeachStack data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/userdata.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TeachStack will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data files makes its format invalid, TeachStack will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the TeachStack to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
@@ -463,6 +465,7 @@ Format: `setweak g/GRADE`
 * Updates weakness threshold value
 * Students with grade lower or equal to threshold grade appear with a marker in the UI
 * `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
+* After setting the threshold, it will be maintained even after shutting down the application.
 
 Example:
 * `setweak g/B` displays a weak marker for all students with grade B or lower.
@@ -508,9 +511,33 @@ Displayed after command: `summary`
 
 ## 9. FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+### 9.1 General concerns
+
+**Q**: Is TeachStack free to use?<br>
+**A**: Yes! TeachStack is completely free to use. We believe in making student management accessible to all computer science instructors. Enjoy the full functionality of TeachStack without any subscription fees or hidden charges.
+
+**Q**: I am facing issues/want to give suggestions for TeachStack. How can I resolve them?<br>
+**A**: Not to worry! Our developer team is committed to ensuring the best experience for instructors like you. Please submit any issues/suggestions you might have to our Google form [here](https://docs.google.com/forms/d/e/1FAIpQLSeA7P9esEWx154CtjAubVDsb2ULjui6Vwuk7HPEAVUe1Or3Tw/viewform?usp=sf_link). Alternatively, you can also file them on our Github repository [here](https://github.com/AY2324S2-CS2103T-T09-1/tp/issues). We appreciate your feedback and will respond as soon as possible.
+
+**Q**: Is TeachStack suitable for use for computer science instructors outside of NUS?<br>
+**A**: For now, the application is only meant to be used within NUS. However, we do plan to make improvements to allow all computer science instructors, regardless of educational institution, to utilise the application, so do keep an eye out for future developments!
+
+**Q**: Is TeachStack suitable for Teaching Assistants (TAs)?<br>
+**A**: While TeachStack is currently tailored for computer science instructors to simplify managing large student bodies, TAs may also find our app useful, especially in scenarios with larger class sizes. We continually strive to expand TeachStack's capabilities to better serve the diverse needs of educators and teaching teams.
+
+**Q**: Is TeachStack really better than Canvas, Excel, etc. for me?
+**A**: Yes! While the other platforms do offer valuable features, TeachStack stands out with its CLI, intuitive group forming, archiving, and other tailored features designed specifically for computer science educators. What sets TeachStack apart is our commitment to continuous improvement and development, driven by your feedback. With ongoing enhancements, we're dedicated to ensuring TeachStack remains the preferred choice for instructors seeking to elevate their teaching experience.
+
+### 9.2 Using TeachStack
+
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TeachStack home folder.
 
+**Q**: I made changes to the data files manually and I am now facing errors! What should I do?
+**A**: We recommend that you only manually edit the files if you are confident that you can update it correctly. In the event that you run into errors after manually editing the files, please delete the `[JAR file location]/data` folder so TeachStack can create new files.
+
+**Q**: Do I have to save my changes manually?
+**A**: No, TeachStack will automatically save any changes you have made after a command is entered.
 --------------------------------------------------------------------------------------------------------------------
 
 ## 10. Known issues
