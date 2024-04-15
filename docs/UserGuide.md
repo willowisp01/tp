@@ -298,7 +298,7 @@ Expected output:
 ### 7.7 Forming focus groups
 
 #### 7.7.1 Forming focus groups manually : `group`
-Creates a group with people corresponding to the selected IDs. The group will have name `GROUP_NAME`.
+Creates a group with people corresponding to the selected IDs. 
 
 Format: `group gp/GROUP_NAME… id/STUDENT_ID…`
 
