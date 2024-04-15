@@ -395,7 +395,7 @@ Format: `archive STUDENT_ID`
 * Archives a student with the specified `STUDENT_ID`.
 * `STUDENT_ID` should start with 'A', followed by 7 digits, and end with any capital letter. 
     * e.g. `A0123459X`
-* The student with the specified `STUDENT_ID` must exists in the `persons` list.
+* The student with the specified `STUDENT_ID` must exist in the `persons` list.
 
 Example:
 * `archive A0123459X` archives a student with  `student_id = A0123459X`.
@@ -457,7 +457,7 @@ Format: `unarchived STUDENT_ID`
 * Unarchives a student with the specified `STUDENT_ID`.
 * `STUDENT_ID` should start with 'A', followed by 7 digits, and end with any capital letter. 
     * e.g. `A0123459X`
-* The student with the specified `STUDENT_ID` must exists in the archived list.
+* The student with the specified `STUDENT_ID` must exist in the archived list.
 * This feature is only applicable to the archived list.
 
 Examples:
