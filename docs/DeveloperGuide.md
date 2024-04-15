@@ -516,7 +516,8 @@ Given below is the sequence diagram for `delete_archived` command:
 ### Set Weakness Threshold Feature
 
 This is a new command to designate students as being "weak" or not based on their grades. `thresholdGrade` is a value 
-within `Grade`. 
+within `Grade`. This does not affect students who have been archived.<br>
+
 By default, we have set C+ as the `thresholdGrade`, meaning that a student with grade lower than or equal to C+ is
 displayed with a weak marker next to their name (as shown below).
 
