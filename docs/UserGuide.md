@@ -250,7 +250,7 @@ Format: `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP_NAME]​...`
 
 
 Example:
-* `add id/A0123459X n/John Doe e/e0123456@u.nus.edu g/A` adds the person named John Doe with `STUDENT_ID` "A0123459X", `EMAIL` "e0123456@u.nus.edu" and `GRADE` "A" to the list.
+* `add id/A0123459X n/John Doe e/e0123456@u.nus.edu g/A` adds the student named John Doe with `STUDENT_ID` "A0123459X", `EMAIL` "e0123456@u.nus.edu" and `GRADE` "A" to the list.
 
 Expected output:
 ![AddUi](images/AddUI.png)
@@ -266,7 +266,7 @@ Format: `list`
 
 ### 7.4 Editing a student : `edit`
 
-Edits an existing person (as specified by `STUDENT_ID`) in the list of students. Exsisting fields are updated to match the specified input fields.
+Edits an existing student (as specified by `STUDENT_ID`) in the list of students. Existing fields are updated to match the specified input fields.
 
 Format: `edit STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...`
 
@@ -282,8 +282,8 @@ Format: `edit STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_
 * Use of `GROUP` prefix `gp/` in an edit command without specifying `GROUP_NAME` will clear all existing `GROUP` of the student.
 
 Examples:
-*  `edit A0123459X e/e0123450@u.nus.edu` Edits the email address of the person with `STUDENT_ID = A0123459X` to be `e0123450@u.nus.edu`.
-*  `edit A0123459X n/John Doe` Edits the name of the person with `STUDENT_ID = A0123459X` to be `John Doe`.
+*  `edit A0123459X e/e0123450@u.nus.edu` Edits the email address of the student with `STUDENT_ID = A0123459X` to be `e0123450@u.nus.edu`.
+*  `edit A0123459X n/John Doe` Edits the name of the student with `STUDENT_ID = A0123459X` to be `John Doe`.
 
 Expected output:
 ![EditUI](images/EditUI.png)
@@ -309,7 +309,7 @@ Deletes the specified student from the list.
 
 Format: `delete STUDENT_ID`
 
-* Deletes the person with the specified `STUDENT_ID`.
+* Deletes the student with the specified `STUDENT_ID`.
 * The `STUDENT_ID` refers to the id corresponding to the student in the list.
 * `STUDENT_ID` should start with 'A', followed by 7 digits, and end with any capital letter. 
     * e.g. `A0123459X`
@@ -325,7 +325,7 @@ Expected output:
 ### 7.7 Forming focus groups
 
 #### 7.7.1 Forming focus groups manually : `group`
-Creates a group with people corresponding to the selected IDs. 
+Creates a group with students corresponding to the selected IDs. 
 
 Format: `group gp/GROUP_NAME… id/STUDENT_ID…`
 
@@ -359,7 +359,7 @@ Examples:
 * Group formed cannot be deleted individually unless using the [`group` command](#771-forming-focus-groups-manually--group) to clear all groups <br>
   eg. `group id/A0123459X` removes student with `STUDENT_ID = A0123459X` from all the groups the student was in.
 * Random groups formed will not be affected by the [`setweak` command](#714-setting-weak-threshold--setweak)<br>
-i.e. students in a randomly formed group will remain in the group after `setweak` command, even if the student falls above the new weak threshold
+  i.e. student in a randomly formed group will remain in the group after `setweak` command, even if the student falls above the new weak threshold
 
 </div>
 
@@ -450,7 +450,7 @@ Expected output:
 
 #### 7.10.4 Unarchiving a student : `unarchived`
 
-Unarchives a student from the archived list. That person is moved to the `persons` list.
+Unarchives a student from the archived list. That student is moved to the `persons` list.
 
 Format: `unarchived STUDENT_ID`
 
