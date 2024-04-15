@@ -823,7 +823,7 @@ testers are expected to do more *exploratory* testing.
 1. Editing a student's id
 
    1. Test case: `edit A0123458X id/A0123458T`<br>
-      Expected: Student with id: A0123458X now has id: A0123458T. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has id: A0123458T. Details of the edited student shown in the status message.
 
    1. Test case: `edit A0000000B id/A0123458T`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -840,7 +840,7 @@ testers are expected to do more *exploratory* testing.
 1. Editing a student's email
 
    1. Test case: `edit A0123458X e/e9876543@u.nus.edu`<br>
-      Expected: Student with id: A0123458X now has email: e9876543@u.nus.edu. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has email: e9876543@u.nus.edu. Details of the edited student shown in the status message.
 
    1. Test case: `edit A0000000B e/e9876543@u.nus.edu`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -857,13 +857,13 @@ testers are expected to do more *exploratory* testing.
 1. Editing a student's group
 
    1. Test case: `edit A0123458X gp/Group 1`<br>
-      Expected: Student with id: A0123458X now has group: Group 1. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has group: Group 1. Details of the edited student shown in the status message.
 
    1. Test case: `edit A0123458X gp/Group 1 gp/Group 2`<br>
-      Expected: Student with id: A0123458X now has groups: Group 1, Group 2. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has groups: Group 1, Group 2. Details of the edited student shown in the status message.
 
    1. Test case: `edit A0123458X gp/`<br>
-      Expected: Student with id: A0123458X no longer has any group. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X no longer has any group. Details of the edited student shown in the status message.
 
    1. Test case: `edit A0000000B gp/Group 1`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -881,7 +881,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all students using the `list` command. Multiple students in the `persons` list.
 
    1. Test case: `delete A0123458X`<br>
-      Expected: Student with id: A0123458X is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X is deleted from the list. Details of the deleted student shown in the status message.
 
    1. Test case: `delete A0000000B`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -894,7 +894,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Find `Person` in `Group 20` using the `find gp/Group 20` command. Zero or more students in the 'persons' list.
 
    1. Test case: `delete A0123458X`<br>
-      Expected: Student with id: A0123458X is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X is deleted from the list. Details of the deleted student shown in the status message.
 
    1. Test case: `delete A0000000B`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -910,16 +910,16 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Multiple students added to `persons` list.
 
    1. Test case: `group gp/Group 10 id/A0123458X`<br>
-      Expected: Student with id: A0123458X now has group: Group 10. Status message shown. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has group: Group 10. Status message shown.
 
    1. Test case: `group gp/Group 10 id/A0123458X id/A0123456U`<br>
-      Expected: Student with id: A0123458X and student with id: A0123456U now have group: Group 10. Status message shown. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X and student with id: A0123456U now have group: Group 10. Status message shown.
 
    1. Test case: `group gp/Group 10 gp/Group 11 id/A0123458X`<br>
-      Expected: Student with id: A0123458X now has groups: Group 10, Group 11. Status message shown. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has groups: Group 10, Group 11. Status message shown.
 
    1. Test case: `group gp/ id/A0123458X`<br>
-      Expected: Student with id: A0123458X now has no group. Status message shown. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has no group. Status message shown.
 
    1. Test case: `group gp/Group 10 id/A0123458X id/A0000000B`<br>
       Expected: No student with id: A0000000B exists. Group command aborted. Error details shown in the status message. Status bar remains the same.
@@ -935,7 +935,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all students using the `list` command. Multiple students in the `persons` list.
 
    1. Test case: `archive A0123458X`<br>
-      Expected: Student with id: A0123458X is moved from `persons` to the `archived` list. Details of the archived student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X is moved from `persons` to the `archived` list. Details of the archived student shown in the status message.
 
    1. Test case: `archive A0000000B`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -948,7 +948,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Find students in `Group 20` using the `find gp/Group 20` command. Zero or more students in the `persons` list.
 
    1. Test case: `archive A0123458X`<br>
-      Expected: Student with id: A0123458X is moved from `persons` to the `archived` list. Details of the archived student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X is moved from `persons` to the `archived` list. Details of the archived student shown in the status message.
 
    1. Test case: `archive A0000000B`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -964,7 +964,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: One or more students in the archived list.
 
    1. Test case: `unarchived A0123458X`<br>
-      Expected: Student with id: A0123458X is moved from archived to the `persons` list. Details of the unarchived student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X is moved from archived to the `persons` list. Details of the unarchived student shown in the status message.
 
    1. Test case: `unarchived A0123456A`<br>
       Expected: No student with id: A0123456A exists in the archived list. Error details shown in the status message. Status bar remains the same.
@@ -981,7 +981,7 @@ testers are expected to do more *exploratory* testing.
 1. Set grade threshold.
 
    1. Test case: `setweak g/A`<br>
-      Expected: Update weakness threshold: A. Status message shown. `Weak` marker appear next to name of all students with grade below or at **A** . Timestamp in the status bar is updated.
+      Expected: Update weakness threshold: A. Status message shown. `Weak` marker appear next to name of all students with grade below or at **A** .
 
    1. Test case: `setweak A`<br>
       Expected: Incorrect format. Error details shown in the status message. Status bar remains the same.
