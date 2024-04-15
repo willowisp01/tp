@@ -238,7 +238,7 @@ Format: `list`
 
 ### 7.4 Editing a student : `edit`
 
-Edits an existing person in the list of students. Exsisting fields are updated to match the specified input fields.
+Edits an existing person (as specified by `STUDENT_ID`) in the list of students. Exsisting fields are updated to match the specified input fields.
 
 Format: `edit STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...`
 
