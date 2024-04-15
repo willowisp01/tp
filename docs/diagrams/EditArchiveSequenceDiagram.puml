@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ArchivedBookParser" as ArchivedBookParser LOGIC_COLOR
+participant ":EditArchiveCommandParser" as EditArchiveCommandParser LOGIC_COLOR
+participant "e:EditArchiveCommand" as EditArchiveCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit_archived A0123456X g/B")
+activate LogicManager
+
+LogicManager -> ArchivedBookParser : parseCommand("edit_archived A0123456X g/B")
+activate ArchivedBookParser
+
+create EditArchiveCommandParser
+ArchivedBookParser -> EditArchiveCommandParser
+activate EditArchiveCommandParser
+
+EditArchiveCommandParser --> ArchivedBookParser
+deactivate EditArchiveCommandParser
+
+ArchivedBookParser -> EditArchiveCommandParser : parse("A0123456X g/B")
+activate EditArchiveCommandParser
+
+create EditArchiveCommand
+EditArchiveCommandParser -> EditArchiveCommand
+activate EditArchiveCommand
+
+EditArchiveCommand --> EditArchiveCommandParser :
+deactivate EditArchiveCommand
+
+EditArchiveCommandParser --> ArchivedBookParser : e
+deactivate EditArchiveCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditArchiveCommandParser -[hidden]-> ArchivedBookParser
+destroy EditArchiveCommandParser
+
+ArchivedBookParser --> LogicManager : e
+deactivate ArchivedBookParser
+
+LogicManager -> EditArchiveCommand : execute(m)
+activate EditArchiveCommand
+
+EditArchiveCommand -> Model : getArchivedPerson(A0123456X)
+activate Model
+
+Model --> EditArchiveCommand : p
+deactivate Model
+
+EditArchiveCommand -> Model : setArchivedPerson(p, editedPerson)
+activate Model
+
+Model --> EditArchiveCommand
+deactivate Model
+
+EditArchiveCommand -> Model : updateFilteredArchivedList(predicate)
+activate Model
+
+Model --> EditArchiveCommand
+deactivate Model
+
+create CommandResult
+EditArchiveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditArchiveCommand
+deactivate CommandResult
+
+EditArchiveCommand --> LogicManager : r
+deactivate EditArchiveCommand
+
+EditArchiveCommand -[hidden]-> ArchivedBookParser
+destroy EditArchiveCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

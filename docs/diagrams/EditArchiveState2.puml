@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+hide methods
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title edit_archived A0123456X g/B
+
+class uniquePersonList as "<u>uniqueArchivedPersonList:UniquePersonList</u>"
+class student1 as "<u>student1:Person</u>" {}
+class studentId1 as "<u>studentId1:StudentId</u>" {
+    studentId = "A0123456X"
+}
+class studentGrade1 as "<u>studentGrade1:Grade</u>" {
+    grade = "B"
+}
+
+uniquePersonList -down-> student1
+student1 *-down-> studentId1
+student1 *-down-> studentGrade1
+@enduml

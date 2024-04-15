@@ -214,9 +214,11 @@ Note that `p0` still retains the original group, group 3.
 
 #### Implementation
 
-The `add` command allows users to add students' details into the list.
+The add feature is similar to the add feature in AB3, which allows users to add students' details into the list.
+However, in our implementation, we decided to extend the add feature to add students' details such as, `name`, `student_id`, `email`, `grade`, `group`
+that tailored to our target audience.
 
-Given below is an example usage scenario of `add` command:
+Given below is an example usage scenario of `add` feature:
 
 Step 1. Assume the user has some existing students in the `UniquePersonList`.
 ![AddState1](images/AddState1.png)
@@ -391,7 +393,123 @@ The following activity diagram summarizes what happens when a user executes a ra
 
 * **Alternative 2:** Remove `Person` from random groups formed if `Grade` of the `Person` is no longer below or at the threshold.
     * Pros: User can use the same groupings for weak students who still require more focus on.
-    * Cons: More complicated to implement and record of previous random groupings a `Person` belongs to will be gone.
+    * Cons: More complicated to implement and record of previous random groupings a `Person` belongs to will be gone. 
+
+### Archive feature
+
+#### Implementation
+
+The archive feature allows the users to keep a record of past students' details.
+
+Given below is an example usage scenario of `archive` feature:
+
+Step 1. Assume the user has some existing students in the `UniquePersonList` of person list.
+![ArchiveState1](images/ArchiveState1.png)
+
+Step 2. The user executes `archive A0123456X` to archive the student into the archived list.
+* The `archive` command invokes `LogicManager#execute()`.
+* `LogicManager#execute` would first invoke `AddressBookParser#parseCommand()`.
+* `AddressBookParser#parseCommand()` will identifies the `archive` command and then invokes `ArchiveCommandParser#parse()` to parse the arguments accordingly.
+* `ArchiveCommandParser#parse()` will return a `ArchiveCommand` object which takes in a `StudentId` object.
+* `LogicManager#execute()` invokes `ArchiveCommand#execute()`. Then, `model#archivePerson` is called to archive the person into the archived list.
+* The archived person will now be added into `UniquePersonList` of the archived list.
+* The archived person will also be removed from the `UniquePersonList` of the person list.
+![ArchiveState2](images/ArchiveState2.png)
+
+Given below is the sequence diagram for `archive` command:
+![ArchiveSequenceDiagram](images/ArchiveSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect: Mass archiving.**
+* **Alternative 1 (current choice):** Allow archiving only one student at a time.
+    * Pros: Reduce the complexity of archiving process for the users.
+    * Cons: May be time-consuming for users who need to archive multiple students.
+
+* **Alternative 2:** Allow users to select and archive multiple students at once.
+    * Pros: Increases efficiency by allowing users to archive multiple students simultaneously.
+    * Cons: May increase the risk of unintentional archiving.
+
+### Unarchived feature
+
+#### Implementation
+
+The unarchived feature allows the users to unarchive past students' details.
+
+Given below is an example usage scenario of `unarchived` feature:
+
+Step 1. Assume the user has some existing students in the `UniquePersonList` of archived list.
+![UnarchivedState1](images/UnarchivedState1.png)
+
+Step 2. The user executes `unarchived A0123456X` to unarchive the student into the person list.
+* The `unarchive` command invokes `LogicManager#execute()`.
+* `LogicManager#execute` would first invoke `ArchivedBookParser#parseCommand()`.
+* `ArchivedBookParser#parseCommand()` will identifies the `unarchived` command and then invokes `UnarchiveCommandParser#parse()` to parse the arguments accordingly.
+* `UnarchiveCommandParser#parse()` will return a `UnarchiveCommand` object which takes in a `StudentId` object.
+* `LogicManager#execute()` invokes `UnarchiveCommand#execute()`. Then, `model#unarchivePerson` is called to unarchive the archived person into the person list.
+* The archived person will now be added into `UniquePersonList` of the person list.
+* The archived person will also be removed from the `UniquePersonList` of the archived list.
+![UnarchivedState2](images/UnarchivedState2.png)
+
+Given below is the sequence diagram for `unarchived` command:
+![UnarchiveSequenceDiagram](images/UnarchivedSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect: Mass unarchiving.**
+* **Alternative 1 (current choice):** Allow unarchiving only one student at a time.
+    * Pros: Reduce the complexity of unarchiving process for the users.
+    * Cons: May be time-consuming for users who need to unarchive multiple students.
+
+* **Alternative 2:** Allow users to select and unarchive multiple students at once.
+    * Pros: Increases efficiency by allowing users to unarchive multiple students simultaneously.
+    * Cons: May increase the risk of unintentional unarchiving.
+
+### Edit_Archived feature
+
+#### Implementation
+
+The edit_archived feature is similar to the edit feature. However, edit_archived is only applicable to edit persons in the archived list.
+
+Given below is an example usage scenario of `edit_archived` feature:
+
+Step 1. Assume the user has some existing students in the `UniquePersonList` of archived list.
+![EditArchiveState1](images/EditArchiveState1.png)
+
+Step 2. The user executes `edit_archived A0123456X g/B` to edit the student's grade to 'B' in the archived list.
+* The `edit_archived` command invokes `LogicManager#execute()`.
+* `LogicManager#execute` would first invoke `ArchivedBookParser#parseCommand()`.
+* `ArchivedBookParser#parseCommand()` will identifies the `edit_archived` command and then invokes `EditArchiveCommandParser#parse()` to parse the arguments accordingly.
+  * `EditArchiveCommandParser#parse()` will return a `EditArchiveCommand` object which takes in a `StudentId` object and `EditPersonDescriptor` object.
+* `LogicManager#execute()` invokes `EditArchiveCommand#execute()`. Then, `model#setArchivedPerson` is called to replace the `personToEdit` with the `editedPerson`.
+* Lastly, the `model#updateFilteredArchivedList()` is called to update the archived list with the editedPerson.
+![EditArchiveState2](images/EditArchiveState2.png)
+
+Given below is the sequence diagram for `edit_archived` command:
+![EditArchiveSequenceDiagram](images/EditArchiveSequenceDiagram.png)
+
+### Delete_Archived feature
+
+#### Implementation
+
+The delete_archived feature is similar to the delete feature. However, delete_archived is only applicable to delete persons in the archived list.
+
+Given below is an example usage scenario of `delete_archived` feature:
+
+Step 1. The user has added some students to `UniquePersonList` of the archived list.
+
+![DeleteArchiveState1](images/DeleteArchiveState1.png)
+
+Step 2. The user executes `find` command where only `student1` and `student2` matches the predicate so only `student1` and `student2` are in the `FilteredArchivedList` of `ModelManager`.
+
+![DeleteState2](images/DeleteArchiveState2.png)
+
+Step 3. The user executes `delete_archived A0123456A` command to delete student with student ID `A0123456A`. `ModelManager#getArchivedPerson(StudentId)` returns `student3` which the id belongs to. `student3` will be removed from `UniquePersonList` of the archived list.
+
+![DeleteState3](images/DeleteArchiveState3.png)
+
+Given below is the sequence diagram for `delete_archived` command:
+![DeleteArchiveSequenceDiagram](images/DeleteArchiveSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -474,10 +592,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
