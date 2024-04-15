@@ -219,6 +219,7 @@ Format: `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP_NAME]​...`
 * `EMAIL` should be of the format `username@domain`. The `username` should start with **e**, followed by 7 digits. The `domain` should be **u.nus.edu**.
     * e.g. `e0123456@u.nus.edu`
 * `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
+* `GROUP_NAME` cannot be empty, and must only contain alphanumeric characters and space.
 
 
 Example:
