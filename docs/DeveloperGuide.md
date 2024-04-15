@@ -552,8 +552,14 @@ a pie chart of grades.
 - `SummaryCommand` creates and passes a `CommandResult` object to `LogicManager`
 - `LogicManager` passes `CommandResult` to `UI` to display `Person` list with the summary. 
 
-Currently, if the `summary` command is used with 0 students, the popup window shows total number of students = 0, mean grade is blank, 
-and standard deviation as 0. And no pie chart is displayed. 
+Currently, if the `summary` command is used with 0 students, the popup window shows total number of students = 0, mean grade is blank,
+and standard deviation as 0. And no pie chart is displayed.
+
+Unlike other commands, the `summary` command does not have a `SummaryCommandParser`. This is because this command does not take in any input. 
+
+Proposed: <br>
+Modifying the summary command to include an input, thereby allowing the user to also view summary of a group.
+
 
 ---------------------------------------------------------------------------------------------------------------------
 ### \[Proposed\] Undo/redo feature
