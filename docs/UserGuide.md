@@ -214,9 +214,9 @@ Format: `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP_NAME]​...`
 * `NAME`, `STUDENT_ID`, `GRADE`, and `EMAIL` must be specified. `GROUP_NAME` is optional.
 * `NAME` is case-sensitive.
     * e.g. `John Doe` is different from `john doe`
-* `STUDENT_ID` should **start with A**. It is followed by **7 digits** and can **end with any letter [A-Z]**.
+* `STUDENT_ID` should start with 'A', followed by 7 digits, and end with any capital letter. 
     * e.g. `A0123459X`
-* `EMAIL` should be of the format **local-part@domain**. **local-part** should start with the letter **e/E**, followed by **7 digits**. The **domain** should be **u.nus.edu**.
+* `EMAIL` should be of the format `username@domain`. The `username` should start with **e**, followed by 7 digits. The `domain` should be **u.nus.edu**.
     * e.g. `e0123456@u.nus.edu`
 * `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
 
@@ -242,14 +242,14 @@ Edits an existing person in the list of students. Exsisting fields are updated t
 
 Format: `edit STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...`
 
-* `STUDENT_ID` should **start with A**. It is followed by **7 digits** and can **end with any letter [A-Z]**.
+* `STUDENT_ID` should start with 'A', followed by 7 digits, and end with any capital letter. 
     * e.g. `A0123459X`
-* The student with the specified `STUDENT_ID` must exist in the list.
 * `NAME` is case-sensitive.
     * e.g. `John Doe` is different from `john doe`
-* `EMAIL` should be of the format **local-part@domain**. **local-part** should start with the letter **e/E**, followed by **7 digits**. The **domain** should be **u.nus.edu**.
+* `EMAIL` should be of the format `username@domain`. The `username` should start with **e**, followed by 7 digits. The `domain` should be **u.nus.edu**.
     * e.g. `e0123456@u.nus.edu`
 * `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
+* The student with the specified `STUDENT_ID` must exist in the list.
 * Editing `GROUP` will overwrite existing `GROUP` entries.
 * Use of `GROUP` prefix `gp/` in an edit command without specifying `GROUP_NAME` will clear all existing `GROUP` of the student.
 
@@ -268,7 +268,8 @@ Format: `view STUDENT_ID`
 
 * Returns the detailed information of the student with the corresponding `STUDENT_ID`.
 * The `STUDENT_ID` is case-sensitive.
-* The `STUDENT_ID` starts with A, ends with a letter, and it must be 9 characters long.
+* `STUDENT_ID` should start with 'A', followed by 7 digits, and end with any capital letter. 
+    * e.g. `A0123459X`
 * This feature is not applicable to the archived list, i.e. you can only view current students.
 
 Examples:
@@ -282,7 +283,8 @@ Format: `delete STUDENT_ID`
 
 * Deletes the person with the specified `STUDENT_ID`.
 * The `STUDENT_ID` refers to the id corresponding to the student in the list.
-* The `STUDENT_ID` is case-sensitive, must be a String starting with ‘A’ and ending with any letter, with a total length of 9
+* `STUDENT_ID` should start with 'A', followed by 7 digits, and end with any capital letter. 
+    * e.g. `A0123459X`
 * The student with the specified `STUDENT_ID` must exist in the list.
 
 
@@ -363,7 +365,7 @@ Archives a student from the person list. That student is moved to the archived l
 Format: `archive STUDENT_ID`
 
 * Archives a student with the specified `STUDENT_ID`.
-* `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
+* `STUDENT_ID` should start with 'A', followed by 7 digits, and end with any capital letter. 
     * e.g. `A0123459X`
 * The student with the specified `STUDENT_ID` must exist in the person list.
 
@@ -398,7 +400,7 @@ Deletes an archived student from the archived list.
 Format: `delete_archived STUDENT_ID`
 
 * Deletes an archived student with the specified `STUDENT_ID`.
-* `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
+* `STUDENT_ID` should start with 'A', followed by 7 digits, and end with any capital letter. 
     * e.g. `A0123459X`
 * The student with the specified `STUDENT_ID` must exist in the archived list.
 * This feature is only applicable to the archived list.
@@ -416,7 +418,7 @@ Unarchives a student from the archived list. That person is moved to the person 
 Format: `unarchived STUDENT_ID`
 
 * Unarchives a student with the specified `STUDENT_ID`.
-* `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
+* `STUDENT_ID` should start with 'A', followed by 7 digits, and end with any capital letter. 
     * e.g. `A0123459X`
 * The student with the specified `STUDENT_ID` must exists in the archived list.
 * This feature is only applicable to the archived list.
