@@ -11,7 +11,7 @@ title: Developer Guide
 
 * The **CS2103T teaching team** for providing us with the [base project](https://github.com/nus-cs2103-AY2324S2/tp) that Teachstack builds upon, as well as for their invaluable guidance throughout this project's development. 
 * **Any other libaries or 3rd-party code**  already used in the [base project](https://github.com/nus-cs2103-AY2324S2/tp). (see link for details)
-
+* The idea for clickable email was inspired from a similar feature in project [CodeConnect](https://github.com/AY2324S2-CS2103T-T12-1/tp).
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -731,6 +731,8 @@ testers are expected to do more *exploratory* testing.
 
 Team Size: 5
 
-- 1. Ensure that the archive bar as well as the summary statistics component follow the ui theme ie dark background in dark theme.
-- 2. Provide ability to view achived students.
-- 3. Expand the characters accepted for name to include 's/o' ,'-' etc.
+1. Ensure that the archive bar as well as the summary statistics component follow the ui theme ie dark background in dark theme.
+2. Provide ability to view archived students.
+3. Expand the characters accepted for name to include special characters like 's/o' ,'-' etc.
+4. Allow for more strength indicators (weak, strong etc.) with threshold setting commands.
+5. Update the app to store multiple grades for a students. This allows users to track how students are performing and progressing and be able to display statistics for a student/group.
