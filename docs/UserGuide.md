@@ -187,7 +187,7 @@ and ensure optimal utilization of the application's capabilities.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear`, and `clear_archived`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Extraneous parameters for commands that do take in parameters (such as `delete` and  `group`) are invalid. This will cause the command to fail.<br>
@@ -413,6 +413,15 @@ Format: `edit_archived STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [
 * At least one of the optional fields indicated within the square bracket must be provided.
 * The `...` after the `GROUP_NAME` indicates that multiple `GROUP_NAME`s can be provided for editing.
 * The student with the specified `STUDENT_ID` must exist in the archived list.
+* `STUDENT_ID` should start with 'A', followed by 7 digits, and end with any capital letter. 
+    * e.g. `A0123459X`
+* `EMAIL` should be of the format `username@domain`. The `username` should start with **e**, followed by 7 digits. The `domain` should be **u.nus.edu**.
+    * e.g. `e0123456@u.nus.edu`
+* `NAME` is case-sensitive.
+    * e.g. `John Doe` is different from `john doe`
+* `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
+* Editing `GROUP` will overwrite existing `GROUP` entries.
+* *Use of `GROUP` prefix `gp/` in an edit command without specifying `GROUP_NAME` will clear all existing `GROUP`s of the student!*
 * This feature is only applicable to the archived list.
 
 Examples:
