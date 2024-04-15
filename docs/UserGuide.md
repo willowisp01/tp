@@ -332,7 +332,7 @@ Examples:
 * Group formed cannot be deleted individually unless using the [`group` command](#771-forming-focus-groups-manually--group) to clear all groups <br>
   eg. `group id/A0123459X` removes student with `STUDENT_ID = A0123459X` from all the groups the student was in.
 * Random groups formed will not be affected by the [`setweak` command](#714-setting-weak-threshold--setweak)<br>
-(i.e. students in a randomly formed group will remain in the group after `setweak` command, even if the student falls above the new weak threshold)
+i.e. students in a randomly formed group will remain in the group after `setweak` command, even if the student falls above the new weak threshold
 
 </div>
 
