@@ -52,6 +52,8 @@ Happy teaching!
     - [7.15 Viewing summary statistics](#715-viewing-summary-statistics--summary)
 - [8. Glossary](#8-glossary)
 - [9. FAQ](#9-faq)
+    - [9.1 General concerns](#91-general-concerns)
+    - [9.2 Using TeachStack](#92-using-teachstack)
 - [10. Known Issues](#10-known-issues)
 - [11. Command Summary](#11-command-summary)
 
@@ -509,7 +511,7 @@ Displayed after command: `summary`
 
 ## 9. FAQ
 
-### General concerns
+### 9.1 General concerns
 
 **Q**: Is TeachStack free to use?<br>
 **A**: Yes! TeachStack is completely free to use. We believe in making student management accessible to all computer science instructors. Enjoy the full functionality of TeachStack without any subscription fees or hidden charges.
@@ -526,7 +528,7 @@ Displayed after command: `summary`
 **Q**: Is TeachStack really better than Canvas, Excel, etc. for me?
 **A**: Yes! While the other platforms do offer valuable features, TeachStack stands out with its CLI, intuitive group forming, archiving, and other tailored features designed specifically for computer science educators. What sets TeachStack apart is our commitment to continuous improvement and development, driven by your feedback. With ongoing enhancements, we're dedicated to ensuring TeachStack remains the preferred choice for instructors seeking to elevate their teaching experience.
 
-### Using TeachStack
+### 9.2 Using TeachStack
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TeachStack home folder.
