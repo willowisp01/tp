@@ -196,6 +196,29 @@ and ensure optimal utilization of the application's capabilities.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the parameter format:**<br>
+
+* `TeachStack` only takes in English input.
+
+* All parameters are case-sensitive.
+
+* Name must only consist of letters, numbers and space characters. Special characters such as `/`, `-` are not allowed.<br>
+  eg. `John Doe` is valid, `John-Doe` is invalid.
+
+* Student id must start with `A`, followed by 7 digits `[0-9]`, and ends with a capital letter `[A-Z]`. It should contain a total of 9 characters.<br>
+  eg. `A0123459X` is valid, `a012345678` is invalid.
+
+* Email must be in the format `exxxxxxx@u.nus.edu`, where x represents a digit `[0-9]`<br>
+  eg. `e1234567@u.nus.edu` is valid, `e1234567@example.com` is invalid.
+
+* Grade must be one of **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**<br>
+  eg. `A+` is valid, `C-` is invalid.
+
+</div>
+
 ### 7.1 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
