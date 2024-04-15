@@ -10,8 +10,9 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * The **CS2103T teaching team** for providing us with the [base project](https://github.com/nus-cs2103-AY2324S2/tp) that Teachstack builds upon, as well as for their invaluable guidance throughout this project's development. 
-* **Any other libaries or 3rd-party code**  already used in the [base project](https://github.com/nus-cs2103-AY2324S2/tp). (see link for details)
-* The idea for clickable email was inspired from a similar feature in project [CodeConnect](https://github.com/AY2324S2-CS2103T-T12-1/tp).
+* **Any other libaries or 3rd-party code**  already used in the [base project](https://github.com/nus-cs2103-AY2324S2/tp). (see link for details) <br>
+
+* The idea for **clickable email** was inspired from a similar feature in project [CodeConnect](https://github.com/AY2324S2-CS2103T-T12-1/tp). 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -160,7 +161,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The group feature is a modification of the original "tag" feature, where each person can have multiple tags with various sorts of information.
+The group feature is a modification of the original "tag" feature, where each `Person` can have multiple tags with various sorts of information.
 We have adapted the tags for the express purpose of putting students into groups.
 
 The command, like all others, implements `execute`. If possible, all students will be put into the specified group.
@@ -286,23 +287,23 @@ The following activity diagram summarizes what happens when a user executes a de
 
 **Aspect: Allow deletion of all `Person` added or only those displayed:**
 
-* **Alternative 1 (current choice):** Can delete any person in the list.
-    * Pros: Delete command will execute successfully without having to run additional command to ensure that the person to be deleted is being displayed.
+* **Alternative 1 (current choice):** Can delete any `Person` in the `persons` list.
+    * Pros: Delete command will execute successfully without having to run additional command to ensure that the `Person` to be deleted is being displayed.
     * Cons: May result in accidental deletion if wrong student id is given.
 
-* **Alternative 2:** Only delete person that is displayed.
-    * Pros: Allow user to refer to the displayed data to reduce risk of specifying a wrong id belonging to another person.
+* **Alternative 2:** Only delete `Person` that is displayed.
+    * Pros: Allow user to refer to the displayed data to reduce risk of specifying a wrong id belonging to another `Person`.
     * Cons: May reduce usability as user may have to enter additional command to ensure the student to be deleted is displayed.
 
 **Aspect: Deleted `Person` stored or ready for garbage collection:**
 
-* **Alternative 1 (current choice):** Person deleted is no longer used and ready for garbage collection.
+* **Alternative 1 (current choice):** `Person` deleted is no longer used and ready for garbage collection.
     * Pros: Easy to implement.
     * Cons: May result in lost of data upon accidental deletion.
 
-* **Alternative 2:** Create a list to store all deleted person.
-    * Pros: Easier to implement command to recover a deleted person in the future.
-    * Cons: Stored deleted person may never be used. May have performance issue in terms of memory usage.
+* **Alternative 2:** Create a list to store all deleted `Person`.
+    * Pros: Easier to implement command to recover a deleted `Person` in the future.
+    * Cons: Stored deleted `Person` may never be used. May have performance issue in terms of memory usage.
 
 ### Find feature
 
@@ -403,7 +404,7 @@ The archive feature allows the users to keep a record of past students' details.
 
 Given below is an example usage scenario of `archive` feature:
 
-Step 1. Assume the user has some existing students in the `UniquePersonList` of person list.
+Step 1. Assume the user has some existing students in the `UniquePersonList` of `persons` list.
 ![ArchiveState1](images/ArchiveState1.png)
 
 Step 2. The user executes `archive A0123456X` to archive the student into the archived list.
@@ -441,13 +442,13 @@ Given below is an example usage scenario of `unarchived` feature:
 Step 1. Assume the user has some existing students in the `UniquePersonList` of archived list.
 ![UnarchivedState1](images/UnarchivedState1.png)
 
-Step 2. The user executes `unarchived A0123456X` to unarchive the student into the person list.
+Step 2. The user executes `unarchived A0123456X` to unarchive the student into the 'persons' list.
 * The `unarchive` command invokes `LogicManager#execute()`.
 * `LogicManager#execute` would first invoke `ArchivedBookParser#parseCommand()`.
 * `ArchivedBookParser#parseCommand()` will identifies the `unarchived` command and then invokes `UnarchiveCommandParser#parse()` to parse the arguments accordingly.
 * `UnarchiveCommandParser#parse()` will return a `UnarchiveCommand` object which takes in a `StudentId` object.
-* `LogicManager#execute()` invokes `UnarchiveCommand#execute()`. Then, `model#unarchivePerson` is called to unarchive the archived person into the person list.
-* The archived person will now be added into `UniquePersonList` of the person list.
+* `LogicManager#execute()` invokes `UnarchiveCommand#execute()`. Then, `model#unarchivePerson` is called to unarchive the archived person into the `persons` list.
+* The archived person will now be added into `UniquePersonList` of the `persons` list.
 * The archived person will also be removed from the `UniquePersonList` of the archived list.
 ![UnarchivedState2](images/UnarchivedState2.png)
 
@@ -511,6 +512,57 @@ Step 3. The user executes `delete_archived A0123456A` command to delete student 
 Given below is the sequence diagram for `delete_archived` command:
 ![DeleteArchiveSequenceDiagram](images/DeleteArchiveSequenceDiagram.png)
 
+--------------------------------------------------------------------------------------------------------------------
+### Set Weakness Threshold Feature
+
+This is a new command to designate students as being "weak" or not based on their grades. `thresholdGrade` is a value 
+within `Grade`. This does not affect students who have been archived.<br>
+
+By default, we have set C+ as the `thresholdGrade`, meaning that a student with grade lower than or equal to C+ is
+displayed with a weak marker next to their name (as shown below).
+
+<img src="images/weak_label.png" alt="Weak Label" width="200">
+
+
+The command `set weak g/GRADE` followed by the grade parameter allows the instructor to set a different grade as the
+new `thresholdGrade`. This command resets students' weak markers and updates the display immediately.
+
+
+The below sequence diagram displays the interactions while executing the command: `setweak g/B`
+
+![SetWeakSequenceDiagram](images/SetWeakSequenceDiagram.png)
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Summary Statistics Feature
+
+This is a new command to view summary statistics of all students.
+Entering the command `summary` results in a popup window in the gui. The popup window consists of summary data including total
+number of students, mean grade, and standard deviation of grades. Additionally, a colored pie chart is displayed of the
+students' grade distribution.
+
+Implementation:
+The `summary` command is implemented as such: 
+
+- `LogicManager`'s execute method calls the `parseCommand` method from `AddressBookParser`
+- `parseCommand` creates a `SummaryCommand`
+- `SummaryCommand`'s execute method is called by `LogicManager`.
+- `SummaryCommand` computes the total number of students, mean grade, and standard deviation of grade. It also generates 
+a pie chart of grades.
+- `SummaryCommand` creates and passes a `CommandResult` object to `LogicManager`
+- `LogicManager` passes `CommandResult` to `UI` to display `Person` list with the summary. 
+
+Currently, if the `summary` command is used with 0 students, the popup window shows total number of students = 0, mean grade is blank,
+and standard deviation as 0. And no pie chart is displayed.
+
+Unlike other commands, the `summary` command does not have a `SummaryCommandParser`. This is because this command does not take in any input. 
+
+Proposed: <br>
+Modifying the summary command to include an input, thereby allowing the user to also view summary of a group.
+
+
+---------------------------------------------------------------------------------------------------------------------
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -584,58 +636,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 
-
---------------------------------------------------------------------------------------------------------------------
-### Set Weakness Threshold Feature
-
-This is a new command to designate students as being "weak" or not based on their grades. `thresholdGrade` is a value 
-within `Grade`. 
-By default, we have set C+ as the `thresholdGrade`, meaning that a student with grade lower than or equal to C+ is
-displayed with a weak marker next to their name (as shown below).
-
-<img src="images/weak_label.png" alt="Weak Label" width="200">
-
-
-The command `set weak g/GRADE` followed by the grade parameter allows the instructor to set a different grade as the
-new `thresholdGrade`. This command resets students' weak markers and updates the display immediately.
-
-
-The below sequence diagram displays the interactions while executing the command: `setweak g/B`
-
-![SetWeakSequenceDiagram](images/SetWeakSequenceDiagram.png)
-
-
---------------------------------------------------------------------------------------------------------------------
-
-### Summary Statistics Feature
-
-This is a new command to view summary statistics of all students.
-Entering the command `summary` results in a popup window in the gui. The popup window consists of summary data including total
-number of students, mean grade, and standard deviation of grades. Additionally, a colored pie chart is displayed of the
-students' grade distribution.
-
-Implementation:
-The `summary` command is implemented as such: 
-
-- `LogicManager`'s execute method calls the `parseCommand` method from `AddressBookParser`
-- `parseCommand` creates a `SummaryCommand`
-- `SummaryCommand`'s execute method is called by `LogicManager`.
-- `SummaryCommand` computes the total number of students, mean grade, and standard deviation of grade. It also generates 
-a pie chart of grades.
-- `SummaryCommand` creates and passes a `CommandResult` object to `LogicManager`
-- `LogicManager` passes `CommandResult` to `UI` to display `Person` list with the summary. 
-
-Currently, if the `summary` command is used with 0 students, the popup window shows total number of students = 0, mean grade is blank, 
-and standard deviation as 0. And no pie chart is displayed. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -768,7 +777,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  Should not lose data up to the latest operation in case of accidental close of application.
 4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
@@ -823,7 +832,7 @@ testers are expected to do more *exploratory* testing.
 1. Editing a student's id
 
    1. Test case: `edit A0123458X id/A0123458T`<br>
-      Expected: Student with id: A0123458X now has id: A0123458T. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has id: A0123458T. Details of the edited student shown in the status message.
 
    1. Test case: `edit A0000000B id/A0123458T`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -840,7 +849,7 @@ testers are expected to do more *exploratory* testing.
 1. Editing a student's email
 
    1. Test case: `edit A0123458X e/e9876543@u.nus.edu`<br>
-      Expected: Student with id: A0123458X now has email: e9876543@u.nus.edu. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has email: e9876543@u.nus.edu. Details of the edited student shown in the status message.
 
    1. Test case: `edit A0000000B e/e9876543@u.nus.edu`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -857,13 +866,13 @@ testers are expected to do more *exploratory* testing.
 1. Editing a student's group
 
    1. Test case: `edit A0123458X gp/Group 1`<br>
-      Expected: Student with id: A0123458X now has group: Group 1. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has group: Group 1. Details of the edited student shown in the status message.
 
    1. Test case: `edit A0123458X gp/Group 1 gp/Group 2`<br>
-      Expected: Student with id: A0123458X now has groups: Group 1, Group 2. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has groups: Group 1, Group 2. Details of the edited student shown in the status message.
 
    1. Test case: `edit A0123458X gp/`<br>
-      Expected: Student with id: A0123458X no longer has any group. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X no longer has any group. Details of the edited student shown in the status message.
 
    1. Test case: `edit A0000000B gp/Group 1`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -878,10 +887,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the person list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the `persons` list.
 
    1. Test case: `delete A0123458X`<br>
-      Expected: Student with id: A0123458X is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X is deleted from the list. Details of the deleted student shown in the status message.
 
    1. Test case: `delete A0000000B`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -891,10 +900,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student that is not being shown
 
-   1. Prerequisites: Find persons in `Group 20` using the `find gp/Group 20` command. Zero or more students in the person list.
+   1. Prerequisites: Find `Person` in `Group 20` using the `find gp/Group 20` command. Zero or more students in the 'persons' list.
 
    1. Test case: `delete A0123458X`<br>
-      Expected: Student with id: A0123458X is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X is deleted from the list. Details of the deleted student shown in the status message.
 
    1. Test case: `delete A0000000B`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -907,19 +916,19 @@ testers are expected to do more *exploratory* testing.
 
 1. Grouping students
 
-   1. Prerequisites: Multiple students added to person list.
+   1. Prerequisites: Multiple students added to `persons` list.
 
    1. Test case: `group gp/Group 10 id/A0123458X`<br>
-      Expected: Student with id: A0123458X now has group: Group 10. Status message shown. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has group: Group 10. Status message shown.
 
    1. Test case: `group gp/Group 10 id/A0123458X id/A0123456U`<br>
-      Expected: Student with id: A0123458X and student with id: A0123456U now have group: Group 10. Status message shown. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X and student with id: A0123456U now have group: Group 10. Status message shown.
 
    1. Test case: `group gp/Group 10 gp/Group 11 id/A0123458X`<br>
-      Expected: Student with id: A0123458X now has groups: Group 10, Group 11. Status message shown. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has groups: Group 10, Group 11. Status message shown.
 
    1. Test case: `group gp/ id/A0123458X`<br>
-      Expected: Student with id: A0123458X now has no group. Status message shown. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X now has no group. Status message shown.
 
    1. Test case: `group gp/Group 10 id/A0123458X id/A0000000B`<br>
       Expected: No student with id: A0000000B exists. Group command aborted. Error details shown in the status message. Status bar remains the same.
@@ -932,10 +941,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Archiving a student while all students are being shown
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the person list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the `persons` list.
 
    1. Test case: `archive A0123458X`<br>
-      Expected: Student with id: A0123458X is moved from person to the archived list. Details of the archived student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X is moved from `persons` to the `archived` list. Details of the archived student shown in the status message.
 
    1. Test case: `archive A0000000B`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -945,10 +954,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Archiving a student that is not being shown
 
-   1. Prerequisites: Find persons in `Group 20` using the `find gp/Group 20` command. Zero or more students in the person list.
+   1. Prerequisites: Find students in `Group 20` using the `find gp/Group 20` command. Zero or more students in the `persons` list.
 
    1. Test case: `archive A0123458X`<br>
-      Expected: Student with id: A0123458X is moved from person to the archived list. Details of the archived student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X is moved from `persons` to the `archived` list. Details of the archived student shown in the status message.
 
    1. Test case: `archive A0000000B`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -964,7 +973,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: One or more students in the archived list.
 
    1. Test case: `unarchived A0123458X`<br>
-      Expected: Student with id: A0123458X is moved from archived to the person list. Details of the unarchived student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X is moved from archived to the `persons` list. Details of the unarchived student shown in the status message.
 
    1. Test case: `unarchived A0123456A`<br>
       Expected: No student with id: A0123456A exists in the archived list. Error details shown in the status message. Status bar remains the same.
@@ -981,7 +990,7 @@ testers are expected to do more *exploratory* testing.
 1. Set grade threshold.
 
    1. Test case: `setweak g/A`<br>
-      Expected: Update weakness threshold: A. Status message shown. `Weak` marker appear next to name of all students with grade below or at **A** . Timestamp in the status bar is updated.
+      Expected: Update weakness threshold: A. Status message shown. `Weak` marker appear next to name of all students with grade below or at **A** .
 
    1. Test case: `setweak A`<br>
       Expected: Incorrect format. Error details shown in the status message. Status bar remains the same.
@@ -1000,7 +1009,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Running of application is not affected.
 
    1. Test case: Stop application. Rerun application.<br>
-      Expected: Application starts with an empty person list.
+      Expected: Application starts with an empty `persons` list.
 
 1. Dealing with missing data files
 
@@ -1036,3 +1045,4 @@ Team Size: 5
 7. Allow users to remove a group with a command. This will make it easier for users to create temporary groups which need to be cleared.
 8. Expand color scheme of summary window. This will make it grades easy to differentiate on the pie chart.
 9. Ensure aspects of UI (scrollbar, etc.) are clearly visible in both color themes, and minimized window.
+10. Allow for importing of data from other formats (excel, csv. etc.).
