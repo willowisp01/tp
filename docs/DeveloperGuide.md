@@ -11,7 +11,7 @@ title: Developer Guide
 
 * The **CS2103T teaching team** for providing us with the [base project](https://github.com/nus-cs2103-AY2324S2/tp) that Teachstack builds upon, as well as for their invaluable guidance throughout this project's development. 
 * **Any other libaries or 3rd-party code**  already used in the [base project](https://github.com/nus-cs2103-AY2324S2/tp). (see link for details)
-
+* The idea for clickable email was inspired from a similar feature in project [CodeConnect](https://github.com/AY2324S2-CS2103T-T12-1/tp).
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -634,7 +634,7 @@ a pie chart of grades.
 - `SummaryCommand` creates and passes a `CommandResult` object to `LogicManager`
 - `LogicManager` passes `CommandResult` to `UI` to display `Person` list with the summary. 
 
-Currently, if the `summary` command is used with 0 students, the popup window shows total number of students, mean grade, 
+Currently, if the `summary` command is used with 0 students, the popup window shows total number of students = 0, mean grade is blank, 
 and standard deviation as 0. And no pie chart is displayed. 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -688,7 +688,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TeachStack` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a student**
+**Use case: UC01 - Delete a student**
 
 **MSS**
 
@@ -711,7 +711,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Add a student**
+**Use case: UC02 - Add a student**
 
 **MSS**
 
@@ -727,7 +727,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Form a group of students**
+**Use case: UC03 - Form a group of students**
 
 **MSS**
 
@@ -1011,3 +1011,28 @@ testers are expected to do more *exploratory* testing.
    
    1. Test case: Stop application. Rerun application.<br>
       Expected: Application starts with an empty archived list.
+
+### Viewing Summary
+
+1. View Summary
+   1. Test case: Enter `summary` with >0 students.<br>
+      Expected: A popup window with a statistics component and pie chart. Status message with statistics shown.
+   
+   1. Test case: Enter `summary` with 0 students.<br>
+      Expected: A popup window with a statistics (Total students = 0, Mean Grade = '', Standard Deviation = 0.00) component. Status message with statistics.
+   
+
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Planned Enhancements**
+
+Team Size: 5
+
+1. Ensure that the archive bar as well as the summary statistics component follow the ui theme ie dark background in dark theme.
+2. Provide ability to view archived students.
+3. Expand the characters accepted for name to include special characters like 's/o' ,'-' etc.
+4. Allow for more strength indicators (weak, strong etc.) with threshold setting commands.
+5. Update the app to store multiple grades for a students. This allows users to track how students are performing and progressing and be able to display statistics for a student/group.
+6. Disable the minimize function of help window and re-centering help window when requested. 
+7. Allow users to remove a group with a command. This will make it easier for users to create temporary groups which need to be cleared.
+8. Expand color scheme of summary window. This will make it grades easy to differentiate on the pie chart.
+9. Ensure aspects of UI (scrollbar, etc.) are clearly visible in both color themes, and minimized window.
