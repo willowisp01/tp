@@ -190,7 +190,7 @@ and ensure optimal utilization of the application's capabilities.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Extraneous parameters for commands that do take in parameters (such as `delete` and  `group`) will be ignored.<br>
+* Extraneous parameters for commands that do take in parameters (such as `delete` and  `group`) are invalid. This will cause the command to fail.<br>
   e.g. command `delete A0123432A n/John` or `group gp/Group 3 id/A0123212A id/A4938274F n/John` is invalid.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -211,25 +211,25 @@ Adds student details to the person list.
 
 Format: `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP_NAME]​...`
 
-* `NAME`, `STUDENT_ID`, `GRADE`, and `EMAIL` must be specified, `GROUP_NAME` is optional.
+* `NAME`, `STUDENT_ID`, `GRADE`, and `EMAIL` must be specified. `GROUP_NAME` is optional.
 * `NAME` is case-sensitive.
-    * e.g. `John Doe is different from john doe`
-* `STUDENT_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
+    * e.g. `John Doe` is different from `john doe`
+* `STUDENT_ID` should **start with A**. It is followed by **7 digits** and can **end with any letter [A-Z]**.
     * e.g. `A0123459X`
-* `EMAIL` should be of the format **local-part@domain**. The local-part should only be in the **format of e/E follow by 7 digits from [0-9]**. The **domain name must end with a domain label u.nus.edu**.
+* `EMAIL` should be of the format **local-part@domain**. **local-part** should start with the letter **e/E**, followed by **7 digits**. The **domain** should be **u.nus.edu**.
     * e.g. `e0123456@u.nus.edu`
 * `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
 
 
 Example:
-* `add id/A0123459X n/John Doe e/e0123456@u.nus.edu g/A` adds the person named John Doe with student_id "A0123459X", email "e0123456@u.nus.edu" and grade "A" to the list.
+* `add id/A0123459X n/John Doe e/e0123456@u.nus.edu g/A` adds the person named John Doe with `STUDENT_ID` "A0123459X", `EMAIL` "e0123456@u.nus.edu" and `GRADE` "A" to the list.
 
 Expected output:
 ![AddUi](images/AddUI.png)
 
 ### 7.3 Listing all students : `list`
 
-Shows a list of all students, ordered by grades in descending order ie. **[F, D, D+, C, C+, B-, B, B+, A- A, A+]**.
+Shows a list of all students, ordered by grades in descending order, i.e. **[F, D, D+, C, C+, B-, B, B+, A- A, A+]**.
 
 Format: `list`
 
@@ -238,31 +238,31 @@ Format: `list`
 
 ### 7.4 Editing a student : `edit`
 
-Edits an existing person in the list of students.
+Edits an existing person in the list of students. Exsisting fields are updated to match the specified input fields.
 
 Format: `edit STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...`
 
-* Edits the person with the specified `STUDENT_ID`.
-* The `STUDENT_ID` refers to the id corresponding to the student in the list.
-* The `STUDENT_ID` is case-sensitive, must be a String starting with ‘A’ and ending with any letter, with a total length of 9
+* `STUDENT_ID` should **start with A**. It is followed by **7 digits** and can **end with any letter [A-Z]**.
+    * e.g. `A0123459X`
 * The student with the specified `STUDENT_ID` must exist in the list.
-* Existing value will be updated to the input value.
-* `NAME` is case-sensitive, eg. john doe is different from John Doe
-* Email must have the correct domain (@u.nus.edu) and string length of 8 for the email username eg. e0000000@u.nus.edu
+* `NAME` is case-sensitive.
+    * e.g. `John Doe` is different from `john doe`
+* `EMAIL` should be of the format **local-part@domain**. **local-part** should start with the letter **e/E**, followed by **7 digits**. The **domain** should be **u.nus.edu**.
+    * e.g. `e0123456@u.nus.edu`
 * `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
 * Editing `GROUP` will overwrite existing `GROUP` entries.
 * Use of `GROUP` prefix `gp/` in an edit command without specifying `GROUP_NAME` will clear all existing `GROUP` of the student.
 
 Examples:
-*  `edit A0123459X e/e0123450@u.nus.edu` Edits the email address of the person with student_id = A0123459X to be `e0123450@u.nus.edu`.
-*  `edit A0123459X n/John Doe` Edits the name of the person with student_id = A0123459X to be `John Doe`.
+*  `edit A0123459X e/e0123450@u.nus.edu` Edits the email address of the person with `STUDENT_ID = A0123459X` to be `e0123450@u.nus.edu`.
+*  `edit A0123459X n/John Doe` Edits the name of the person with `STUDENT_ID = A0123459X` to be `John Doe`.
 
 Expected output:
 ![EditUI](images/EditUI.png)
 
 ### 7.5 Viewing students : `view`
 
-Shows the detailed information of the student with the specified student_id.
+Shows the detailed information of the student with the specified `STUDENT_ID`.
 
 Format: `view STUDENT_ID`
 
@@ -280,10 +280,10 @@ Deletes the specified student from the list.
 
 Format: `delete STUDENT_ID`
 
-* Deletes the person at the specified `STUDENT_ID`.
+* Deletes the person with the specified `STUDENT_ID`.
 * The `STUDENT_ID` refers to the id corresponding to the student in the list.
 * The `STUDENT_ID` is case-sensitive, must be a String starting with ‘A’ and ending with any letter, with a total length of 9
-* The student with the specified `STUDENT_ID` must exists in the list.
+* The student with the specified `STUDENT_ID` must exist in the list.
 
 
 Examples:
@@ -295,11 +295,10 @@ Expected output:
 ### 7.7 Forming focus groups
 
 #### 7.7.1 Forming focus groups manually : `group`
-Creates a group with people corresponding to the selected IDs.
+Creates a group with people corresponding to the selected IDs. The group will have name `GROUP_NAME`.
 
-Format: `group gp/GROUP_NAME… id/STUDENT_ID…` (multiple groups, IDs allowed)
+Format: `group gp/GROUP_NAME… id/STUDENT_ID…`
 
-* Forms a group with the specified `GROUP_NAME`.
 * The group name includes students with the corresponding `STUDENT_IDs`.
 * If any of the given `STUDENT_IDs` do not exist, the command completely fails.
 * `GROUP_NAME` cannot be empty, and must only contain alphanumeric characters and space.
@@ -330,7 +329,7 @@ Examples:
 * Group formed cannot be deleted individually unless using the [`group` command](#771-forming-focus-groups-manually--group) to clear all groups <br>
   eg. `group id/A0123459X` removes student with `STUDENT_ID = A0123459X` from all the groups the student was in.
 * Random groups formed will not be affected by the [`setweak` command](#714-setting-weak-threshold--setweak)<br>
-  ie. student in a randomly formed group will remain in the group after `setweak` command, even if the student falls above the new weak threshold
+  *  i.e. students in a randomly formed group will remain in the group after `setweak` command, even if the student falls above the new weak threshold
 
 </div>
 
@@ -359,17 +358,17 @@ Format: `clear`
 ### 7.10 Archiving Features
 #### 7.10.1 Archiving a student : `archive`
 
-Archives a student from the person list to the archived list.
+Archives a student from the person list. That student is moved to the archived list.
 
 Format: `archive STUDENT_ID`
 
 * Archives a student with the specified `STUDENT_ID`.
 * `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
     * e.g. `A0123459X`
-* The student with the specified `STUDENT_ID` must exists in the person list.
+* The student with the specified `STUDENT_ID` must exist in the person list.
 
 Example:
-* `archive A0123459X` archives a student with the student_id "A0123459X".
+* `archive A0123459X` archives a student with  `student_id = A0123459X`.
 
 Expected output:
 ![](images/ArchiveUI.png)
@@ -382,12 +381,12 @@ Format: `edit_archived STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [
 
 * Edits the details of an archived student with the specified `STUDENT_ID`.
 * At least one of the optional fields indicated within the square bracket must be provided.
-* The `...` after the `GROUP_NAME` indicates that multiple `GROUP_NAME` can be provided for editing.
-* The student with the specified `STUDENT_ID` must exists in the archived list.
+* The `...` after the `GROUP_NAME` indicates that multiple `GROUP_NAME`s can be provided for editing.
+* The student with the specified `STUDENT_ID` must exist in the archived list.
 * This feature is only applicable to the archived list.
 
 Examples:
-* `edit_archived A0123459X g/B e/e0237861@u.nus.edu` edits the grade of the student with student_id "A0123459X" to "B" and the email to "e0237861@u.nus.edu".
+* `edit_archived A0123459X g/B e/e0237861@u.nus.edu` edits the grade of the student with `STUDENT_ID = A0123459X` to "B" and the `EMAIL` to "e0237861@u.nus.edu".
 
 Expected output:
 ![](images/EditArchivedUI.png)
@@ -401,18 +400,18 @@ Format: `delete_archived STUDENT_ID`
 * Deletes an archived student with the specified `STUDENT_ID`.
 * `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
     * e.g. `A0123459X`
-* The student with the specified `STUDENT_ID` must exists in the archived list.
+* The student with the specified `STUDENT_ID` must exist in the archived list.
 * This feature is only applicable to the archived list.
 
 Example:
-* `delete_archived A0123459X` deletes the student with student_id "A0123459X" from the archived list.
+* `delete_archived A0123459X` deletes the student with `STUDENT_ID = A0123459X` from the archived list.
 
 Expected output:
 ![](images/DeleteArchivedUI.png)
 
 #### 7.10.4 Unarchiving a student : `unarchived`
 
-Unarchives a student from the archived list to the person list.
+Unarchives a student from the archived list. That person is moved to the person list.
 
 Format: `unarchived STUDENT_ID`
 
@@ -423,7 +422,7 @@ Format: `unarchived STUDENT_ID`
 * This feature is only applicable to the archived list.
 
 Examples:
-* `unarchived A0123459X` unarchives a student with the student_id "A0123459X".
+* `unarchived A0123459X` unarchives a student with the `student_id = A0123459X`.
 
 Expected output:
 ![](images/UnarchivedUI.png)
@@ -452,17 +451,17 @@ TeachStack data is saved automatically as a JSON file `[JAR file location]/data/
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data files makes its format invalid, TeachStack will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the TeachStack to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+Furthermore, certain edits can cause the TeachStack to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. **Teachstack cannot take any responsibility for corrupted data if you choose to modify the data files directly.**
 </div>
 
 ### 7.14 Setting weak threshold : `setweak`
 
-Sets the weakness threshold for a weak marker.
+Sets the weakness threshold for a weak marker. The weakness threshold is the minimum grade for a student to be considered weak. 
 
 Format: `setweak g/GRADE`
 
-* By default, weakness threshold is set at Grade: C+
-* Updates weakness threshold value
+* By default, weakness threshold is set to `GRADE = C+`.
 * Students with grade lower or equal to threshold grade appear with a marker in the UI
 * `GRADE` should be one of the valid grades: **[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**.
 * After setting the threshold, it will be maintained even after shutting down the application.
@@ -503,8 +502,8 @@ Displayed after command: `summary`
 * **Grade**: A letter that shows how good a student's performance is. `TeachStack` only accepts grades that exist in the NUS grading system (**[A+, A, A-, B+, B, B-, C+, C, D+, D, F]**).
 * **Name**: Name of a student. `TeachStack` only accepts name consisting of alphabets, numbers and space.
 * **Focus group**: Group of students such that the user can pay more attention to assist the students in the group. Indicated by a `Group label` on the GUI
-* **Student details**: The student's name, id, email address, grade, and focus group that the student belongs in if any. 
-* **Grade threshold**: A threshold used by the system to determine if a student is considered as `weak` based on grades. If the student's grade falls below or is at the threshold, the student is considered as weak. It is set to **C+** by default and user can update using the `setweak` command to set expected performance.
+* **Student details**: The student's `NAME`, `STUDENT_ID`, `EMAIL`, `GRADE`, and focus group (`GROUP`) that the student belongs to, if any. 
+* **Grade threshold**: A threshold used by the system to determine if a student is considered as `weak` based on their grades. If the student's grade falls below, or is at the threshold, the student is considered as weak. It is set to **C+** by default. The user can update the threshold using the `setweak` command according to their preference. 
 * **Summary statistics**: Statistics of all active students (not in archived list), including the total number of students, mean grade, standard deviation of grade and a pie chart showing grade distribution. 
 
 --------------------------------------------------------------------------------------------------------------------
