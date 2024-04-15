@@ -10,8 +10,9 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * The **CS2103T teaching team** for providing us with the [base project](https://github.com/nus-cs2103-AY2324S2/tp) that Teachstack builds upon, as well as for their invaluable guidance throughout this project's development. 
-* **Any other libaries or 3rd-party code**  already used in the [base project](https://github.com/nus-cs2103-AY2324S2/tp). (see link for details)
-* The idea for clickable email was inspired from a similar feature in project [CodeConnect](https://github.com/AY2324S2-CS2103T-T12-1/tp).
+* **Any other libaries or 3rd-party code**  already used in the [base project](https://github.com/nus-cs2103-AY2324S2/tp). (see link for details) <br>
+
+* The idea for **clickable email** was inspired from a similar feature in project [CodeConnect](https://github.com/AY2324S2-CS2103T-T12-1/tp). 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -511,6 +512,57 @@ Step 3. The user executes `delete_archived A0123456A` command to delete student 
 Given below is the sequence diagram for `delete_archived` command:
 ![DeleteArchiveSequenceDiagram](images/DeleteArchiveSequenceDiagram.png)
 
+--------------------------------------------------------------------------------------------------------------------
+### Set Weakness Threshold Feature
+
+This is a new command to designate students as being "weak" or not based on their grades. `thresholdGrade` is a value 
+within `Grade`. This does not affect students who have been archived.<br>
+
+By default, we have set C+ as the `thresholdGrade`, meaning that a student with grade lower than or equal to C+ is
+displayed with a weak marker next to their name (as shown below).
+
+<img src="images/weak_label.png" alt="Weak Label" width="200">
+
+
+The command `set weak g/GRADE` followed by the grade parameter allows the instructor to set a different grade as the
+new `thresholdGrade`. This command resets students' weak markers and updates the display immediately.
+
+
+The below sequence diagram displays the interactions while executing the command: `setweak g/B`
+
+![SetWeakSequenceDiagram](images/SetWeakSequenceDiagram.png)
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Summary Statistics Feature
+
+This is a new command to view summary statistics of all students.
+Entering the command `summary` results in a popup window in the gui. The popup window consists of summary data including total
+number of students, mean grade, and standard deviation of grades. Additionally, a colored pie chart is displayed of the
+students' grade distribution.
+
+Implementation:
+The `summary` command is implemented as such: 
+
+- `LogicManager`'s execute method calls the `parseCommand` method from `AddressBookParser`
+- `parseCommand` creates a `SummaryCommand`
+- `SummaryCommand`'s execute method is called by `LogicManager`.
+- `SummaryCommand` computes the total number of students, mean grade, and standard deviation of grade. It also generates 
+a pie chart of grades.
+- `SummaryCommand` creates and passes a `CommandResult` object to `LogicManager`
+- `LogicManager` passes `CommandResult` to `UI` to display `Person` list with the summary. 
+
+Currently, if the `summary` command is used with 0 students, the popup window shows total number of students = 0, mean grade is blank,
+and standard deviation as 0. And no pie chart is displayed.
+
+Unlike other commands, the `summary` command does not have a `SummaryCommandParser`. This is because this command does not take in any input. 
+
+Proposed: <br>
+Modifying the summary command to include an input, thereby allowing the user to also view summary of a group.
+
+
+---------------------------------------------------------------------------------------------------------------------
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -584,58 +636,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 
-
---------------------------------------------------------------------------------------------------------------------
-### Set Weakness Threshold Feature
-
-This is a new command to designate students as being "weak" or not based on their grades. `thresholdGrade` is a value 
-within `Grade`. 
-By default, we have set C+ as the `thresholdGrade`, meaning that a student with grade lower than or equal to C+ is
-displayed with a weak marker next to their name (as shown below).
-
-<img src="images/weak_label.png" alt="Weak Label" width="200">
-
-
-The command `set weak g/GRADE` followed by the grade parameter allows the instructor to set a different grade as the
-new `thresholdGrade`. This command resets students' weak markers and updates the display immediately.
-
-
-The below sequence diagram displays the interactions while executing the command: `setweak g/B`
-
-![SetWeakSequenceDiagram](images/SetWeakSequenceDiagram.png)
-
-
---------------------------------------------------------------------------------------------------------------------
-
-### Summary Statistics Feature
-
-This is a new command to view summary statistics of all students.
-Entering the command `summary` results in a popup window in the gui. The popup window consists of summary data including total
-number of students, mean grade, and standard deviation of grades. Additionally, a colored pie chart is displayed of the
-students' grade distribution.
-
-Implementation:
-The `summary` command is implemented as such: 
-
-- `LogicManager`'s execute method calls the `parseCommand` method from `AddressBookParser`
-- `parseCommand` creates a `SummaryCommand`
-- `SummaryCommand`'s execute method is called by `LogicManager`.
-- `SummaryCommand` computes the total number of students, mean grade, and standard deviation of grade. It also generates 
-a pie chart of grades.
-- `SummaryCommand` creates and passes a `CommandResult` object to `LogicManager`
-- `LogicManager` passes `CommandResult` to `UI` to display `Person` list with the summary. 
-
-Currently, if the `summary` command is used with 0 students, the popup window shows total number of students = 0, mean grade is blank, 
-and standard deviation as 0. And no pie chart is displayed. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1036,3 +1045,4 @@ Team Size: 5
 7. Allow users to remove a group with a command. This will make it easier for users to create temporary groups which need to be cleared.
 8. Expand color scheme of summary window. This will make it grades easy to differentiate on the pie chart.
 9. Ensure aspects of UI (scrollbar, etc.) are clearly visible in both color themes, and minimized window.
+10. Allow for importing of data from other formats (excel, csv. etc.).
