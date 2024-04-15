@@ -22,6 +22,19 @@ Class JsonAdaptedPerson
 Class JsonAdaptedTag
 }
 
+package "ArchivedBook Storage" #F4F6F6{
+Class "<<interface>>\nArchivedBookStorage" as ArchivedBookStorage
+Class JsonArchivedBookStorage
+Class JsonSerializableArchivedBook
+}
+
+package "UserData Storage" #F4F6F6{
+Class "<<interface>>\nUserDataStorage" as UserDataStorage
+Class JsonUserDataStorage
+Class JsonSerializableUserData
+Class "{abstract}\nJsonAdaptedField" as JsonAdaptedField
+}
+
 }
 
 Class HiddenOutside #FFFFFF
@@ -30,14 +43,26 @@ HiddenOutside ..> Storage
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" ArchivedBookStorage
+StorageManager -up-> "1" UserDataStorage
 
 Storage -left-|> UserPrefsStorage
 Storage -right-|> AddressBookStorage
+Storage -right-|> ArchivedBookStorage
+Storage -left-|> UserDataStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
+
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+JsonArchivedBookStorage .up.|> ArchivedBookStorage
+JsonArchivedBookStorage ..> JsonSerializableArchivedBook
+
+JsonUserDataStorage .up.|> UserDataStorage
+JsonUserDataStorage ..> JsonSerializableUserData
+JsonSerializableUserData --> "*" JsonAdaptedField
 
 @enduml

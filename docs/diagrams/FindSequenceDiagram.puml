@@ -72,6 +72,9 @@ deactivate CommandResult
 
 FindCommand --> LogicManager : r
 deactivate FindCommand
+'Hidden arrow
+FindCommand -[hidden]-> AddressBookParser
+destroy FindCommand
 
 [<--LogicManager
 deactivate LogicManager
