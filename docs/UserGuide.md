@@ -525,7 +525,7 @@ Displayed after command: `summary`
 **Q**: Is TeachStack suitable for Teaching Assistants (TAs)?<br>
 **A**: While TeachStack is currently tailored for computer science instructors to simplify managing large student bodies, TAs may also find our app useful, especially in scenarios with larger class sizes. We continually strive to expand TeachStack's capabilities to better serve the diverse needs of educators and teaching teams.
 
-**Q**: Is TeachStack really better than Canvas, Excel, etc. for me?
+**Q**: Is TeachStack really better than Canvas, Excel, etc. for me?<br>
 **A**: Yes! While the other platforms do offer valuable features, TeachStack stands out with its CLI, intuitive group forming, archiving, and other tailored features designed specifically for computer science educators. What sets TeachStack apart is our commitment to continuous improvement and development, driven by your feedback. With ongoing enhancements, we're dedicated to ensuring TeachStack remains the preferred choice for instructors seeking to elevate their teaching experience.
 
 ### 9.2 Using TeachStack
@@ -533,11 +533,12 @@ Displayed after command: `summary`
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TeachStack home folder.
 
-**Q**: I made changes to the data files manually and I am now facing errors! What should I do?
+**Q**: I made changes to the data files manually and I am now facing errors! What should I do?<br>
 **A**: We recommend that you only manually edit the files if you are confident that you can update it correctly. In the event that you run into errors after manually editing the files, please delete the `[JAR file location]/data` folder so TeachStack can create new files.
 
-**Q**: Do I have to save my changes manually?
+**Q**: Do I have to save my changes manually?<br>
 **A**: No, TeachStack will automatically save any changes you have made after a command is entered.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 10. Known issues
