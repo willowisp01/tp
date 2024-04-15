@@ -160,7 +160,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The group feature is a modification of the original "tag" feature, where each person can have multiple tags with various sorts of information.
+The group feature is a modification of the original "tag" feature, where each `Person` can have multiple tags with various sorts of information.
 We have adapted the tags for the express purpose of putting students into groups.
 
 The command, like all others, implements `execute`. If possible, all students will be put into the specified group.
@@ -286,23 +286,23 @@ The following activity diagram summarizes what happens when a user executes a de
 
 **Aspect: Allow deletion of all `Person` added or only those displayed:**
 
-* **Alternative 1 (current choice):** Can delete any person in the list.
-    * Pros: Delete command will execute successfully without having to run additional command to ensure that the person to be deleted is being displayed.
+* **Alternative 1 (current choice):** Can delete any `Person` in the `persons` list.
+    * Pros: Delete command will execute successfully without having to run additional command to ensure that the `Person` to be deleted is being displayed.
     * Cons: May result in accidental deletion if wrong student id is given.
 
-* **Alternative 2:** Only delete person that is displayed.
-    * Pros: Allow user to refer to the displayed data to reduce risk of specifying a wrong id belonging to another person.
+* **Alternative 2:** Only delete `Person` that is displayed.
+    * Pros: Allow user to refer to the displayed data to reduce risk of specifying a wrong id belonging to another `Person`.
     * Cons: May reduce usability as user may have to enter additional command to ensure the student to be deleted is displayed.
 
 **Aspect: Deleted `Person` stored or ready for garbage collection:**
 
-* **Alternative 1 (current choice):** Person deleted is no longer used and ready for garbage collection.
+* **Alternative 1 (current choice):** `Person` deleted is no longer used and ready for garbage collection.
     * Pros: Easy to implement.
     * Cons: May result in lost of data upon accidental deletion.
 
-* **Alternative 2:** Create a list to store all deleted person.
-    * Pros: Easier to implement command to recover a deleted person in the future.
-    * Cons: Stored deleted person may never be used. May have performance issue in terms of memory usage.
+* **Alternative 2:** Create a list to store all deleted `Person`.
+    * Pros: Easier to implement command to recover a deleted `Person` in the future.
+    * Cons: Stored deleted `Person` may never be used. May have performance issue in terms of memory usage.
 
 ### Find feature
 
@@ -403,7 +403,7 @@ The archive feature allows the users to keep a record of past students' details.
 
 Given below is an example usage scenario of `archive` feature:
 
-Step 1. Assume the user has some existing students in the `UniquePersonList` of person list.
+Step 1. Assume the user has some existing students in the `UniquePersonList` of `persons` list.
 ![ArchiveState1](images/ArchiveState1.png)
 
 Step 2. The user executes `archive A0123456X` to archive the student into the archived list.
@@ -441,13 +441,13 @@ Given below is an example usage scenario of `unarchived` feature:
 Step 1. Assume the user has some existing students in the `UniquePersonList` of archived list.
 ![UnarchivedState1](images/UnarchivedState1.png)
 
-Step 2. The user executes `unarchived A0123456X` to unarchive the student into the person list.
+Step 2. The user executes `unarchived A0123456X` to unarchive the student into the 'persons' list.
 * The `unarchive` command invokes `LogicManager#execute()`.
 * `LogicManager#execute` would first invoke `ArchivedBookParser#parseCommand()`.
 * `ArchivedBookParser#parseCommand()` will identifies the `unarchived` command and then invokes `UnarchiveCommandParser#parse()` to parse the arguments accordingly.
 * `UnarchiveCommandParser#parse()` will return a `UnarchiveCommand` object which takes in a `StudentId` object.
-* `LogicManager#execute()` invokes `UnarchiveCommand#execute()`. Then, `model#unarchivePerson` is called to unarchive the archived person into the person list.
-* The archived person will now be added into `UniquePersonList` of the person list.
+* `LogicManager#execute()` invokes `UnarchiveCommand#execute()`. Then, `model#unarchivePerson` is called to unarchive the archived person into the `persons` list.
+* The archived person will now be added into `UniquePersonList` of the `persons` list.
 * The archived person will also be removed from the `UniquePersonList` of the archived list.
 ![UnarchivedState2](images/UnarchivedState2.png)
 
@@ -768,7 +768,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  Should not lose data up to the latest operation in case of accidental close of application.
 4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
@@ -878,7 +878,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the person list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the `persons` list.
 
    1. Test case: `delete A0123458X`<br>
       Expected: Student with id: A0123458X is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
@@ -891,7 +891,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student that is not being shown
 
-   1. Prerequisites: Find persons in `Group 20` using the `find gp/Group 20` command. Zero or more students in the person list.
+   1. Prerequisites: Find `Person` in `Group 20` using the `find gp/Group 20` command. Zero or more students in the 'persons' list.
 
    1. Test case: `delete A0123458X`<br>
       Expected: Student with id: A0123458X is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
@@ -907,7 +907,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Grouping students
 
-   1. Prerequisites: Multiple students added to person list.
+   1. Prerequisites: Multiple students added to `persons` list.
 
    1. Test case: `group gp/Group 10 id/A0123458X`<br>
       Expected: Student with id: A0123458X now has group: Group 10. Status message shown. Timestamp in the status bar is updated.
@@ -932,10 +932,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Archiving a student while all students are being shown
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the person list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the `persons` list.
 
    1. Test case: `archive A0123458X`<br>
-      Expected: Student with id: A0123458X is moved from person to the archived list. Details of the archived student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X is moved from `persons` to the `archived` list. Details of the archived student shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `archive A0000000B`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -945,10 +945,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Archiving a student that is not being shown
 
-   1. Prerequisites: Find persons in `Group 20` using the `find gp/Group 20` command. Zero or more students in the person list.
+   1. Prerequisites: Find students in `Group 20` using the `find gp/Group 20` command. Zero or more students in the `persons` list.
 
    1. Test case: `archive A0123458X`<br>
-      Expected: Student with id: A0123458X is moved from person to the archived list. Details of the archived student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X is moved from `persons` to the `archived` list. Details of the archived student shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `archive A0000000B`<br>
       Expected: No student with id: A0000000B exists. Error details shown in the status message. Status bar remains the same.
@@ -964,7 +964,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: One or more students in the archived list.
 
    1. Test case: `unarchived A0123458X`<br>
-      Expected: Student with id: A0123458X is moved from archived to the person list. Details of the unarchived student shown in the status message. Timestamp in the status bar is updated.
+      Expected: Student with id: A0123458X is moved from archived to the `persons` list. Details of the unarchived student shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `unarchived A0123456A`<br>
       Expected: No student with id: A0123456A exists in the archived list. Error details shown in the status message. Status bar remains the same.
@@ -1000,7 +1000,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Running of application is not affected.
 
    1. Test case: Stop application. Rerun application.<br>
-      Expected: Application starts with an empty person list.
+      Expected: Application starts with an empty `persons` list.
 
 1. Dealing with missing data files
 

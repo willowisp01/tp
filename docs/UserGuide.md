@@ -33,7 +33,7 @@ Happy teaching!
     - [7.3 Listing all students](#73-listing-all-students--list)
     - [7.4 Editing a student](#74-editing-a-student--edit)
     - [7.5 Viewing a student](#75-viewing-students-by-name--view)
-    - [7.6 Deleting a student](#76-deleting-a-person--delete)
+    - [7.6 Deleting a student](#76-deleting-a-student--delete)
     - [7.7 Forming focus groups](#77-forming-focus-groups)
       - [7.7.1 Forming focus groups manually](#771-forming-focus-groups-manually--group)
       - [7.7.2 Forming focus groups randomly](#772-forming-random-groups--random)
@@ -207,7 +207,7 @@ Format: `help`
 
 ### 7.2 Adding a student : `add`
 
-Adds student details to the person list.
+Adds student details to the `persons` list.
 
 Format: `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP_NAME]​...`
 
@@ -222,7 +222,7 @@ Format: `add id/STUDENT_ID n/NAME e/EMAIL g/GRADE [gp/GROUP_NAME]​...`
 
 
 Example:
-* `add id/A0123459X n/John Doe e/e0123456@u.nus.edu g/A` adds the person named John Doe with student_id "A0123459X", email "e0123456@u.nus.edu" and grade "A" to the list.
+* `add id/A0123459X n/John Doe e/e0123456@u.nus.edu g/A` adds the student named John Doe with student_id "A0123459X", email "e0123456@u.nus.edu" and grade "A" to the list.
 
 Expected output:
 ![AddUi](images/AddUI.png)
@@ -238,11 +238,11 @@ Format: `list`
 
 ### 7.4 Editing a student : `edit`
 
-Edits an existing person in the list of students.
+Edits an existing student in the list of students.
 
 Format: `edit STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_NAME]...`
 
-* Edits the person with the specified `STUDENT_ID`.
+* Edits the student with the specified `STUDENT_ID`.
 * The `STUDENT_ID` refers to the id corresponding to the student in the list.
 * The `STUDENT_ID` is case-sensitive, must be a String starting with ‘A’ and ending with any letter, with a total length of 9
 * The student with the specified `STUDENT_ID` must exist in the list.
@@ -254,8 +254,8 @@ Format: `edit STUDENT_ID [id/STUDENT_ID] [n/NAME] [e/EMAIL] [g/GRADE] [gp/GROUP_
 * Use of `GROUP` prefix `gp/` in an edit command without specifying `GROUP_NAME` will clear all existing `GROUP` of the student.
 
 Examples:
-*  `edit A0123459X e/e0123450@u.nus.edu` Edits the email address of the person with student_id = A0123459X to be `e0123450@u.nus.edu`.
-*  `edit A0123459X n/John Doe` Edits the name of the person with student_id = A0123459X to be `John Doe`.
+*  `edit A0123459X e/e0123450@u.nus.edu` Edits the email address of the student with student_id = A0123459X to be `e0123450@u.nus.edu`.
+*  `edit A0123459X n/John Doe` Edits the name of the student with student_id = A0123459X to be `John Doe`.
 
 Expected output:
 ![EditUI](images/EditUI.png)
@@ -280,7 +280,7 @@ Deletes the specified student from the list.
 
 Format: `delete STUDENT_ID`
 
-* Deletes the person at the specified `STUDENT_ID`.
+* Deletes the student at the specified `STUDENT_ID`.
 * The `STUDENT_ID` refers to the id corresponding to the student in the list.
 * The `STUDENT_ID` is case-sensitive, must be a String starting with ‘A’ and ending with any letter, with a total length of 9
 * The student with the specified `STUDENT_ID` must exists in the list.
@@ -359,14 +359,14 @@ Format: `clear`
 ### 7.10 Archiving Features
 #### 7.10.1 Archiving a student : `archive`
 
-Archives a student from the person list to the archived list.
+Archives a student from the `persons` list to the archived list.
 
 Format: `archive STUDENT_ID`
 
 * Archives a student with the specified `STUDENT_ID`.
 * `Student_ID` should **start with A follow by 7 digits and ends with a letter [A-Z]**.
     * e.g. `A0123459X`
-* The student with the specified `STUDENT_ID` must exists in the person list.
+* The student with the specified `STUDENT_ID` must exists in the `persons` list.
 
 Example:
 * `archive A0123459X` archives a student with the student_id "A0123459X".
@@ -412,7 +412,7 @@ Expected output:
 
 #### 7.10.4 Unarchiving a student : `unarchived`
 
-Unarchives a student from the archived list to the person list.
+Unarchives a student from the archived list to the `persons` list.
 
 Format: `unarchived STUDENT_ID`
 
